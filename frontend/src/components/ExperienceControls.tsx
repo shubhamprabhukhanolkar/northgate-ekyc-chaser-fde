@@ -129,8 +129,8 @@ export default function ExperienceControls({
 }) {
   return (
     <div className={"experience-controls " + (login ? "login-controls" : "")}>
-      <DraftingModeToggle />
-      <AudioToggle />
+      {!login && <DraftingModeToggle />}
+      {!login && <AudioToggle />}
       <ThemeToggle />
     </div>
   );

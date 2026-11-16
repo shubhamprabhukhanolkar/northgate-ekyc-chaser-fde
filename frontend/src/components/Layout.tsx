@@ -12,8 +12,6 @@ import {
   Globe,
   Command,
   PanelLeftClose,
-  Compass,
-  ArrowUpRight,
 } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
@@ -64,25 +62,6 @@ export default function Layout() {
             </NavLink>
           ))}
         </nav>
-        <NavLink
-          to="/policy"
-          className="sidebar-note sidebar-guide"
-          onClick={() => setMenu(false)}
-        >
-          <Compass size={19} />
-          <strong>
-            A little guidance.
-            <br />A clearer next step.
-          </strong>
-          <p>
-            Ask Portal Guide for help finding cases, drafting messages and using
-            your workspace.
-          </p>
-          <span>
-            Open Portal Guide
-            <ArrowUpRight size={12} />
-          </span>
-        </NavLink>
         <div className="profile">
           <div className="avatar">
             {user?.name
@@ -132,19 +111,21 @@ export default function Layout() {
           </div>
         </header>
         <main>
-          <div className="environment-bar">
-            <span>
-              <Command size={12} /> FIRST SOLUTION SLICE
-            </span>
-            <span>
-              {runtime?.offline_demo
-                ? "Offline demo · deterministic fixtures"
-                : runtime?.gemini_configured
-                  ? "Gemini primary · Groq standby"
-                  : "API keys not configured"}{" "}
-              · Synthetic outbox
-            </span>
-          </div>
+          {location.pathname !== "/policy" && (
+            <div className="environment-bar">
+              <span>
+                <Command size={12} /> FIRST SOLUTION SLICE
+              </span>
+              <span>
+                {runtime?.offline_demo
+                  ? "Offline demo · deterministic fixtures"
+                  : runtime?.gemini_configured
+                    ? "Gemini primary · Groq standby"
+                    : "API keys not configured"}{" "}
+                · Synthetic outbox
+              </span>
+            </div>
+          )}
           <div className="page-transition" key={location.pathname}>
             <Outlet />
           </div>

@@ -418,6 +418,7 @@ input[type="range"] {
   margin-top: 5px;
 }
 .profile {
+  margin-top: auto;
   display: flex;
   gap: 9px;
   padding: 18px 17px;
@@ -4240,8 +4241,8 @@ textarea {
   display: flex;
   flex-direction: column;
   padding: 0;
-  min-height: 640px;
-  height: calc(100dvh - 260px);
+  min-height: 0;
+  height: calc(100dvh - 120px);
   max-height: 950px;
   overflow: hidden;
 }
@@ -4249,8 +4250,8 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
-  padding: 17px 22px;
+  gap: 14px;
+  padding: 10px 18px;
   border-bottom: 1px solid var(--border);
   background: color-mix(in srgb, var(--primary) 2%, var(--surface));
   flex-shrink: 0;
@@ -4332,7 +4333,7 @@ textarea {
   align-items: center;
   justify-content: center;
   min-height: 100%;
-  padding: 36px 30px 24px;
+  padding: 22px 24px 16px;
   max-width: 870px;
   margin: 0 auto;
   text-align: center;
@@ -4340,8 +4341,8 @@ textarea {
 }
 .portal-guide-mark {
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: 56px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -4352,10 +4353,10 @@ textarea {
     var(--surface)
   );
   border: 1px solid color-mix(in srgb, var(--primary) 25%, var(--border));
-  border-radius: 24px;
-  box-shadow: 0 0 65px color-mix(in srgb, var(--primary) 10%, transparent);
+  border-radius: 16px;
+  box-shadow: 0 0 40px color-mix(in srgb, var(--primary) 10%, transparent);
   animation: quiet-float 7s ease-in-out infinite;
-  margin: 4px 0 26px;
+  margin: 4px 0 16px;
 }
 .portal-guide-ring {
   position: absolute;
@@ -4379,31 +4380,31 @@ textarea {
   letter-spacing: 1.5px;
 }
 .portal-welcome h2 {
-  font-size: 27px;
-  letter-spacing: -0.9px;
-  margin: 13px 0 10px;
+  font-size: 16px;
+  letter-spacing: -0.4px;
+  margin: 8px 0 6px;
 }
 .portal-welcome > p {
-  font-size: 12px;
-  line-height: 1.9;
+  font-size: 9px;
+  line-height: 1.6;
 }
 .portal-suggestions {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  gap: 10px;
   width: 100%;
-  margin-top: 27px;
+  margin-top: 18px;
 }
 .portal-suggestions > button {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   text-align: left;
-  padding: 16px;
+  padding: 11px 13px;
   color: var(--text);
   background: var(--bg);
   border: 1px solid var(--border);
-  border-radius: 11px;
+  border-radius: 9px;
   animation: content-arrive 400ms ease backwards;
   transition:
     transform 220ms,
@@ -4421,6 +4422,8 @@ textarea {
   flex-shrink: 0;
   margin-left: auto;
   color: var(--muted);
+  width: 13px;
+  height: 13px;
   transition:
     transform 220ms,
     color 220ms;
@@ -4433,24 +4436,28 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 36px;
-  width: 36px;
+  height: 28px;
+  width: 28px;
   flex-shrink: 0;
   background: color-mix(in srgb, var(--primary) 8%, transparent);
   color: var(--primary);
-  border-radius: 10px;
+  border-radius: 8px;
+}
+.portal-suggestion-icon > svg {
+  width: 15px;
+  height: 15px;
 }
 .portal-suggestions strong {
   display: block;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 500;
 }
 .portal-suggestions small {
   display: block;
   color: var(--muted);
-  font-size: 9px;
-  margin-top: 4px;
-  line-height: 1.7;
+  font-size: 8px;
+  margin-top: 2px;
+  line-height: 1.5;
 }
 .portal-shortcuts {
   display: flex;
@@ -4616,7 +4623,7 @@ textarea {
   animation-delay: 300ms;
 }
 .portal-composer {
-  padding: 15px 24px 17px;
+  padding: 12px 22px 14px;
   border-top: 1px solid var(--border);
   flex-shrink: 0;
   background: var(--surface);
@@ -4624,11 +4631,11 @@ textarea {
 .portal-chat-input {
   display: flex;
   align-items: center;
-  gap: 11px;
+  gap: 12px;
   border: 1px solid var(--border);
   border-radius: 12px;
   background: var(--bg);
-  padding: 8px 9px 8px 16px;
+  padding: 10px 12px 10px 18px;
   transition:
     border-color 200ms,
     box-shadow 200ms;
@@ -4646,8 +4653,8 @@ textarea {
   background: transparent;
   border: 0;
   outline: 0;
-  padding: 9px 0;
-  font-size: 12px;
+  padding: 10px 0;
+  font-size: 13px;
   min-width: 0;
 }
 .portal-send {
@@ -4740,44 +4747,44 @@ textarea {
     padding: 30px 17px 22px;
   }
   .portal-guide-mark {
-    height: 63px;
-    width: 63px;
-    border-radius: 19px;
-    margin-bottom: 23px;
+    height: 46px;
+    width: 46px;
+    border-radius: 13px;
+    margin-bottom: 16px;
   }
   .portal-guide-mark > svg:not(.portal-sparkle) {
-    width: 29px;
+    width: 20px;
   }
   .portal-welcome-label {
-    font-size: 7px;
+    font-size: 6.5px;
     letter-spacing: 1px;
   }
   .portal-welcome h2 {
-    font-size: 21px;
+    font-size: 14px;
   }
   .portal-welcome > p {
-    font-size: 10px;
+    font-size: 8px;
   }
   .portal-suggestions {
     grid-template-columns: 1fr;
-    gap: 9px;
-    margin-top: 23px;
+    gap: 8px;
+    margin-top: 16px;
   }
   .portal-suggestions > button {
-    padding: 12px;
-    gap: 9px;
+    padding: 10px;
+    gap: 8px;
   }
   .portal-suggestions strong {
-    font-size: 10px;
+    font-size: 9.5px;
   }
   .portal-suggestions small {
-    font-size: 8px;
-    margin-top: 3px;
+    font-size: 7.5px;
+    margin-top: 2px;
   }
   .portal-suggestion-icon {
-    height: 30px;
-    width: 30px;
-    border-radius: 8px;
+    height: 24px;
+    width: 24px;
+    border-radius: 6px;
   }
   .portal-suggestion-icon > svg {
     width: 16px;
@@ -5053,26 +5060,27 @@ textarea {
   }
 }
 .portal-chat {
-  margin-top: 22px;
-  height: calc(100dvh - 210px);
+  margin-top: 10px;
+  min-height: 0;
+  height: calc(100dvh - 120px);
   max-height: none;
 }
 .portal-welcome-title {
-  font-size: 27px;
-  letter-spacing: -0.9px;
-  margin: 13px 0 10px;
-  line-height: 1.4;
+  font-size: 16px;
+  letter-spacing: -0.4px;
+  margin: 8px 0 6px;
+  line-height: 1.35;
 }
 .portal-welcome > p {
-  max-width: 590px;
+  max-width: 480px;
 }
 @media (max-width: 760px) {
   .portal-chat {
-    margin-top: 18px;
-    height: calc(100dvh - 190px);
+    margin-top: 8px;
+    height: calc(100dvh - 140px);
   }
   .portal-welcome-title {
-    font-size: 22px;
+    font-size: 14px;
   }
 }
 .draft-mode-switch > .draft-choice-guided {
@@ -5109,9 +5117,9 @@ textarea {
   color: var(--mode-text);
 }
 .portal-guide-mark {
-  width: 92px;
-  height: 92px;
-  border-radius: 25px;
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
   border: 1.5px solid color-mix(in srgb, var(--primary) 60%, var(--border));
   background: linear-gradient(
     145deg,
@@ -5119,15 +5127,15 @@ textarea {
     var(--surface)
   );
   box-shadow:
-    0 12px 35px color-mix(in srgb, var(--primary) 22%, transparent),
+    0 8px 22px color-mix(in srgb, var(--primary) 22%, transparent),
     inset 0 1px 0 color-mix(in srgb, var(--primary) 30%, transparent);
-  margin: 19px 0 43px;
+  margin: 10px 0 24px;
   isolation: isolate;
   animation: guide-float-bold 4s ease-in-out infinite;
 }
 .portal-guide-halo {
   position: absolute;
-  inset: -34px;
+  inset: -18px;
   background: radial-gradient(
     circle,
     color-mix(in srgb, var(--primary) 32%, transparent) 0%,
@@ -5140,61 +5148,61 @@ textarea {
   animation: guide-beacon 3.2s ease-in-out infinite;
 }
 .portal-guide-ring {
-  inset: -13px;
-  border: 2px solid color-mix(in srgb, var(--primary) 60%, transparent);
+  inset: -8px;
+  border: 1.5px solid color-mix(in srgb, var(--primary) 60%, transparent);
   border-right-color: transparent;
   border-bottom-color: var(--primary);
   border-radius: 50%;
-  box-shadow: 0 0 15px color-mix(in srgb, var(--primary) 12%, transparent);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--primary) 12%, transparent);
   animation: guide-orbit 7s linear infinite;
 }
 .portal-guide-ring:after {
   content: "";
   position: absolute;
-  width: 7px;
-  height: 7px;
-  right: 12px;
-  top: 12px;
+  width: 5px;
+  height: 5px;
+  right: 7px;
+  top: 7px;
   border-radius: 50%;
   background: var(--primary);
   box-shadow:
-    0 0 0 3px color-mix(in srgb, var(--primary) 16%, transparent),
-    0 0 12px var(--primary);
+    0 0 0 2px color-mix(in srgb, var(--primary) 16%, transparent),
+    0 0 8px var(--primary);
 }
 .portal-guide-ring-outer {
-  inset: -24px;
+  inset: -15px;
   border: 1px dashed color-mix(in srgb, var(--primary) 65%, transparent);
   border-left-color: transparent;
   box-shadow: none;
   animation: guide-orbit 11s linear infinite reverse;
 }
 .portal-guide-ring-outer:after {
-  width: 8px;
-  height: 8px;
-  top: calc(50% - 4px);
-  left: -4px;
+  width: 5px;
+  height: 5px;
+  top: calc(50% - 2.5px);
+  left: -2.5px;
   right: auto;
   background: var(--green);
   box-shadow:
-    0 0 0 3px color-mix(in srgb, var(--green) 12%, transparent),
-    0 0 10px color-mix(in srgb, var(--green) 60%, transparent);
+    0 0 0 2px color-mix(in srgb, var(--green) 12%, transparent),
+    0 0 7px color-mix(in srgb, var(--green) 60%, transparent);
 }
 .portal-guide-mark > svg:not(.portal-sparkle) {
-  width: 40px;
-  height: 40px;
+  width: 24px;
+  height: 24px;
   animation: guide-compass 4s ease-in-out infinite;
   filter: drop-shadow(
-    0 2px 5px color-mix(in srgb, var(--primary) 25%, transparent)
+    0 2px 4px color-mix(in srgb, var(--primary) 25%, transparent)
   );
 }
 .portal-guide-mark > .portal-sparkle {
-  height: 20px;
-  width: 20px;
-  right: -9px;
-  top: -9px;
+  height: 12px;
+  width: 12px;
+  right: -5px;
+  top: -5px;
   animation: guide-sparkle-bold 2.8s ease-in-out infinite;
   filter: drop-shadow(
-    0 0 5px color-mix(in srgb, var(--green) 40%, transparent)
+    0 0 4px color-mix(in srgb, var(--green) 40%, transparent)
   );
 }
 :root[data-theme="light"] .portal-guide-mark {
@@ -5254,24 +5262,24 @@ textarea {
 }
 @media (max-width: 760px) {
   .portal-guide-mark {
-    width: 72px;
-    height: 72px;
-    border-radius: 21px;
-    margin: 17px 0 37px;
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
+    margin: 8px 0 18px;
   }
   .portal-guide-mark > svg:not(.portal-sparkle) {
-    width: 32px;
-    height: 32px;
+    width: 19px;
+    height: 19px;
   }
   .portal-guide-ring {
-    inset: -11px;
+    inset: -6px;
   }
   .portal-guide-ring-outer {
-    inset: -20px;
+    inset: -12px;
   }
   .portal-guide-mark > .portal-sparkle {
-    width: 17px;
-    height: 17px;
+    width: 10px;
+    height: 10px;
   }
 }
 .sidebar-guide {

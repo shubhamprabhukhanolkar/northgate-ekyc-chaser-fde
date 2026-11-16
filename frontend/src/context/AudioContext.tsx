@@ -19,7 +19,7 @@ const Audio = createContext({
 export function AudioProvider({ children }: { children: ReactNode }) {
   const supported = typeof window.AudioContext !== "undefined";
   const [enabled, setEnabled] = useState(
-    () => supported && localStorage.getItem("northgate-audio") === "on",
+    () => supported && localStorage.getItem("northgate-audio") !== "off",
   );
   const enabledRef = useRef(enabled);
 
