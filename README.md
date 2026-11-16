@@ -2,6 +2,10 @@
 
 A synthetic corporate onboarding prototype: React/Vite/Tailwind, Python 3.12/FastAPI, a cyclical LangGraph workflow, SQLite, and the official Python FastMCP adapter. Direct Gemini APIs only; no Vertex AI.
 
+**Live app:** https://northgate-ekyc-chaser-ruxttjrlxq-el.a.run.app · **MCP:** https://northgate-ekyc-chaser-ruxttjrlxq-el.a.run.app/mcp/ · [Public repository](https://github.com/shubhamprabhukhanolkar/northgate-ekyc-chaser-fde) · [Successful CI/container deployment](https://github.com/shubhamprabhukhanolkar/northgate-ekyc-chaser-fde/actions/runs/43900998032).
+
+Verified on 16 November 2026: 23 backend tests, production frontend build, official stdio and authenticated HTTP MCP, real Gemini generation and Groq outage failover, and desktop/mobile browser checks across the complete UI. Docker was built and deployed by GitHub Actions; Docker is unavailable on the local Windows host, so a local Docker run was not performed. The local FastAPI process serves the same built frontend on port 8080.
+
 ## Run locally
 
 ```powershell
@@ -59,6 +63,8 @@ Local Gemini CLI `.gemini/settings.json` (replace the absolute checkout path):
         "DATABASE_PATH": "C:/Users/shubh/Desktop/northgate/data/northgate.db",
         "GEMINI_API_KEY": "${GEMINI_API_KEY}",
         "GROQ_API_KEY": "${GROQ_API_KEY}",
+        "AUTH_SECRET": "${AUTH_SECRET}",
+        "GROQ_MODEL": "openai/gpt-oss-120b",
         "GEMINI_MODEL_NAME": "gemini-3.5-flash-lite"
       },
       "trust": false
@@ -75,7 +81,7 @@ Remote Gemini CLI configuration (substitute the verified Cloud Run service URL a
 {
   "mcpServers": {
     "northgate": {
-      "httpUrl": "https://<service-url>/mcp/",
+      "httpUrl": "https://northgate-ekyc-chaser-ruxttjrlxq-el.a.run.app/mcp/",
       "headers": {"Authorization": "Bearer ${MCP_API_KEY}"},
       "trust": false
     }
