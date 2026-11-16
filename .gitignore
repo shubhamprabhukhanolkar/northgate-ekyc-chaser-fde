@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.env
+data/
+frontend/node_modules/
+frontend/dist/
+*.db*
+.runtime-env.yml
+*.key.json
+.uv-cache/
+pytest-cache-files-*/
+artifacts/
+frontend/*.tsbuildinfo

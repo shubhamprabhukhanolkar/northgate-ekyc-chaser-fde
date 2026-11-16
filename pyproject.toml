@@ -1,0 +1,20 @@
+[project]
+name = "northgate-ekyc"
+version = "0.1.0"
+description = "Synthetic Northgate missing-document chaser with a mandatory human gate"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "fastapi>=0.115,<1", "uvicorn[standard]>=0.34,<1",
+  "langgraph>=1,<2", "pydantic-settings>=2.7,<3",
+  "google-genai>=1,<2", "groq>=0.20,<1", "mcp>=1.20,<2",
+  "PyJWT>=2.10,<3", "pwdlib[argon2]>=0.2,<1"
+]
+[dependency-groups]
+dev = ["pytest>=8,<10", "pytest-asyncio>=0.25,<2", "httpx>=0.28,<1"]
+[tool.pytest.ini_options]
+pythonpath = ["backend"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+[tool.uv]
+package = false

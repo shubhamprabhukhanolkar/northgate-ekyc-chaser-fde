@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "outline": "#737686",
+        "outline-variant": "#c3c6d7",
+        "surface-tint": "#0053db",
+        "secondary": "#006a61",
+        "on-background": "#0b1c30",
+        "background": "#F8FAFC",
+        "primary-fixed": "#dbe1ff",
+        "surface-container": "#eff4ff",
+        "on-secondary-fixed": "#00201d",
+        "text-muted": "#64748B",
+        "on-primary": "#ffffff",
+        "on-tertiary-container": "#ffede1",
+        "tertiary": "#0D9488",
+        "tertiary-fixed": "#ffdcc3",
+        "light-border": "#E2E8F0",
+        "primary-container": "#2563EB",
+        "primary": "#004ac6",
+        "on-primary-fixed": "#00174b",
+        "light-canvas": "#F8FAFC",
+        "surface-variant": "#e2e8f0",
+        "on-primary-container": "#ffffff",
+        "on-error": "#ffffff",
+        "on-primary-fixed-variant": "#003ea8",
+        "status-nudge": "#d97706",
+        "light-surface": "#FFFFFF",
+        "on-error-container": "#93000a",
+        "on-surface-variant": "#475569",
+        "surface-bright": "#f8f9ff",
+        "secondary-fixed": "#89f5e7",
+        "surface-elevated": "#FFFFFF",
+        "on-tertiary": "#ffffff",
+        "tertiary-fixed-dim": "#ffb77d",
+        "surface-border": "#E2E8F0",
+        "error": "#e11d48",
+        "surface-container-lowest": "#ffffff",
+        "light-teal": "#0D9488",
+        "error-container": "#ffe4e6",
+        "inverse-on-surface": "#eaf1ff",
+        "surface-container-highest": "#d3e4fe",
+        "on-secondary-fixed-variant": "#005049",
+        "inverse-primary": "#b4c5ff",
+        "surface-dim": "#cbdbf5",
+        "on-tertiary-fixed-variant": "#6e3900",
+        "secondary-fixed-dim": "#6bd8cb",
+        "on-surface": "#0f172a",
+        "primary-fixed-dim": "#b4c5ff",
+        "tertiary-container": "#a65900",
+        "secondary-container": "#ccfbf1",
+        "surface-container-high": "#f1f5f9",
+        "surface": "#FFFFFF",
+        "light-cobalt": "#2563EB",
+        "on-tertiary-fixed": "#2f1500",
+        "surface-container-low": "#f8fafc",
+        "on-secondary-container": "#006f66",
+        "on-secondary": "#ffffff",
+        "inverse-surface": "#213145",
+        "text-primary": "#0f172a",
+        "status-alert": "#e11d48"
+      },
+      borderRadius: {
+        "DEFAULT": "0.5rem",
+        "lg": "0.75rem",
+        "xl": "1rem",
+        "2xl": "1.25rem",
+        "full": "9999px"
+      },
+      spacing: {
+        "space-xs": "0.25rem",
+        "space-sm": "0.5rem",
+        "space-md": "1rem",
+        "space-lg": "1.5rem",
+        "space-xl": "2rem",
+        "space-2xl": "2.5rem",
+        "gutter": "1.5rem",
+        "gutter-mobile": "1rem",
+        "margin": "2rem",
+        "margin-mobile": "1rem"
+      },
+      fontFamily: {
+        "headline-xl": ["Plus Jakarta Sans", "sans-serif"],
+        "body-md": ["Inter", "sans-serif"],
+        "headline-sm": ["Plus Jakarta Sans", "sans-serif"],
+        "body-sm": ["Inter", "sans-serif"],
+        "label-code-sm": ["JetBrains Mono", "monospace"],
+        "body-lg": ["Inter", "sans-serif"],
+        "display-lg": ["Plus Jakarta Sans", "sans-serif"],
+        "headline-md": ["Plus Jakarta Sans", "sans-serif"],
+        "label-code-lg": ["JetBrains Mono", "monospace"],
+        "label-ui": ["Plus Jakarta Sans", "sans-serif"],
+        "headline-lg": ["Plus Jakarta Sans", "sans-serif"]
+      },
+      fontSize: {
+        "headline-xl": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "700" }],
+        "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }],
+        "headline-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+        "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+        "label-code-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+        "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }],
+        "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+        "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+        "label-code-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+        "label-ui": ["13px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+        "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }]
+      }
+    }
+  }
+};
+</script></head><body class="bg-background font-body-md text-on-surface antialiased min-h-screen selection:bg-blue-100 selection:text-blue-900"><aside class="fixed left-0 top-0 h-full w-72 bg-white z-50 flex flex-col justify-between border-r border-light-border shadow-sm"><div class="flex flex-col"><div class="h-20 px-space-lg flex items-center justify-between border-b border-light-border"><div class="flex items-center gap-space-sm"><img alt="Northgate Bank Monogram" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrD8SbGzElxVPAjcyQcgvy0gApaNthFyhUIq4GV2c83zJo93uz60Q6OCv35hZVedhxNom7yro7AMYhI9AJ5k3CsLRQ2RH1CH2SNkZLRadAAPWVZzuvo_ah7hIhu5jRvoIJY01zVMj40Xi_K2nCfwqpOvZtfhG6nB08UyNEMjh41wvj3CO9ufo_RVnpGpimSxkuepvXQU-F3oZYVjlhhqA26VNdDvOByZOwO82VtZlzhI"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-text-primary tracking-tight">Northgate Bank</span><span class="font-label-code-sm text-label-code-sm text-text-muted">eKYC Workspace</span></div></div><span class="px-space-xs py-0.5 rounded-full bg-slate-100 text-slate-700 font-label-code-sm text-label-code-sm uppercase tracking-wider font-semibold border border-slate-200">v3.4</span></div><nav class="flex flex-col gap-space-xs px-space-md py-space-lg" data-active-classes="bg-blue-50 text-primary-container font-headline-sm"><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all group" data-path="case-queue" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-slate-400 group-hover:text-primary-container transition-colors text-[20px]">inbox</span><span class="font-label-ui text-label-ui">Case Queue</span></div><span class="px-space-xs py-0.5 rounded-full bg-slate-100 text-slate-600 font-label-code-sm text-label-code-sm group-hover:bg-primary-container group-hover:text-white transition-colors">42</span></a><a aria-current="page" class="flex items-center justify-between px-space-md py-space-sm rounded-lg transition-all group bg-blue-50/80 text-primary-container font-headline-sm border border-blue-100" data-path="gap-workspace" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-primary-container transition-colors text-[20px]">description</span><span class="font-label-ui text-label-ui font-semibold">Gap Workspace</span></div></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all group" data-path="3-day-nudge-tracker" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-slate-400 group-hover:text-primary-container transition-colors text-[20px]">schedule</span><span class="font-label-ui text-label-ui">3-Day Nudges</span></div><span class="px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200/80 font-label-code-sm text-label-code-sm font-semibold">3 Due</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all group" data-path="agent-pipeline-trace" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-slate-400 group-hover:text-primary-container transition-colors text-[20px]">account_tree</span><span class="font-label-ui text-label-ui">Agent Trace</span></div></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all group" data-path="prompt-&amp;-toner-studio" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-slate-400 group-hover:text-primary-container transition-colors text-[20px]">tune</span><span class="font-label-ui text-label-ui">Toner Studio</span></div></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all group" data-path="finops-&amp;-impact" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-slate-400 group-hover:text-primary-container transition-colors text-[20px]">bar_chart</span><span class="font-label-ui text-label-ui">FinOps &amp; Impact</span></div></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all group" data-path="kyc-policy-copilot" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-slate-400 group-hover:text-primary-container transition-colors text-[20px]">smart_toy</span><span class="font-label-ui text-label-ui">Policy Copilot</span></div></a></nav></div><div class="p-space-md border-t border-light-border"><div class="p-space-sm rounded-lg bg-slate-50 border border-slate-200/70 flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm overflow-hidden"><div class="relative flex-shrink-0"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-slate-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDw48RDCPPDW9VijwDsHaWnQfyH0iVGKBGalI-NTpQbkj-cK1y_e0htXgkwV5f-KUF-8dgqPwaejfMAdusrw9BMi06cYrdzx4F5hPtP680s3TxL9VDSuA4Lax7MrBYsKrzTykLxJglysxTZTzv0FawKEArS2nLFOu6BDh4d3eaDXSfNnnp9qxPOgt0pf7GHgUa-DkQUQHnO986Ps06HcIgNnqRp6N7J3Ne09p7j-QCc"/><div class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white"></div></div><div class="flex flex-col truncate"><span class="font-label-ui text-label-ui text-slate-800 font-semibold truncate">Marcus Sterling</span><span class="font-body-sm text-body-sm text-slate-500 truncate">Lead RM (London)</span></div></div><a class="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors flex items-center" data-path="sentinel-sso" href="#" title="Lock &amp; Sign Out"><span class="material-symbols-outlined text-[18px]">power_settings_new</span></a></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-20 bg-white/95 backdrop-blur-md border-b border-light-border z-40 px-space-xl flex items-center justify-between shadow-sm"><div class="flex items-center gap-space-md"><div class="flex items-center bg-slate-50 px-space-sm py-1 rounded-full border border-slate-200 text-slate-700"><span class="material-symbols-outlined text-[16px] mr-1.5 text-primary-container">public</span><span class="font-label-code-sm text-label-code-sm font-semibold tracking-wide text-slate-800">LDN · LON SE1</span><span class="mx-2 text-slate-300">|</span><span class="font-label-code-sm text-label-code-sm text-slate-500">Singapore · New York</span></div><div class="hidden xl:flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span><span class="font-label-code-sm text-label-code-sm font-semibold">Deterministic Pre-Check: Active (0% False Chases)</span></div><div class="hidden lg:flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700"><span class="material-symbols-outlined text-[14px]">verified_user</span><span class="font-label-code-sm text-label-code-sm font-semibold">Human Gate Enforced</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center bg-slate-100 rounded-full p-0.5 border border-slate-200"><button class="px-2.5 py-1 rounded-full text-slate-500 hover:text-slate-800 font-label-code-sm text-label-code-sm flex items-center gap-1 transition-all" onclick="document.documentElement.classList.add('dark')" type="button"><span class="material-symbols-outlined text-[14px]">dark_mode</span>Phantom</button><button class="px-2.5 py-1 rounded-full text-slate-900 bg-white shadow-sm font-label-code-sm text-label-code-sm font-semibold flex items-center gap-1" onclick="document.documentElement.classList.remove('dark')" type="button"><span class="material-symbols-outlined text-[14px] text-amber-500">light_mode</span>Light</button></div><button class="relative p-2 rounded-full text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-rose-500 ring-2 ring-white"></span></button><div class="h-4 w-[1px] bg-slate-200"></div><div class="flex items-center gap-space-sm"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-slate-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDw48RDCPPDW9VijwDsHaWnQfyH0iVGKBGalI-NTpQbkj-cK1y_e0htXgkwV5f-KUF-8dgqPwaejfMAdusrw9BMi06cYrdzx4F5hPtP680s3TxL9VDSuA4Lax7MrBYsKrzTykLxJglysxTZTzv0FawKEArS2nLFOu6BDh4d3eaDXSfNnnp9qxPOgt0pf7GHgUa-DkQUQHnO986Ps06HcIgNnqRp6N7J3Ne09p7j-QCc"/><div class="flex flex-col text-left"><span class="font-label-ui text-label-ui text-slate-900 font-semibold leading-tight">M. Sterling</span><span class="font-label-code-sm text-label-code-sm text-emerald-700 font-semibold leading-tight">Authorized RM</span></div></div></div></header><main class="relative pt-20 bg-background min-h-screen"><div class="flex flex-col w-full">
+<div class="px-space-xl py-space-lg flex flex-col gap-space-lg max-w-[1720px] mx-auto w-full">
+<!-- Top Case Metadata & Gate Status -->
+<div class="flex flex-col gap-space-md">
+<!-- Breadcrumb Bar & Quick Badges -->
+<div class="flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex items-center gap-2 font-label-code-sm text-label-code-sm text-slate-500">
+<span class="hover:text-slate-900 transition-colors cursor-pointer">Cases</span>
+<span>/</span>
+<span class="text-slate-700 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-teal-600">anchor</span>
+            Singapore
+          </span>
+<span>/</span>
+<span class="text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-200 font-semibold font-mono">NG-2026-0841</span>
+<span>/</span>
+<span class="text-slate-900 font-semibold">Helios Maritime Ltd</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-slate-600 font-label-code-sm text-label-code-sm border border-light-border shadow-xs">
+<span class="text-slate-400 text-[10px] font-bold">LEI</span>
+<span class="text-slate-800 font-mono tracking-wide">549300H28R48YJ80LK22</span>
+</div>
+<span class="px-3 py-1 rounded-full bg-rose-50 text-rose-700 border border-rose-200 font-label-code-sm text-label-code-sm font-semibold flex items-center gap-1.5 shadow-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-ping"></span>
+            High CDD Tier 1
+          </span>
+</div>
+</div>
+<!-- Main Title Block & Entity Specs -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-md">
+<div>
+<div class="flex items-center gap-space-sm mb-1">
+<h1 class="font-display-lg text-display-lg text-slate-900 tracking-tight">Helios Maritime Ltd</h1>
+<span class="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-label-code-sm text-label-code-sm font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-emerald-600">verified</span>
+              Singapore Desk
+            </span>
+</div>
+<p class="font-body-md text-body-md text-slate-500">Commercial Deep-Sea Freight &amp; Sovereign Bunker Operations · Multi-Currency Escrow Pool</p>
+</div>
+<!-- System Gate Banner Notification -->
+<div class="flex items-center gap-space-sm bg-white border border-light-border px-4 py-2.5 rounded-xl shadow-xs self-start lg:self-auto">
+<div class="w-2.5 h-2.5 rounded-full bg-blue-600 animate-pulse"></div>
+<div class="flex flex-col">
+<span class="font-label-ui text-label-ui text-slate-800 font-semibold">RM Review Gate Enforced</span>
+<span class="font-label-code-sm text-label-code-sm text-slate-500">Outreach remains draft until approved by Marcus Sterling</span>
+</div>
+</div>
+</div>
+<!-- Deterministic Engine Pre-Check Alert Banner -->
+<div class="relative overflow-hidden bg-gradient-to-r from-emerald-50/80 via-white to-blue-50/50 border border-emerald-200/80 rounded-2xl p-space-md shadow-xs">
+<div class="relative flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="p-2 rounded-xl bg-emerald-600 text-white flex items-center justify-center shadow-xs">
+<span class="material-symbols-outlined text-[20px]">task_alt</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-slate-900 font-bold">
+                Deterministic Pre-Check Complete
+              </span>
+<span class="font-body-sm text-body-sm text-slate-600">
+                1 Document Verified On-Prem Vault (auto-excluded from chase) · 2 Required Documentation Gaps Identified
+              </span>
+</div>
+</div>
+<div class="flex items-center gap-2 self-end md:self-auto">
+<span class="px-3 py-1 rounded-full bg-white text-emerald-800 border border-emerald-200 font-label-code-sm text-label-code-sm font-semibold shadow-xs flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              0% False Chases Target Active
+            </span>
+</div>
+</div>
+</div>
+</div>
+<!-- 2-Pane Comfortable Workspace (50 / 50 Grid) -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-lg items-start">
+<!-- LEFT COLUMN: Deterministic Gap Checklist (Read-Before-Write) -->
+<section class="flex flex-col bg-white rounded-2xl p-space-xl shadow-sm border border-light-border relative overflow-hidden">
+<!-- Subtle top accent -->
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-teal-500 via-blue-500 to-transparent"></div>
+<!-- Section Header -->
+<div class="flex items-start justify-between pb-space-lg mb-space-lg border-b border-light-border">
+<div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-[22px]">policy</span>
+<h2 class="font-headline-md text-headline-md text-slate-900">Deterministic Gap Checklist</h2>
+</div>
+<p class="font-label-code-sm text-label-code-sm text-slate-500 mt-1 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[13px] text-teal-600">sync</span>
+              Checked against On-Prem Sovereign Vault 4s ago
+            </p>
+</div>
+<span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 font-label-code-sm text-label-code-sm font-semibold border border-slate-200">
+            4 Evaluated Items
+          </span>
+</div>
+<!-- Item Cards Container -->
+<div class="flex flex-col gap-space-md">
+<!-- Item 1: Certificate of Incorporation & ACRA Profile (Verified) -->
+<div class="bg-[#ECFDF5] border border-[#A7F3D0] rounded-xl p-space-md flex flex-col gap-space-xs transition-all hover:border-emerald-300">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="p-1 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-emerald-950 font-bold">Certificate of Incorporation &amp; ACRA Profile</span>
+<span class="font-label-code-sm text-label-code-sm text-emerald-800">Entity Code: 201829410Z · ACRA Instant API</span>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-emerald-100/90 text-emerald-800 border border-emerald-300 font-label-code-sm text-label-code-sm font-bold tracking-wider whitespace-nowrap">
+                VERIFIED RECEIVED
+              </span>
+</div>
+<!-- Vault Certificate Callout -->
+<div class="mt-2 bg-white/80 border border-emerald-200/70 px-3 py-2 rounded-lg flex items-center justify-between text-slate-600 font-label-code-sm text-label-code-sm">
+<div class="flex items-center gap-1.5 truncate">
+<span class="material-symbols-outlined text-[14px] text-emerald-700">lock</span>
+<span class="text-slate-900 font-semibold">On-Prem Vault</span>
+<span class="text-slate-300">·</span>
+<span class="font-mono text-slate-600 truncate">SHA-256: 0x9f88d29c4ba801a21b</span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-slate-400 cursor-pointer hover:text-primary-container">open_in_new</span>
+</div>
+<p class="font-body-sm text-body-sm text-emerald-800 font-medium mt-1 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-emerald-700">do_not_disturb_on</span>
+              Verified directly via Singapore ACRA API · Excluded from chase email to prevent client annoyance
+            </p>
+</div>
+<!-- Item 2: Director Passport (Capt. E. Vance) (Verified) -->
+<div class="bg-[#ECFDF5] border border-[#A7F3D0] rounded-xl p-space-md flex flex-col gap-space-xs transition-all hover:border-emerald-300">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="p-1 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-emerald-950 font-bold">Director Passport (Capt. E. Vance)</span>
+<span class="font-label-code-sm text-label-code-sm text-emerald-800">UK Sovereign Marine Registry #GBR-99214-E</span>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-emerald-100/90 text-emerald-800 border border-emerald-300 font-label-code-sm text-label-code-sm font-bold tracking-wider whitespace-nowrap">
+                VERIFIED RECEIVED
+              </span>
+</div>
+<p class="font-body-sm text-body-sm text-emerald-800/90 mt-1 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-emerald-700">history</span>
+              Received in initial onboarding packet 14 May 2026 · Validated by Biometric Engine
+            </p>
+</div>
+<!-- Item 3: Certified Trust Deed (MISSING) -->
+<div class="bg-[#FFF1F2] border border-[#FECDD3] rounded-xl p-space-md flex flex-col gap-space-xs transition-all hover:border-rose-300">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="p-1 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-rose-950 font-bold">Certified Trust Deed (Offshore Parent Entity)</span>
+<span class="font-label-code-sm text-label-code-sm text-rose-700 font-medium">Cayman Anchor Sovereign Settlement Trust</span>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-rose-100 text-rose-800 border border-rose-300 font-label-code-sm text-label-code-sm font-bold tracking-wider whitespace-nowrap flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-rose-600 animate-pulse"></span>
+                MISSING
+              </span>
+</div>
+<div class="mt-1 bg-white/90 border border-rose-200/80 p-3 rounded-lg flex flex-col gap-1">
+<div class="flex items-center gap-1.5 text-slate-800 font-label-ui text-label-ui font-semibold">
+<span class="material-symbols-outlined text-[16px] text-amber-600">gavel</span>
+                Requirement: Mandatory under MAS Notice 626 for entities with Cayman ownership
+              </div>
+<p class="font-body-sm text-body-sm text-slate-600 pl-5">
+                Must include original apostille seal or qualified solicitor certification dated within 90 days.
+              </p>
+</div>
+</div>
+<!-- Item 4: UBO Declaration (MISSING) -->
+<div class="bg-[#FFF1F2] border border-[#FECDD3] rounded-xl p-space-md flex flex-col gap-space-xs transition-all hover:border-rose-300">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="p-1 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">assignment_late</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-rose-950 font-bold">UBO Declaration (&gt;25% Controlling Stake)</span>
+<span class="font-label-code-sm text-label-code-sm text-rose-700 font-medium">Direct &amp; Indirect Equity Holder Audit</span>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-rose-100 text-rose-800 border border-rose-300 font-label-code-sm text-label-code-sm font-bold tracking-wider whitespace-nowrap flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-rose-600 animate-pulse"></span>
+                MISSING
+              </span>
+</div>
+<div class="mt-1 bg-white/90 border border-rose-200/80 p-3 rounded-lg flex flex-col gap-1">
+<div class="flex items-center gap-1.5 text-slate-800 font-label-ui text-label-ui font-semibold">
+<span class="material-symbols-outlined text-[16px] text-amber-600">schema</span>
+                Requirement: Signed by authorized managing director
+              </div>
+<p class="font-body-sm text-body-sm text-slate-600 pl-5">
+                Beneficial ownership hierarchy chart attached showing ultimate natural persons behind Apex Marine Ltd.
+              </p>
+</div>
+</div>
+</div>
+<!-- Footer Audit Verification Guarantee -->
+<div class="mt-space-lg pt-space-md border-t border-light-border flex items-center justify-between text-slate-500 font-label-code-sm text-label-code-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-teal-600">security</span>
+<span>Deterministic rule engine v3.4</span>
+</div>
+<span class="text-teal-700 font-medium">0% false chases guaranteed by schema lockdown</span>
+</div>
+</section>
+<!-- RIGHT COLUMN: Consolidated AI Chase Email & RM Review Gate -->
+<section class="flex flex-col bg-white rounded-2xl p-space-xl shadow-sm border border-light-border relative overflow-hidden">
+<!-- Subtle top accent -->
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-teal-500 to-transparent"></div>
+<!-- Top Header & Critique Gate Scoring Strip -->
+<div class="flex flex-col gap-space-sm pb-space-md border-b border-light-border">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-[22px]">mark_email_unread</span>
+<h2 class="font-headline-md text-headline-md text-slate-900">Consolidated AI Chase Email</h2>
+</div>
+<span class="font-label-code-sm text-label-code-sm text-blue-700 bg-blue-50 border border-blue-200 px-2.5 py-1 rounded-full font-semibold">
+              Draft v1.1
+            </span>
+</div>
+<!-- Quality & Tone Pill Badges -->
+<div class="flex flex-wrap items-center gap-2 mt-1">
+<div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-label-code-sm text-label-code-sm font-semibold shadow-xs">
+<span class="material-symbols-outlined text-[15px] text-emerald-600">auto_awesome</span>
+<span>Critique Gate Passed (Score: 98/100) · 0 Risk Ratings</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 font-label-code-sm text-label-code-sm">
+<span class="material-symbols-outlined text-[15px] text-teal-600">sentiment_satisfied</span>
+<span>Tone: Respectful Institutional Sovereign</span>
+</div>
+</div>
+</div>
+<!-- Email Metadata Form Strip -->
+<div class="flex flex-col gap-2 py-space-md border-b border-light-border font-label-code-sm text-label-code-sm">
+<!-- Recipient -->
+<div class="flex items-center gap-space-sm bg-slate-50 border border-slate-200 px-3 py-2 rounded-lg">
+<span class="text-slate-400 w-16 uppercase tracking-wider text-[10px] font-bold">To:</span>
+<div class="flex items-center gap-2 truncate">
+<span class="text-slate-900 font-mono font-medium">cfo.office@heliosmaritime.sg</span>
+<span class="text-slate-500 truncate">(Capt. Erik Vance / Li Wei Chen)</span>
+</div>
+</div>
+<!-- Sender -->
+<div class="flex items-center gap-space-sm bg-slate-50 border border-slate-200 px-3 py-2 rounded-lg">
+<span class="text-slate-400 w-16 uppercase tracking-wider text-[10px] font-bold">From:</span>
+<div class="flex items-center gap-2 truncate">
+<span class="text-slate-900 font-mono font-medium">marcus.sterling@northgatebank.co.uk</span>
+<span class="text-slate-500 text-[11px]">(via RM Mailbox Gateway)</span>
+</div>
+</div>
+<!-- Subject Line -->
+<div class="flex items-center gap-space-sm bg-slate-50 border border-slate-200 px-3 py-2 rounded-lg">
+<span class="text-slate-400 w-16 uppercase tracking-wider text-[10px] font-bold">Subject:</span>
+<span class="text-slate-900 font-headline-sm text-label-ui font-semibold truncate">
+              Action Required: Final Documentation for Northgate Sovereign Treasury Account [NG-2026-0841]
+            </span>
+</div>
+</div>
+<!-- Consolidated Email Body Preview (Spacious, high contrast, clean typography) -->
+<div class="my-space-md p-space-lg rounded-xl bg-[#F8FAFC] border border-light-border font-body-md text-body-md text-slate-800 leading-relaxed flex flex-col gap-space-md shadow-xs" id="email-preview-container">
+<p class="text-slate-900 font-semibold">Dear Captain Vance,</p>
+<p class="text-slate-700">
+            Thank you for your ongoing partnership as we finalize the establishment of Helios Maritime Ltd's primary sovereign treasury facilities.
+          </p>
+<p class="text-slate-700">
+            To proceed with account activation under Monetary Authority of Singapore (MAS 626) requirements, our compliance desk requires two remaining items:
+          </p>
+<!-- Numbered Gaps Callout within Email -->
+<div class="bg-white rounded-xl p-space-md flex flex-col gap-space-sm border-l-4 border-primary-container shadow-xs border border-slate-200/80">
+<div class="flex items-start gap-2.5">
+<span class="font-label-code-sm text-primary-container font-bold">1.</span>
+<div>
+<span class="font-headline-sm text-label-ui text-slate-900 font-bold">Certified Trust Deed:</span>
+<span class="text-slate-700 ml-1 font-body-sm text-body-sm">Full copy including solicitor apostille for the Cayman holding trust.</span>
+</div>
+</div>
+<div class="flex items-start gap-2.5">
+<span class="font-label-code-sm text-primary-container font-bold">2.</span>
+<div>
+<span class="font-headline-sm text-label-ui text-slate-900 font-bold">UBO Declaration Form:</span>
+<span class="text-slate-700 ml-1 font-body-sm text-body-sm">Confirmation for beneficial interest holders exceeding 25% voting stake.</span>
+</div>
+</div>
+</div>
+<!-- Pre-check exclusion assurance note -->
+<div class="flex items-start gap-2 text-emerald-900 bg-emerald-50 border border-emerald-200 p-3 rounded-lg font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[18px] text-emerald-700 flex-shrink-0">fact_check</span>
+<span>
+<strong class="font-semibold text-emerald-950">Please note:</strong> We have already verified and archived your Certificate of Incorporation and ACRA filing; no further submission is required for those items.
+            </span>
+</div>
+<p class="text-slate-700">
+            You may reply directly to this secure thread or upload via the Northgate Sovereign Portal link below.
+          </p>
+<div class="pt-space-sm border-t border-slate-200 text-slate-600 font-body-sm text-body-sm">
+<p class="text-slate-900 font-bold">Sincerely,</p>
+<p class="text-slate-800 font-medium">Marcus Sterling · Senior Relationship Manager</p>
+<p class="text-slate-500 text-label-code-sm font-mono mt-0.5">Northgate Bank (London Desk · Southeast Asia Maritime Division)</p>
+</div>
+</div>
+<!-- Editable Area (hidden by default) -->
+<div class="hidden my-space-md p-space-md rounded-xl bg-white border border-light-border flex flex-col gap-space-sm" id="email-editor-container">
+<label class="font-label-code-sm text-label-code-sm text-blue-700 font-semibold">Direct RM Copy Editor</label>
+<textarea class="w-full h-64 bg-slate-50 rounded-lg p-3 text-slate-900 font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary-container border border-slate-300 resize-none font-mono" id="email-draft-input">Dear Captain Vance,
+
+Thank you for your ongoing partnership as we finalize the establishment of Helios Maritime Ltd's primary sovereign treasury facilities.
+
+To proceed with account activation under Monetary Authority of Singapore (MAS 626) requirements, our compliance desk requires two remaining items:
+1. Certified Trust Deed: Full copy including solicitor apostille for the Cayman holding trust.
+2. UBO Declaration Form: Confirmation for beneficial interest holders exceeding 25% voting stake.
+
+Please note: We have already verified and archived your Certificate of Incorporation and ACRA filing; no further submission is required for those items.
+
+You may reply directly to this secure thread or upload via the Northgate Sovereign Portal link below.
+
+Sincerely,
+Marcus Sterling · Senior Relationship Manager</textarea>
+<div class="flex justify-end gap-2">
+<button class="px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-label-ui text-label-ui" onclick="cancelEdit()" type="button">Cancel</button>
+<button class="px-4 py-1.5 rounded-full bg-primary-container hover:bg-blue-700 text-white font-label-ui text-label-ui shadow-xs" onclick="saveEdit()" type="button">Apply Edits</button>
+</div>
+</div>
+<!-- Action Bar at Bottom -->
+<div class="mt-auto pt-space-lg border-t border-light-border flex flex-col sm:flex-row items-center justify-between gap-space-md">
+<!-- Primary Dispatch Button (Trust Cobalt #2563EB) -->
+<button class="w-full sm:w-auto px-6 py-3 rounded-full bg-primary-container text-white font-headline-sm text-headline-sm tracking-wide shadow-md hover:bg-blue-700 hover:shadow-lg active:scale-[0.98] transition-all flex items-center justify-center gap-2" id="send-chase-btn" onclick="handleApproveSend()" type="button">
+<span class="material-symbols-outlined text-[20px]">send_and_archive</span>
+<span>Approve &amp; Send via RM Mailbox</span>
+</button>
+<!-- Secondary Actions -->
+<div class="flex items-center gap-space-sm w-full sm:w-auto justify-end">
+<!-- Edit Copy Toggle (White button with #CBD5E1 border) -->
+<button class="px-4 py-2.5 rounded-full bg-white text-slate-700 border border-[#CBD5E1] font-label-ui text-label-ui hover:bg-slate-50 hover:text-slate-900 transition-colors flex items-center gap-1.5 shadow-xs" onclick="toggleEdit()" type="button">
+<span class="material-symbols-outlined text-[16px] text-slate-500">edit_note</span>
+<span id="edit-btn-text">Edit Copy</span>
+</button>
+<!-- Discard Draft with Dropdown Menu -->
+<div class="relative">
+<button class="px-3.5 py-2.5 rounded-full text-rose-700 hover:bg-rose-50 border border-transparent hover:border-rose-200 transition-colors flex items-center gap-1 font-label-ui text-label-ui font-medium" onclick="toggleDiscardMenu()" type="button">
+<span class="material-symbols-outlined text-[16px]">delete_outline</span>
+<span>Discard Draft</span>
+<span class="material-symbols-outlined text-[14px]">expand_more</span>
+</button>
+<!-- Discard Dropdown Popover -->
+<div class="hidden absolute right-0 bottom-12 w-80 bg-white rounded-xl p-2 shadow-xl z-30 border border-slate-200" id="discard-dropdown">
+<div class="px-3 py-2 text-[11px] font-label-code-sm text-slate-500 uppercase tracking-wider font-semibold border-b border-slate-100">Reason for Cancellation</div>
+<button class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-50 text-slate-800 font-label-ui text-label-ui flex items-center gap-2 transition-colors" onclick="confirmDiscard('Client already provided via phone')" type="button">
+<span class="material-symbols-outlined text-[16px] text-slate-500">phone_in_talk</span>
+<span>Client already provided via phone</span>
+</button>
+<button class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-50 text-slate-800 font-label-ui text-label-ui flex items-center gap-2 transition-colors" onclick="confirmDiscard('Exemption granted by Head of AML')" type="button">
+<span class="material-symbols-outlined text-[16px] text-teal-600">verified</span>
+<span>Exemption granted by Compliance</span>
+</button>
+<button class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-rose-50 text-rose-700 font-label-ui text-label-ui flex items-center gap-2 transition-colors" onclick="confirmDiscard('Incorrect requirement generated')" type="button">
+<span class="material-symbols-outlined text-[16px]">error_outline</span>
+<span>Incorrect requirement identified</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Notification Toast (Injected on Action) -->
+<div class="hidden fixed bottom-8 right-8 z-50 bg-white border border-light-border text-slate-900 px-5 py-4 rounded-xl shadow-2xl flex items-center gap-3 transition-transform duration-300" id="notification-toast">
+<div class="p-2 rounded-full bg-emerald-600 text-white flex items-center justify-center shadow-xs" id="toast-icon-wrapper">
+<span class="material-symbols-outlined text-[18px]">done_all</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-slate-900 font-bold" id="toast-title">Email Dispatched</span>
+<span class="font-label-code-sm text-label-code-sm text-slate-500" id="toast-desc">Outreach logged in Sovereign Audit Ledger #9842</span>
+</div>
+</div>
+</div>
+</div>
+<script>
+  let isEditing = false;
+
+  function toggleEdit() {
+    isEditing = !isEditing;
+    const preview = document.getElementById('email-preview-container');
+    const editor = document.getElementById('email-editor-container');
+    const btnText = document.getElementById('edit-btn-text');
+
+    if (isEditing) {
+      preview.classList.add('hidden');
+      editor.classList.remove('hidden');
+      btnText.innerText = 'Viewing Mode';
+    } else {
+      preview.classList.remove('hidden');
+      editor.classList.add('hidden');
+      btnText.innerText = 'Edit Copy';
+    }
+  }
+
+  function saveEdit() {
+    showToast('Draft Updated', 'Modified copy certified by RM Marcus Sterling');
+    toggleEdit();
+  }
+
+  function cancelEdit() {
+    toggleEdit();
+  }
+
+  function toggleDiscardMenu() {
+    const dropdown = document.getElementById('discard-dropdown');
+    dropdown.classList.toggle('hidden');
+  }
+
+  function confirmDiscard(reason) {
+    const dropdown = document.getElementById('discard-dropdown');
+    dropdown.classList.add('hidden');
+    showToast('Draft Discarded', 'Reason logged: ' + reason, true);
+  }
+
+  function handleApproveSend() {
+    const btn = document.getElementById('send-chase-btn');
+    btn.disabled = true;
+    btn.innerHTML = `<span class="material-symbols-outlined text-[20px] animate-spin">progress_activity</span><span>Encrypting &amp; Dispatching...</span>`;
+
+    setTimeout(() => {
+      btn.innerHTML = `<span class="material-symbols-outlined text-[20px]">check_circle</span><span>Dispatched via RM Mailbox</span>`;
+      btn.classList.remove('bg-primary-container', 'hover:bg-blue-700');
+      btn.classList.add('bg-emerald-600', 'hover:bg-emerald-700');
+      showToast('Chase Email Dispatched', 'Sent to cfo.office@heliosmaritime.sg. 3-Day reminder countdown started.');
+    }, 1200);
+  }
+
+  function showToast(title, desc, isAlert = false) {
+    const toast = document.getElementById('notification-toast');
+    const toastTitle = document.getElementById('toast-title');
+    const toastDesc = document.getElementById('toast-desc');
+    const iconWrapper = document.getElementById('toast-icon-wrapper');
+
+    toastTitle.innerText = title;
+    toastDesc.innerText = desc;
+
+    if (isAlert) {
+      iconWrapper.className = 'p-2 rounded-full bg-rose-600 text-white flex items-center justify-center';
+      iconWrapper.innerHTML = '<span class="material-symbols-outlined text-[18px]">cancel</span>';
+    } else {
+      iconWrapper.className = 'p-2 rounded-full bg-emerald-600 text-white flex items-center justify-center';
+      iconWrapper.innerHTML = '<span class="material-symbols-outlined text-[18px]">done_all</span>';
+    }
+
+    toast.classList.remove('hidden');
+    setTimeout(() => {
+      toast.classList.add('hidden');
+    }, 4500);
+  }
+
+  // Close dropdown on outside click
+  window.addEventListener('click', function(e) {
+    const dropdown = document.getElementById('discard-dropdown');
+    if (!e.target.closest('#discard-dropdown') && !e.target.closest('button[onclick="toggleDiscardMenu()"]')) {
+      if (!dropdown.classList.contains('hidden')) {
+        dropdown.classList.add('hidden');
+      }
+    }
+  });
+</script></main></div></body></html>

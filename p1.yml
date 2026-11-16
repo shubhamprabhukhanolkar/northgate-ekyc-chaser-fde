@@ -1,0 +1,151 @@
+# Kestrel Fast-Track — copy to .github/workflows/p1.yml to activate.
+# Keep only one automatic deployment workflow for this service.
+# Project, region, registry and Google authentication match the original p1.yml.
+# GitHub secret GCP_CREDENTIALS or GCP_SA_KEY must contain authorized SA JSON.
+# The deployer needs registry write, Cloud Run deployment/invocation-policy
+# permissions and service-account act-as. No credential values belong here.
+#
+# This is the current prototype profile: real Gemini/Groq calls, password login,
+# SQLite, local PDFs and an in-process worker. Instance replacement can reset data.
+# Existing Cloud Run GEMINI_API_KEY, GROQ_API_KEY, DEFAULT_OPERATOR_PASSWORD and
+# pricing overrides are preserved by the merge strategy. Configure the keys and
+# operator password privately in Cloud Run before using a newly created service.
+
+name: Test and Deploy Kestrel Fast-Track to Google Cloud Run
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+env:
+  PROJECT_ID: slabspro-slabsuser37
+  REGION: asia-south1
+  GAR_REPOSITORY: omnistream-repo
+  SERVICE_NAME: kestrel-fast-track
+  IMAGE_NAME: asia-south1-docker.pkg.dev/slabspro-slabsuser37/omnistream-repo/kestrel-fast-track
+
+concurrency:
+  group: kestrel-p1-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  test-and-build:
+    name: Run Backend Tests and Build Frontend
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          version: '0.13.7'
+          enable-cache: true
+      - name: Set up Python 3.12
+        run: uv python install 3.12
+      # pyproject.toml, uv.lock and tests/ live at the repository root.
+      - name: Install Locked Backend Dependencies
+        run: uv sync --frozen
+      - name: Run Backend Tests
+        run: uv run pytest -q
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Install Locked Frontend Dependencies
+        working-directory: frontend
+        run: npm ci
+      - name: Build Frontend
+        working-directory: frontend
+        run: npm run build
+
+  deploy:
+    name: Build and Deploy Kestrel to Cloud Run
+    needs: test-and-build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      # Same Google authentication setup as the original p1.yml.
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_CREDENTIALS || secrets.GCP_SA_KEY }}
+      - uses: google-github-actions/setup-gcloud@v2
+        with:
+          version: '>= 460.0.0'
+      - name: Configure Artifact Registry Docker Authentication
+        run: gcloud auth configure-docker "$REGION-docker.pkg.dev" --quiet
+      - name: Ensure Artifact Registry Repository Exists
+        run: |
+          gcloud artifacts repositories describe "$GAR_REPOSITORY" \
+            --location="$REGION" --project="$PROJECT_ID" --quiet || \
+          gcloud artifacts repositories create "$GAR_REPOSITORY" \
+            --repository-format=docker --location="$REGION" \
+            --description="Kestrel Fast-Track application images" \
+            --project="$PROJECT_ID" --quiet
+      # Dockerfile builds React and serves its assets from FastAPI in one image.
+      - name: Build and Push Unified Image
+        run: |
+          docker build --file Dockerfile \
+            --tag "$IMAGE_NAME:${{ github.sha }}" \
+            --tag "$IMAGE_NAME:latest" .
+          docker push "$IMAGE_NAME:${{ github.sha }}"
+          docker push "$IMAGE_NAME:latest"
+      - name: Prepare Kestrel Runtime Configuration
+        run: |
+          python - <<'PY'
+          import json, os
+          values = {
+              "GCP_PROJECT": os.environ["PROJECT_ID"],
+              "GCP_REGION": os.environ["REGION"],
+              "VERTEX_LOCATION": os.environ["REGION"],
+              "PRIMARY_PROVIDER": "gemini_api",
+              "GEMINI_MODEL_NAME": "gemini-3.5-flash-lite",
+              "GROQ_MODEL": "openai/gpt-oss-120b",
+              "ALLOW_NONREGIONAL_INFERENCE": "true",
+              "DEMO_MODE": "false",
+              "AUTH_MODE": "password",
+              "APP_ENV": "local",
+              "SECURE_COOKIES": "true",
+              "STATIC_DIR": "/app/static",
+              "DATABASE_PATH": "/app/data/kestrel.db",
+              "DOCUMENT_DIR": "/app/data/documents",
+              "SEED_SAMPLE_CASES": "true",
+              "SEED_TELEMETRY": "false",
+              "TASK_BACKEND": "worker",
+              "ENABLE_JOB_WORKER": "true",
+              "LLM_TIMEOUT_SECONDS": "60",
+          }
+          # JSON is valid YAML and avoids shell escaping errors in env values.
+          with open(".runtime-env.yml", "w", encoding="utf-8") as output:
+              json.dump(values, output)
+          PY
+      - name: Deploy Kestrel Fast-Track
+        id: deploy
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          project_id: ${{ env.PROJECT_ID }}
+          service: ${{ env.SERVICE_NAME }}
+          region: ${{ env.REGION }}
+          image: ${{ env.IMAGE_NAME }}:${{ github.sha }}
+          env_vars_file: .runtime-env.yml
+          env_vars_update_strategy: merge
+          # Same public Cloud Run entry point; operators authenticate inside the app.
+          # One instance limits separate SQLite workspaces; allocated CPU keeps
+          # the in-process worker running after the request completes.
+          flags: >-
+            --allow-unauthenticated --ingress=all --port=8080
+            --min-instances=1 --max-instances=1 --concurrency=8
+            --memory=2Gi --cpu=2 --no-cpu-throttling --timeout=600s
+      - name: Check Hosted Application
+        env:
+          SERVICE_URL: ${{ steps.deploy.outputs.url }}
+        run: |
+          curl --fail --retry 5 --retry-delay 3 --retry-all-errors "$SERVICE_URL/api/v1/health"
+          curl --fail "$SERVICE_URL/" > /dev/null
+          echo "Kestrel Fast-Track deployed to $SERVICE_URL"

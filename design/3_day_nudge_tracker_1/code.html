@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "outline": "#938f9c", "surface-tint": "#c9bfff", "secondary": "#cdbff2", "on-background": "#e4e1e6", "background": "#131316", "primary-fixed": "#e5deff", "surface-container": "#1f1f22", "on-secondary-fixed": "#1f143d", "text-muted": "#9E9EA8", "on-primary": "#30236f", "on-tertiary-container": "#004830", "tertiary": "#55dea6", "tertiary-fixed": "#74fbc1", "light-border": "#E2E8F0", "primary-container": "#ab9ff2", "primary": "#c9bfff", "on-primary-fixed": "#1a075a", "light-canvas": "#F8FAFC", "surface-variant": "#353438", "on-primary-container": "#3e327e", "on-error": "#690005", "on-primary-fixed-variant": "#473b87", "status-nudge": "#F59E0B", "light-surface": "#FFFFFF", "on-error-container": "#ffdad6", "on-surface-variant": "#c9c4d2", "surface-bright": "#39393c", "secondary-fixed": "#e8ddff", "surface-elevated": "#1C1C21", "on-tertiary": "#003825", "tertiary-fixed-dim": "#55dea6", "surface-border": "rgba(255, 255, 255, 0.07)", "error": "#ffb4ab", "surface-container-lowest": "#0e0e11", "light-teal": "#0D9488", "error-container": "#93000a", "inverse-on-surface": "#303033", "surface-container-highest": "#353438", "on-secondary-fixed-variant": "#4b406b", "inverse-primary": "#5f54a0", "surface-dim": "#131316", "on-tertiary-fixed-variant": "#005137", "secondary-fixed-dim": "#cdbff2", "on-surface": "#e4e1e6", "primary-fixed-dim": "#c9bfff", "tertiary-container": "#2cbf8a", "secondary-container": "#504570", "surface-container-high": "#2a2a2d", "surface": "#131316", "light-cobalt": "#2563EB", "on-tertiary-fixed": "#002114", "surface-container-low": "#1b1b1e", "on-secondary-container": "#c3b4e7", "on-secondary": "#342a53", "inverse-surface": "#e4e1e6", "outline-variant": "#484550", "text-primary": "#FFFFFF", "status-alert": "#FB7185" }, "borderRadius": { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, "spacing": { "space-sm": "0.5rem", "space-xs": "0.25rem", "space-md": "1rem", "space-2xl": "2.5rem", "gutter-mobile": "1rem", "gutter": "1.5rem", "margin": "2rem", "space-lg": "1.5rem", "margin-mobile": "1rem", "space-xl": "2rem" }, "fontFamily": { "headline-xl": [ "Plus Jakarta Sans" ], "body-md": [ "Inter" ], "headline-sm": [ "Plus Jakarta Sans" ], "body-sm": [ "Inter" ], "label-code-sm": [ "JetBrains Mono" ], "body-lg": [ "Inter" ], "display-lg": [ "Plus Jakarta Sans" ], "headline-md": [ "Plus Jakarta Sans" ], "label-code-lg": [ "JetBrains Mono" ], "label-ui": [ "Plus Jakarta Sans" ], "headline-lg": [ "Plus Jakarta Sans" ] }, "fontSize": { "headline-xl": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "700" } ], "body-md": [ "14px", { "lineHeight": "22px", "fontWeight": "400" } ], "headline-sm": [ "16px", { "lineHeight": "24px", "fontWeight": "600" } ], "body-sm": [ "12px", { "lineHeight": "18px", "fontWeight": "400" } ], "label-code-sm": [ "11px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" } ], "body-lg": [ "16px", { "lineHeight": "26px", "fontWeight": "400" } ], "display-lg": [ "40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "headline-md": [ "20px", { "lineHeight": "28px", "fontWeight": "600" } ], "label-code-lg": [ "14px", { "lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "500" } ], "label-ui": [ "13px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "600" } ], "headline-lg": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" } ] } } } };</script></head><body class="bg-background font-body-md text-on-surface antialiased min-h-screen selection:bg-primary-container selection:text-on-primary-container"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-elevated z-50 flex flex-col justify-between border-r border-surface-border"><div class="flex flex-col"><div class="h-20 px-space-lg flex items-center justify-between border-b border-surface-border"><div class="flex items-center gap-space-sm"><img alt="Northgate Bank Monogram" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrD8SbGzElxVPAjcyQcgvy0gApaNthFyhUIq4GV2c83zJo93uz60Q6OCv35hZVedhxNom7yro7AMYhI9AJ5k3CsLRQ2RH1CH2SNkZLRadAAPWVZzuvo_ah7hIhu5jRvoIJY01zVMj40Xi_K2nCfwqpOvZtfhG6nB08UyNEMjh41wvj3CO9ufo_RVnpGpimSxkuepvXQU-F3oZYVjlhhqA26VNdDvOByZOwO82VtZlzhI"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-text-primary tracking-tight">Northgate Bank</span><span class="font-label-code-sm text-label-code-sm text-text-muted">eKYC Workspace</span></div></div><span class="px-space-xs py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-code-sm text-label-code-sm uppercase tracking-wider">v3.4</span></div><nav class="flex flex-col gap-space-xs px-space-md py-space-lg" data-active-classes="bg-surface-variant text-primary font-headline-sm"><a class="flex items-center justify-between px-space-md py-space-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="case-queue" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[20px]">inbox</span><span class="font-label-ui text-label-ui">Case Queue</span></div><span class="px-space-xs py-0.5 rounded-full bg-surface-container-high text-on-surface font-label-code-sm text-label-code-sm group-hover:bg-primary group-hover:text-on-primary transition-colors">42</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="gap-workspace" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[20px]">description</span><span class="font-label-ui text-label-ui">Gap Workspace</span></div></a><a aria-current="page" class="flex items-center justify-between px-space-md py-space-sm rounded-DEFAULT transition-all group bg-surface-variant text-primary font-headline-sm" data-path="3-day-nudge-tracker" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[20px]">schedule</span><span class="font-label-ui text-label-ui">3-Day Nudges</span></div><span class="px-space-xs py-0.5 rounded-full bg-status-nudge/15 text-status-nudge font-label-code-sm text-label-code-sm">3 Due</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="agent-pipeline-trace" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[20px]">account_tree</span><span class="font-label-ui text-label-ui">Agent Trace</span></div></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="prompt-&amp;-toner-studio" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[20px]">tune</span><span class="font-label-ui text-label-ui">Toner Studio</span></div></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="finops-&amp;-impact" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[20px]">bar_chart</span><span class="font-label-ui text-label-ui">FinOps &amp; Impact</span></div></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="kyc-policy-copilot" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[20px]">smart_toy</span><span class="font-label-ui text-label-ui">Policy Copilot</span></div></a></nav></div><div class="p-space-md border-t border-surface-border"><div class="p-space-sm rounded-DEFAULT bg-surface-container flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm overflow-hidden"><div class="relative flex-shrink-0"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDw48RDCPPDW9VijwDsHaWnQfyH0iVGKBGalI-NTpQbkj-cK1y_e0htXgkwV5f-KUF-8dgqPwaejfMAdusrw9BMi06cYrdzx4F5hPtP680s3TxL9VDSuA4Lax7MrBYsKrzTykLxJglysxTZTzv0FawKEArS2nLFOu6BDh4d3eaDXSfNnnp9qxPOgt0pf7GHgUa-DkQUQHnO986Ps06HcIgNnqRp6N7J3Ne09p7j-QCc"/><div class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-tertiary ring-2 ring-surface-container"></div></div><div class="flex flex-col truncate"><span class="font-label-ui text-label-ui text-text-primary truncate">Marcus Sterling</span><span class="font-body-sm text-body-sm text-text-muted truncate">Lead RM (London)</span></div></div><a class="p-1.5 rounded-DEFAULT text-outline hover:text-status-alert hover:bg-surface-variant transition-colors flex items-center" data-path="sentinel-sso" href="#" title="Lock &amp; Sign Out"><span class="material-symbols-outlined text-[18px]">power_settings_new</span></a></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-20 bg-surface-elevated/85 backdrop-blur-xl border-b border-surface-border z-40 px-space-xl flex items-center justify-between"><div class="flex items-center gap-space-md"><div class="flex items-center bg-surface-container px-space-sm py-1 rounded-full border border-surface-border text-on-surface-variant"><span class="material-symbols-outlined text-[16px] mr-1.5 text-primary">public</span><span class="font-label-code-sm text-label-code-sm font-medium tracking-wide text-on-surface">LDN · LON SE1</span><span class="mx-2 text-outline">|</span><span class="font-label-code-sm text-label-code-sm text-text-muted">Singapore · New York</span></div><div class="hidden xl:flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-tertiary-container/10 border border-tertiary-container/30 text-tertiary"><span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span><span class="font-label-code-sm text-label-code-sm font-semibold">Deterministic Pre-Check: Active (0% False Chases)</span></div><div class="hidden lg:flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-primary-container/10 border border-primary-container/30 text-primary"><span class="material-symbols-outlined text-[14px]">verified_user</span><span class="font-label-code-sm text-label-code-sm font-semibold">Human Gate Enforced</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center bg-surface-container rounded-full p-0.5 border border-surface-border"><button class="px-2.5 py-1 rounded-full text-primary bg-surface-variant font-label-code-sm text-label-code-sm flex items-center gap-1" onclick="document.documentElement.classList.add('dark')" type="button"><span class="material-symbols-outlined text-[14px]">dark_mode</span>Phantom</button><button class="px-2.5 py-1 rounded-full text-text-muted hover:text-on-surface font-label-code-sm text-label-code-sm flex items-center gap-1" onclick="document.documentElement.classList.remove('dark')" type="button"><span class="material-symbols-outlined text-[14px]">light_mode</span>Light</button></div><button class="relative p-2 rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-status-alert"></span></button><div class="h-4 w-[1px] bg-outline-variant"></div><div class="flex items-center gap-space-sm"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-surface-border" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDw48RDCPPDW9VijwDsHaWnQfyH0iVGKBGalI-NTpQbkj-cK1y_e0htXgkwV5f-KUF-8dgqPwaejfMAdusrw9BMi06cYrdzx4F5hPtP680s3TxL9VDSuA4Lax7MrBYsKrzTykLxJglysxTZTzv0FawKEArS2nLFOu6BDh4d3eaDXSfNnnp9qxPOgt0pf7GHgUa-DkQUQHnO986Ps06HcIgNnqRp6N7J3Ne09p7j-QCc"/><div class="flex flex-col text-left"><span class="font-label-ui text-label-ui text-text-primary leading-tight">M. Sterling</span><span class="font-label-code-sm text-label-code-sm text-tertiary leading-tight">Authorized RM</span></div></div></div></header><main class="relative pt-20 bg-background min-h-screen"><div class="flex flex-col w-full">
+<!-- Interactive Slide-over Backdrop & Drawer -->
+<div class="fixed inset-0 bg-background/80 backdrop-blur-md z-50 opacity-0 pointer-events-none transition-opacity duration-300" id="drawer-backdrop"></div>
+<aside class="fixed top-0 right-0 h-full w-full max-w-xl bg-surface-container-high shadow-xl z-50 transform translate-x-full transition-transform duration-300 ease-out flex flex-col justify-between overflow-y-auto" id="nudge-drawer">
+<div class="p-space-xl flex flex-col gap-space-lg">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="px-space-xs py-0.5 rounded-full bg-status-nudge/15 text-status-nudge font-label-code-sm text-label-code-sm uppercase tracking-wider flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-status-nudge animate-pulse"></span>
+            Cadence Trigger: 72h SLA
+          </span>
+<span class="font-label-code-sm text-label-code-sm text-text-muted" id="drawer-case-ref">NG-2026-0842</span>
+</div>
+<button class="p-1.5 rounded-full bg-surface-container hover:bg-surface-variant text-on-surface-variant hover:text-on-surface transition-colors flex items-center" onclick="closeDrawer()" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="flex flex-col gap-space-xs">
+<h2 class="font-headline-lg text-headline-lg text-text-primary" id="drawer-company-title">Thames Valley Logistics PLC</h2>
+<p class="font-body-md text-body-md text-text-muted" id="drawer-contact-meta">Primary Recipient: Alistair Vance (Group CFO) · Dispatched 3.4 days ago</p>
+</div>
+<!-- Tone & Safety Matrix Card -->
+<div class="p-space-md rounded-DEFAULT bg-surface-container flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-ui text-label-ui text-text-primary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[18px]">tune</span>
+            Cadence Tone Matrix
+          </span>
+<span class="font-label-code-sm text-label-code-sm text-secondary bg-surface-variant px-2 py-0.5 rounded-full">Collaborative (Level 2)</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">
+          Deterministic frequency guard verified: Last communication was dispatched 81h 36m ago. Zero outreach collisions recorded across WhatsApp Sovereign &amp; Secure Direct Inboxes.
+        </p>
+</div>
+<!-- Live Editable Nudge Preview Canvas -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant uppercase tracking-wider">AI Pre-Composed SLA Notification</span>
+<span class="font-label-code-sm text-label-code-sm text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">auto_awesome</span> Verified Audit-Safe
+          </span>
+</div>
+<div class="p-space-lg rounded-DEFAULT bg-surface-container-lowest flex flex-col gap-space-md">
+<div class="flex flex-col gap-1 text-text-muted font-label-code-sm text-label-code-sm">
+<div><span class="text-outline">To:</span> <span class="text-on-surface" id="drawer-email-to">a.vance@thamesvalleylogistics.co.uk</span></div>
+<div><span class="text-outline">Subject:</span> <span class="text-on-surface" id="drawer-email-subject">Northgate Bank eKYC Update: Thames Valley Logistics PLC [Ref: #0842]</span></div>
+</div>
+<div class="h-0.5 w-full bg-surface-variant/40"></div>
+<div class="font-body-md text-body-md text-on-surface leading-relaxed flex flex-col gap-space-md" id="drawer-email-body">
+<p>Dear Alistair,</p>
+<p>Following our initial onboarding exchange earlier this week, our institutional verification gate requires two outstanding registry items to complete corporate facility clearance:</p>
+<ul class="list-disc pl-5 flex flex-col gap-1 text-primary">
+<li><strong class="text-text-primary">Group Structure Chart</strong> (Showing natural persons with ≥10% beneficial equity)</li>
+<li><strong class="text-text-primary">Audited Financial Statements 2024</strong> (Signed by statutory auditor)</li>
+</ul>
+<p>To ensure no delay to your active treasury line setup scheduled for Friday, kindly submit directly through your sovereign upload token below:</p>
+<div class="p-space-sm rounded-DEFAULT bg-surface-container flex items-center justify-between">
+<span class="font-label-code-sm text-label-code-sm text-tertiary">portal.northgate.bank/v3/auth?case=NG-0842-88f2</span>
+<span class="font-label-code-sm text-label-code-sm text-text-muted">Expires in 48h</span>
+</div>
+<p class="text-text-muted">Warm regards,<br/><strong class="text-on-surface">Marcus Sterling</strong><br/>Lead Relationship Manager · Institutional Corporate Desk, London</p>
+</div>
+</div>
+</div>
+<!-- Engagement Pulse Metrics -->
+<div class="grid grid-cols-2 gap-space-md">
+<div class="p-space-md rounded-DEFAULT bg-surface-container flex flex-col">
+<span class="font-label-code-sm text-label-code-sm text-text-muted">Telemetry Signal</span>
+<span class="font-headline-sm text-headline-sm text-text-primary mt-1">2 Opens Detected</span>
+<span class="font-body-sm text-body-sm text-outline mt-0.5">Yesterday at 16:22 &amp; 18:40</span>
+</div>
+<div class="p-space-md rounded-DEFAULT bg-surface-container flex flex-col">
+<span class="font-label-code-sm text-label-code-sm text-text-muted">Dispatch Channel</span>
+<span class="font-headline-sm text-headline-sm text-text-primary mt-1">Secure RM Email + SMS</span>
+<span class="font-body-sm text-body-sm text-tertiary mt-0.5">Direct Delivery Confirmed</span>
+</div>
+</div>
+</div>
+<!-- Slide-over Fixed Bottom Footer Actions -->
+<div class="p-space-lg bg-surface-container-high/90 backdrop-blur-md flex items-center justify-between gap-space-md">
+<button class="px-6 py-2.5 rounded-full bg-surface-variant hover:bg-surface-bright font-label-ui text-label-ui text-on-surface transition-all" onclick="closeDrawer()" type="button">
+        Discard &amp; Keep Cadence
+      </button>
+<div class="flex items-center gap-space-sm">
+<button class="p-2.5 rounded-full bg-surface-variant hover:bg-surface-bright text-on-surface-variant hover:text-on-surface transition-all flex items-center justify-center" onclick="triggerToast('Custom template modified')" title="Modify Wording" type="button">
+<span class="material-symbols-outlined text-[18px]">edit_note</span>
+</button>
+<button class="px-6 py-2.5 rounded-full bg-status-nudge text-background font-label-ui text-label-ui font-semibold shadow-lg hover:shadow-status-nudge/30 hover:opacity-90 transition-all flex items-center gap-1.5" onclick="dispatchNudgeAction()" type="button">
+<span class="material-symbols-outlined text-[18px]">outgoing_mail</span>
+          Dispatch 3-Day Nudge Now
+        </button>
+</div>
+</div>
+</aside>
+<!-- Notification Toast Container -->
+<div class="fixed bottom-6 right-6 z-50 bg-surface-container-highest px-space-lg py-space-sm rounded-full shadow-xl flex items-center gap-space-sm pointer-events-none opacity-0 translate-y-3 transition-all duration-300" id="toast-banner">
+<span class="material-symbols-outlined text-tertiary text-[20px]" id="toast-icon">check_circle</span>
+<span class="font-label-ui text-label-ui text-text-primary" id="toast-message">Nudge dispatched via London Outbox</span>
+</div>
+<!-- Primary Workspace Content Area -->
+<div class="px-space-xl py-space-xl flex flex-col gap-space-2xl max-w-[1720px] mx-auto w-full">
+<!-- Header Block & Executive Context -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-lg">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="px-2.5 py-0.5 rounded-full bg-surface-variant text-text-muted font-label-code-sm text-label-code-sm">Outreach Engine</span>
+<span class="font-label-code-sm text-label-code-sm text-tertiary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> 72h Enforced Cadence
+          </span>
+</div>
+<h1 class="font-display-lg text-display-lg text-text-primary tracking-tight">3-Day Nudge &amp; Cadence Tracker</h1>
+<p class="font-body-lg text-body-lg text-text-muted max-w-3xl">
+          Automated SLA tracking: Follow-up cadence triggers exactly 72h post-dispatch if missing documents remain unfulfilled. Respects client relationship equilibrium with calibrated tone curves.
+        </p>
+</div>
+<!-- Quick Action Controls -->
+<div class="flex items-center gap-space-sm">
+<button class="px-4 py-2 rounded-full bg-surface-container hover:bg-surface-variant font-label-ui text-label-ui text-on-surface transition-all flex items-center gap-1.5" onclick="triggerToast('Cadence settings synced to Global KYC Policy v3.4')" type="button">
+<span class="material-symbols-outlined text-outline text-[18px]">rule</span>
+          Cadence Rules
+        </button>
+<button class="px-4 py-2 rounded-full bg-primary-container text-on-primary-container font-label-ui text-label-ui transition-all flex items-center gap-1.5 shadow-md" onclick="triggerToast('Synchronized with London, Singapore &amp; NY queues')" type="button">
+<span class="material-symbols-outlined text-[18px]">sync</span>
+          Sync All Queues
+        </button>
+</div>
+</div>
+<!-- Quick Stats Bar (3 clean pill metrics) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+<!-- Metric 1: Due Today -->
+<div class="p-space-lg rounded-DEFAULT bg-surface-container flex items-center justify-between relative overflow-hidden group hover:bg-surface-variant/40 transition-colors">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-status-nudge"></span>
+<span class="font-label-code-sm text-label-code-sm text-status-nudge uppercase tracking-wider font-semibold">Immediate Action</span>
+</div>
+<span class="font-headline-xl text-headline-xl text-text-primary mt-1">3 Cases</span>
+<span class="font-body-md text-body-md text-text-muted">Due for 72h Nudge Today</span>
+</div>
+<div class="w-14 h-14 rounded-full bg-status-nudge/10 flex items-center justify-center text-status-nudge flex-shrink-0">
+<span class="material-symbols-outlined text-[28px]">notification_important</span>
+</div>
+</div>
+<!-- Metric 2: In Grace Period -->
+<div class="p-space-lg rounded-DEFAULT bg-surface-container flex items-center justify-between relative overflow-hidden group hover:bg-surface-variant/40 transition-colors">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+<span class="font-label-code-sm text-label-code-sm text-primary uppercase tracking-wider font-semibold">Observation Period</span>
+</div>
+<span class="font-headline-xl text-headline-xl text-text-primary mt-1">11 Cases</span>
+<span class="font-body-md text-body-md text-text-muted">In 24h–48h Grace Period</span>
+</div>
+<div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[28px]">timelapse</span>
+</div>
+</div>
+<!-- Metric 3: First-Touch Resolution -->
+<div class="p-space-lg rounded-DEFAULT bg-surface-container flex items-center justify-between relative overflow-hidden group hover:bg-surface-variant/40 transition-colors">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary"></span>
+<span class="font-label-code-sm text-label-code-sm text-tertiary uppercase tracking-wider font-semibold">First-Touch Precision</span>
+</div>
+<span class="font-headline-xl text-headline-xl text-text-primary mt-1">28 Cases</span>
+<span class="font-body-md text-body-md text-text-muted">Resolved on 1st Outreach (66.7%)</span>
+</div>
+<div class="w-14 h-14 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary flex-shrink-0">
+<span class="material-symbols-outlined text-[28px]">verified</span>
+</div>
+</div>
+</div>
+<!-- Operational Rhythm & Cadence Pipeline (3 Calm Spatial Lanes) -->
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-space-xl items-start">
+<!-- ========================================== -->
+<!-- LANE 1: Due for Gentle Nudge Today (Day 3+) -->
+<!-- ========================================== -->
+<section class="flex flex-col gap-space-md">
+<!-- Lane Header -->
+<div class="flex items-center justify-between px-space-xs">
+<div class="flex items-center gap-space-sm">
+<div class="w-3 h-3 rounded-full bg-status-nudge"></div>
+<h2 class="font-headline-md text-headline-md text-text-primary">Due for Gentle Nudge Today</h2>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-status-nudge/15 text-status-nudge font-label-code-sm text-label-code-sm font-semibold">
+            3 Cases (72h+)
+          </span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted px-space-xs">
+          72-hour grace elapsed with zero registry receipt. Ready for verified single-click outbound chaser.
+        </p>
+<!-- Lane 1 - Case Card 1 -->
+<article class="p-space-lg rounded-DEFAULT bg-surface-elevated flex flex-col gap-space-md hover:bg-surface-variant/30 transition-all cursor-pointer relative shadow-sm" onclick="openDrawer('NG-2026-0842', 'Thames Valley Logistics PLC', 'Alistair Vance (Group CFO)', '3.4 days ago (18 May, 10:14)', 'Group Structure Chart &amp; Audited Financials 2024', 'Email opened twice yesterday; no attachments returned', 'AI Gentle Reminder Ready (Tone: Collaborative &amp; Urgency Level 2)')">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex flex-col">
+<span class="font-label-code-sm text-label-code-sm text-text-muted">Case NG-2026-0842</span>
+<h3 class="font-headline-sm text-headline-sm text-text-primary mt-0.5">Thames Valley Logistics PLC</h3>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-status-nudge/20 text-status-nudge font-label-code-sm text-label-code-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">timer</span>
+              3.4d Overdue
+            </span>
+</div>
+<!-- Missing Docs & Metadata -->
+<div class="flex flex-col gap-space-xs p-space-sm rounded-DEFAULT bg-surface-container-lowest">
+<div class="flex items-center justify-between">
+<span class="font-label-code-sm text-label-code-sm text-status-alert flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">warning</span> Missing Requirements:
+              </span>
+<span class="font-label-code-sm text-label-code-sm text-text-muted">2 Documents</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">Group Structure Chart &amp; Audited Financials 2024</p>
+</div>
+<!-- Engagement Signal -->
+<div class="flex items-center gap-space-sm text-text-muted font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-primary text-[18px]">visibility</span>
+<span class="truncate">Email opened twice yesterday; no attachments returned</span>
+</div>
+<!-- Draft Status Pill -->
+<div class="p-space-sm rounded-DEFAULT bg-surface-container flex items-center justify-between">
+<div class="flex items-center gap-1.5 truncate">
+<span class="material-symbols-outlined text-secondary text-[16px]">smart_toy</span>
+<span class="font-label-code-sm text-label-code-sm text-text-primary truncate">AI Collaborative Wording (L2)</span>
+</div>
+<span class="font-label-code-sm text-label-code-sm text-tertiary">100% Ready</span>
+</div>
+<!-- Action Button -->
+<button class="w-full py-2.5 px-space-md rounded-full bg-status-nudge text-background font-label-ui text-label-ui font-semibold shadow-md hover:brightness-110 transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); openDrawer('NG-2026-0842', 'Thames Valley Logistics PLC', 'Alistair Vance (Group CFO)', '3.4 days ago (18 May, 10:14)', 'Group Structure Chart &amp; Audited Financials 2024', 'Email opened twice yesterday; no attachments returned', 'AI Gentle Reminder Ready (Tone: Collaborative &amp; Urgency Level 2)')" type="button">
+<span class="material-symbols-outlined text-[18px]">send</span>
+            Review &amp; Send 3-Day Nudge
+          </button>
+</article>
+<!-- Lane 1 - Case Card 2 -->
+<article class="p-space-lg rounded-DEFAULT bg-surface-elevated flex flex-col gap-space-md hover:bg-surface-variant/30 transition-all cursor-pointer relative shadow-sm" onclick="openDrawer('NG-2026-0839', 'Mersey Bulk Carriers UK', 'Fiona Gallagher (Compliance Director)', '3.1 days ago (18 May, 16:40)', 'Proof of Operational Address', 'Unopened in client inbox; SMS portal link unclicked', 'AI Gentle Reminder Ready (Tone: Direct &amp; Friendly)')">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex flex-col">
+<span class="font-label-code-sm text-label-code-sm text-text-muted">Case NG-2026-0839</span>
+<h3 class="font-headline-sm text-headline-sm text-text-primary mt-0.5">Mersey Bulk Carriers UK</h3>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-status-nudge/20 text-status-nudge font-label-code-sm text-label-code-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">timer</span>
+              3.1d Overdue
+            </span>
+</div>
+<div class="flex flex-col gap-space-xs p-space-sm rounded-DEFAULT bg-surface-container-lowest">
+<div class="flex items-center justify-between">
+<span class="font-label-code-sm text-label-code-sm text-status-alert flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">warning</span> Missing Requirements:
+              </span>
+<span class="font-label-code-sm text-label-code-sm text-text-muted">1 Document</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">Proof of Operational Address (Lease or Tax Bill &lt;90d)</p>
+</div>
+<div class="flex items-center gap-space-sm text-text-muted font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-outline text-[18px]">mark_email_unread</span>
+<span class="truncate">Unopened in client inbox; SMS portal pending</span>
+</div>
+<div class="p-space-sm rounded-DEFAULT bg-surface-container flex items-center justify-between">
+<div class="flex items-center gap-1.5 truncate">
+<span class="material-symbols-outlined text-secondary text-[16px]">smart_toy</span>
+<span class="font-label-code-sm text-label-code-sm text-text-primary truncate">AI Multi-Channel Push</span>
+</div>
+<span class="font-label-code-sm text-label-code-sm text-tertiary">Email + WhatsApp</span>
+</div>
+<button class="w-full py-2.5 px-space-md rounded-full bg-status-nudge text-background font-label-ui text-label-ui font-semibold shadow-md hover:brightness-110 transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); openDrawer('NG-2026-0839', 'Mersey Bulk Carriers UK', 'Fiona Gallagher (Compliance Director)', '3.1 days ago (18 May, 16:40)', 'Proof of Operational Address', 'Unopened in client inbox; SMS portal link unclicked', 'AI Gentle Reminder Ready (Tone: Direct &amp; Friendly)')" type="button">
+<span class="material-symbols-outlined text-[18px]">send</span>
+            Review &amp; Send 3-Day Nudge
+          </button>
+</article>
+<!-- Lane 1 - Case Card 3 -->
+<article class="p-space-lg rounded-DEFAULT bg-surface-elevated flex flex-col gap-space-md hover:bg-surface-variant/30 transition-all cursor-pointer relative shadow-sm" onclick="openDrawer('NG-2026-0837', 'Pacific Horizon Energy Ltd', 'Daisuke Tanaka (Head of Treasury)', '3.0 days ago (18 May, 18:22)', 'Authorized Signatory Resolution', 'Downloaded portal auth key; document not uploaded', 'AI Gentle Reminder Ready (Tone: Executive SLA Notice)')">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex flex-col">
+<span class="font-label-code-sm text-label-code-sm text-text-muted">Case NG-2026-0837</span>
+<h3 class="font-headline-sm text-headline-sm text-text-primary mt-0.5">Pacific Horizon Energy Ltd</h3>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-status-nudge/20 text-status-nudge font-label-code-sm text-label-code-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">timer</span>
+              3.0d Overdue
+            </span>
+</div>
+<div class="flex flex-col gap-space-xs p-space-sm rounded-DEFAULT bg-surface-container-lowest">
+<div class="flex items-center justify-between">
+<span class="font-label-code-sm text-label-code-sm text-status-alert flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">warning</span> Missing Requirements:
+              </span>
+<span class="font-label-code-sm text-label-code-sm text-text-muted">1 Document</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">Authorized Signatory Resolution (Board Minutes)</p>
+</div>
+<div class="flex items-center gap-space-sm text-text-muted font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-primary text-[18px]">lock_clock</span>
+<span class="truncate">Downloaded portal auth key; upload incomplete</span>
+</div>
+<div class="p-space-sm rounded-DEFAULT bg-surface-container flex items-center justify-between">
+<div class="flex items-center gap-1.5 truncate">
+<span class="material-symbols-outlined text-secondary text-[16px]">smart_toy</span>
+<span class="font-label-code-sm text-label-code-sm text-text-primary truncate">Executive Board Wording</span>
+</div>
+<span class="font-label-code-sm text-label-code-sm text-tertiary">Verified</span>
+</div>
+<button class="w-full py-2.5 px-space-md rounded-full bg-status-nudge text-background font-label-ui text-label-ui font-semibold shadow-md hover:brightness-110 transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); openDrawer('NG-2026-0837', 'Pacific Horizon Energy Ltd', 'Daisuke Tanaka (Head of Treasury)', '3.0 days ago (18 May, 18:22)', 'Authorized Signatory Resolution', 'Downloaded portal auth key; document not uploaded', 'AI Gentle Reminder Ready (Tone: Executive SLA Notice)')" type="button">
+<span class="material-symbols-outlined text-[18px]">send</span>
+            Review &amp; Send 3-Day Nudge
+          </button>
+</article>
+</section>
+<!-- ========================================== -->
+<!-- LANE 2: Awaiting Client Response (Grace Window) -->
+<!-- ========================================== -->
+<section class="flex flex-col gap-space-md">
+<!-- Lane Header -->
+<div class="flex items-center justify-between px-space-xs">
+<div class="flex items-center gap-space-sm">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<h2 class="font-headline-md text-headline-md text-text-primary">Awaiting Client Response</h2>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-primary/15 text-primary font-label-code-sm text-label-code-sm font-semibold">
+            Day 1–2 Grace (11 Cases)
+          </span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted px-space-xs">
+          Active grace period. Chasers suppressed automatically to prevent over-messaging institutional clients.
+        </p>
+<!-- Lane 2 - Case Card 1 -->
+<article class="p-space-lg rounded-DEFAULT bg-surface-elevated flex flex-col gap-space-md hover:bg-surface-variant/30 transition-all cursor-pointer relative shadow-sm" onclick="openDrawer('NG-2026-0841', 'Helios Maritime Ltd', 'Eleni Papadakis (Group Legal)', 'Sent 4 hours ago (Today, 08:30)', 'Register of Directors &amp; UBO Passports', 'Portal link generated; client notified', 'Cadence In Grace Window — Nudge locked until Friday 09:00 SGT')">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex flex-col">
+<span class="font-label-code-sm text-label-code-sm text-text-muted">Case NG-2026-0841</span>
+<h3 class="font-headline-sm text-headline-sm text-text-primary mt-0.5">Helios Maritime Ltd</h3>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-text-muted font-label-code-sm text-label-code-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">history</span>
+              Sent 4h ago
+            </span>
+</div>
+<div class="flex flex-col gap-1 p-space-sm rounded-DEFAULT bg-surface-container-lowest">
+<span class="font-label-code-sm text-label-code-sm text-text-muted">Pending Item:</span>
+<p class="font-body-sm text-body-sm text-on-surface">Register of Directors &amp; UBO Passports</p>
+</div>
+<!-- Cadence Countdown Timer Visual -->
+<div class="flex flex-col gap-1.5 p-space-sm rounded-DEFAULT bg-surface-container">
+<div class="flex items-center justify-between text-body-sm">
+<span class="font-label-code-sm text-label-code-sm text-text-muted">72h SLA Window</span>
+<span class="font-label-code-sm text-label-code-sm text-primary font-medium">68h Remaining</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 6%;"></div>
+</div>
+<span class="font-label-code-sm text-label-code-sm text-outline mt-0.5">Next nudge window: Friday 09:00 SGT</span>
+</div>
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-code-sm text-label-code-sm text-text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-outline text-[16px]">lock</span> Chaser Suppressed
+            </span>
+<button class="font-label-code-sm text-label-code-sm text-secondary hover:text-text-primary transition-colors" onclick="event.stopPropagation(); triggerToast('Manual override logged in audit trail')" type="button">
+              Request Early Override
+            </button>
+</div>
+</article>
+<!-- Lane 2 - Case Card 2 -->
+<article class="p-space-lg rounded-DEFAULT bg-surface-elevated flex flex-col gap-space-md hover:bg-surface-variant/30 transition-all cursor-pointer relative shadow-sm" onclick="openDrawer('NG-2026-0848', 'Vanguard Nordic Clean Energy BV', 'Jens Lindqvist (CFO)', 'Sent 1.2 days ago (20 May, 14:10)', 'Tax Identification Certificate 2024', 'Delivered to corporate desk', 'Cadence In Grace Window — Nudge eligible Thursday 14:10')">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex flex-col">
+<span class="font-label-code-sm text-label-code-sm text-text-muted">Case NG-2026-0848</span>
+<h3 class="font-headline-sm text-headline-sm text-text-primary mt-0.5">Vanguard Nordic Clean Energy BV</h3>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-text-muted font-label-code-sm text-label-code-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">history</span>
+              Sent 1.2d ago
+            </span>
+</div>
+<div class="flex flex-col gap-1 p-space-sm rounded-DEFAULT bg-surface-container-lowest">
+<span class="font-label-code-sm text-label-code-sm text-text-muted">Pending Item:</span>
+<p class="font-body-sm text-body-sm text-on-surface">Tax Identification Certificate 2024</p>
+</div>
+<div class="flex flex-col gap-1.5 p-space-sm rounded-DEFAULT bg-surface-container">
+<div class="flex items-center justify-between text-body-sm">
+<span class="font-label-code-sm text-label-code-sm text-text-muted">72h SLA Window</span>
+<span class="font-label-code-sm text-label-code-sm text-primary font-medium">43h Remaining</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 40%;"></div>
+</div>
+<span class="font-label-code-sm text-label-code-sm text-outline mt-0.5">Next nudge window: Thursday 14:10 CEST</span>
+</div>
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-code-sm text-label-code-sm text-text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-outline text-[16px]">lock</span> Chaser Suppressed
+            </span>
+<span class="font-label-code-sm text-label-code-sm text-tertiary">Channel Active</span>
+</div>
+</article>
+<!-- Lane 2 - Case Card 3 -->
+<article class="p-space-lg rounded-DEFAULT bg-surface-elevated flex flex-col gap-space-md hover:bg-surface-variant/30 transition-all cursor-pointer relative shadow-sm" onclick="openDrawer('NG-2026-0850', 'Apex Global Commodities', 'Rashid Al-Maktoum (Head of Treasury Operations)', 'Sent 1.8 days ago (20 May, 01:15)', 'Anti-Bribery Compliance Attestation', 'Portal access log recorded', 'Cadence In Grace Window — Nudge eligible Thursday 21:00')">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex flex-col">
+<span class="font-label-code-sm text-label-code-sm text-text-muted">Case NG-2026-0850</span>
+<h3 class="font-headline-sm text-headline-sm text-text-primary mt-0.5">Apex Global Commodities</h3>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-text-muted font-label-code-sm text-label-code-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">history</span>
+              Sent 1.8d ago
+            </span>
+</div>
+<div class="flex flex-col gap-1 p-space-sm rounded-DEFAULT bg-surface-container-lowest">
+<span class="font-label-code-sm text-label-code-sm text-text-muted">Pending Item:</span>
+<p class="font-body-sm text-body-sm text-on-surface">Anti-Bribery Compliance Attestation</p>
+</div>
+<div class="flex flex-col gap-1.5 p-space-sm rounded-DEFAULT bg-surface-container">
+<div class="flex items-center justify-between text-body-sm">
+<span class="font-label-code-sm text-label-code-sm text-text-muted">72h SLA Window</span>
+<span class="font-label-code-sm text-label-code-sm text-primary font-medium">28h Remaining</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 61%;"></div>
+</div>
+<span class="font-label-code-sm text-label-code-sm text-outline mt-0.5">Next nudge window: Thursday 21:00 GST</span>
+</div>
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-code-sm text-label-code-sm text-text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-outline text-[16px]">lock</span> Chaser Suppressed
+            </span>
+<span class="font-label-code-sm text-label-code-sm text-tertiary">Signal Clear</span>
+</div>
+</article>
+</section>
+<!-- ========================================== -->
+<!-- LANE 3: Recently Completed / Documents Captured -->
+<!-- ========================================== -->
+<section class="flex flex-col gap-space-md">
+<!-- Lane Header -->
+<div class="flex items-center justify-between px-space-xs">
+<div class="flex items-center gap-space-sm">
+<div class="w-3 h-3 rounded-full bg-tertiary"></div>
+<h2 class="font-headline-md text-headline-md text-text-primary">Completed / Captured</h2>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-tertiary/15 text-tertiary font-label-code-sm text-label-code-sm font-semibold">
+            Resolved (28 Cases)
+          </span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted px-space-xs">
+          Successful document capture. Chaser pipeline terminated; transferred to Sentinel deterministic validation.
+        </p>
+<!-- Lane 3 - Case Card 1 (Resolved via Day 3 Nudge) -->
+<article class="p-space-lg rounded-DEFAULT bg-surface-elevated flex flex-col gap-space-md hover:bg-surface-variant/30 transition-all cursor-pointer relative shadow-sm" onclick="openDrawer('NG-2026-0845', 'Hudson Biotech Corp', 'Dr. Sarah Lin (Chief Executive)', 'Resolved today at 11:20', 'All 4 Statutory Documents Captured', 'Client responded within 4h of Day 3 Nudge', 'Pipeline Completed — Automated Chasers Ceased')">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex flex-col">
+<span class="font-label-code-sm text-label-code-sm text-text-muted">Case NG-2026-0845</span>
+<h3 class="font-headline-sm text-headline-sm text-text-primary mt-0.5">Hudson Biotech Corp</h3>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-tertiary/15 text-tertiary font-label-code-sm text-label-code-sm flex items-center gap-1 font-medium">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+              Cleared via Day 3 Nudge
+            </span>
+</div>
+<!-- Micro Resolution Journey -->
+<div class="p-space-sm rounded-DEFAULT bg-surface-container-lowest flex flex-col gap-2">
+<div class="flex items-center justify-between font-label-code-sm text-label-code-sm text-text-muted">
+<span>Cadence Impact Analysis</span>
+<span class="text-tertiary">+100% SLA Compliance</span>
+</div>
+<div class="flex items-center gap-2 text-body-sm text-on-surface">
+<span class="material-symbols-outlined text-status-nudge text-[16px]">outgoing_mail</span>
+<span>Nudged at 07:15</span>
+<span class="text-outline">→</span>
+<span class="material-symbols-outlined text-tertiary text-[16px]">cloud_done</span>
+<span>Uploaded within 4h</span>
+</div>
+</div>
+<!-- Captured Artifacts -->
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded bg-surface-container text-text-muted font-label-code-sm text-label-code-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-tertiary text-[12px]">verified</span> Certificate of Inc.
+            </span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-text-muted font-label-code-sm text-label-code-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-tertiary text-[12px]">verified</span> Articles of Assoc.
+            </span>
+</div>
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-code-sm text-label-code-sm text-tertiary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Pipeline Ceased Cleanly
+            </span>
+<span class="font-label-code-sm text-label-code-sm text-text-muted">View Gap Workspace →</span>
+</div>
+</article>
+<!-- Lane 3 - Case Card 2 (Round 1 Clean Clearance) -->
+<article class="p-space-lg rounded-DEFAULT bg-surface-elevated flex flex-col gap-space-md hover:bg-surface-variant/30 transition-all cursor-pointer relative shadow-sm" onclick="openDrawer('NG-2026-0833', 'Silverline Shipping Pte', 'Capt. Michael Teo (Managing Director)', 'Resolved yesterday at 17:45', 'All Onboarding Items Received', 'Instant first-touch response via Sovereign Link', 'First-Touch Full Clearance — Zero Nudges Required')">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex flex-col">
+<span class="font-label-code-sm text-label-code-sm text-text-muted">Case NG-2026-0833</span>
+<h3 class="font-headline-sm text-headline-sm text-text-primary mt-0.5">Silverline Shipping Pte</h3>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-tertiary/15 text-tertiary font-label-code-sm text-label-code-sm flex items-center gap-1 font-medium">
+<span class="material-symbols-outlined text-[14px]">done_all</span>
+              Cleared in Round 1
+            </span>
+</div>
+<div class="p-space-sm rounded-DEFAULT bg-surface-container-lowest flex flex-col gap-2">
+<div class="flex items-center justify-between font-label-code-sm text-label-code-sm text-text-muted">
+<span>Cadence Metric</span>
+<span class="text-tertiary">0 Chasers Dispatched</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">Client verified all signatory passports in first session</p>
+</div>
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded bg-surface-container text-text-muted font-label-code-sm text-label-code-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-tertiary text-[12px]">verified</span> ACRA Registry
+            </span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-text-muted font-label-code-sm text-label-code-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-tertiary text-[12px]">verified</span> LEI: 549300V98
+            </span>
+</div>
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-code-sm text-label-code-sm text-tertiary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Ready for Risk Sign-Off
+            </span>
+<span class="font-label-code-sm text-label-code-sm text-text-muted">Archive Dossier</span>
+</div>
+</article>
+<!-- Lane 3 - Inline Visual Telemetry Summary Widget -->
+<div class="p-space-lg rounded-DEFAULT bg-surface-container flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-label-ui text-label-ui text-text-primary">Cadence Velocity Trend</span>
+<span class="font-label-code-sm text-label-code-sm text-tertiary">Past 14 Days</span>
+</div>
+<!-- Lightweight inline SVG Sparkline/Bar Visual -->
+<div class="flex items-end justify-between gap-1 h-14 w-full pt-2">
+<div class="flex-1 bg-surface-variant/40 rounded-t h-[40%]" title="Day 1"></div>
+<div class="flex-1 bg-surface-variant/50 rounded-t h-[55%]" title="Day 2"></div>
+<div class="flex-1 bg-surface-variant/60 rounded-t h-[45%]" title="Day 3"></div>
+<div class="flex-1 bg-surface-variant/70 rounded-t h-[65%]" title="Day 4"></div>
+<div class="flex-1 bg-tertiary/40 rounded-t h-[75%]" title="Day 5"></div>
+<div class="flex-1 bg-tertiary/60 rounded-t h-[90%]" title="Day 6"></div>
+<div class="flex-1 bg-tertiary rounded-t h-[100%]" title="Today"></div>
+</div>
+<div class="flex items-center justify-between text-body-sm text-text-muted">
+<span class="font-label-code-sm text-label-code-sm">Mean Turnaround: 2.1 Days</span>
+<span class="font-label-code-sm text-label-code-sm text-tertiary font-semibold">0% Chaser Fatigue</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Bottom Institutional Safety Notice -->
+<div class="p-space-md rounded-DEFAULT bg-surface-container flex flex-col md:flex-row items-center justify-between gap-space-md text-text-muted">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">shield_with_heart</span>
+<span class="font-body-sm text-body-sm">
+<strong>Northgate Relationship Safeguard:</strong> Automated nudge locks dynamically prevent redundant notifications if an RM or client uploaded relevant documentation within the last 12 hours.
+        </span>
+</div>
+<div class="flex items-center gap-space-md flex-shrink-0">
+<span class="font-label-code-sm text-label-code-sm text-outline">Audit Stamp: #NG-CADENCE-SLA-409</span>
+</div>
+</div>
+</div>
+</div>
+<script>
+  function openDrawer(caseId, companyName, contactMeta, dispatchMeta, missingItems, signalMeta, wordingTitle) {
+    const backdrop = document.getElementById('drawer-backdrop');
+    const drawer = document.getElementById('nudge-drawer');
+
+    document.getElementById('drawer-case-ref').textContent = caseId;
+    document.getElementById('drawer-company-title').textContent = companyName;
+    document.getElementById('drawer-contact-meta').textContent = 'Primary Recipient: ' + contactMeta + ' · ' + dispatchMeta;
+
+    const emailToSlug = companyName.toLowerCase().replace(/[^a-z]/g, '').slice(0, 10);
+    document.getElementById('drawer-email-to').textContent = 'operations@' + emailToSlug + '.co.uk';
+    document.getElementById('drawer-email-subject').textContent = 'Northgate Bank eKYC Update: ' + companyName + ' [Ref: ' + caseId + ']';
+
+    backdrop.classList.remove('opacity-0', 'pointer-events-none');
+    backdrop.classList.add('opacity-100', 'pointer-events-auto');
+    drawer.classList.remove('translate-x-full');
+    drawer.classList.add('translate-x-0');
+  }
+
+  function closeDrawer() {
+    const backdrop = document.getElementById('drawer-backdrop');
+    const drawer = document.getElementById('nudge-drawer');
+
+    backdrop.classList.remove('opacity-100', 'pointer-events-auto');
+    backdrop.classList.add('opacity-0', 'pointer-events-none');
+    drawer.classList.remove('translate-x-0');
+    drawer.classList.add('translate-x-full');
+  }
+
+  document.getElementById('drawer-backdrop').addEventListener('click', closeDrawer);
+
+  function dispatchNudgeAction() {
+    const caseRef = document.getElementById('drawer-case-ref').textContent;
+    closeDrawer();
+    triggerToast('3-Day Cadence nudge dispatched for ' + caseRef + ' via secure corporate relay.');
+  }
+
+  let toastTimeout;
+  function triggerToast(message) {
+    const toast = document.getElementById('toast-banner');
+    const toastMsg = document.getElementById('toast-message');
+    toastMsg.textContent = message;
+
+    clearTimeout(toastTimeout);
+    toast.classList.remove('opacity-0', 'translate-y-3', 'pointer-events-none');
+    toast.classList.add('opacity-100', 'translate-y-0');
+
+    toastTimeout = setTimeout(() => {
+      toast.classList.remove('opacity-100', 'translate-y-0');
+      toast.classList.add('opacity-0', 'translate-y-3', 'pointer-events-none');
+    }, 3800);
+  }
+</script></main></div></body></html>

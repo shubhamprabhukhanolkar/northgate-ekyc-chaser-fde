@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "outline": "#64748B", "surface-tint": "#2563EB", "secondary": "#0D9488", "on-background": "#0F172A", "background": "#F8FAFC", "primary-fixed": "#DBEAFE", "surface-container": "#F1F5F9", "on-secondary-fixed": "#042F2E", "text-muted": "#64748B", "on-primary": "#FFFFFF", "on-tertiary-container": "#064E3B", "tertiary": "#0D9488", "tertiary-fixed": "#CCFBF1", "light-border": "#E2E8F0", "primary-container": "#2563EB", "primary": "#2563EB", "on-primary-fixed": "#1E3A8A", "light-canvas": "#F8FAFC", "surface-variant": "#E2E8F0", "on-primary-container": "#FFFFFF", "on-error": "#FFFFFF", "on-primary-fixed-variant": "#1D4ED8", "status-nudge": "#D97706", "light-surface": "#FFFFFF", "on-error-container": "#991B1B", "on-surface-variant": "#475569", "surface-bright": "#FFFFFF", "secondary-fixed": "#CCFBF1", "surface-elevated": "#FFFFFF", "on-tertiary": "#FFFFFF", "tertiary-fixed-dim": "#5EEAD4", "surface-border": "#E2E8F0", "error": "#DC2626", "surface-container-lowest": "#FFFFFF", "light-teal": "#0D9488", "error-container": "#FEE2E2", "inverse-on-surface": "#F8FAFC", "surface-container-highest": "#E2E8F0", "on-secondary-fixed-variant": "#115E59", "inverse-primary": "#93C5FD", "surface-dim": "#F1F5F9", "on-tertiary-fixed-variant": "#115E59", "secondary-fixed-dim": "#5EEAD4", "on-surface": "#0F172A", "primary-fixed-dim": "#BFDBFE", "tertiary-container": "#ECFDF5", "secondary-container": "#CCFBF1", "surface-container-high": "#E2E8F0", "surface": "#FFFFFF", "light-cobalt": "#2563EB", "on-tertiary-fixed": "#042F2E", "surface-container-low": "#F8FAFC", "on-secondary-container": "#0F766E", "on-secondary": "#FFFFFF", "inverse-surface": "#0F172A", "outline-variant": "#CBD5E1", "text-primary": "#0F172A", "status-alert": "#E11D48" }, "borderRadius": { "DEFAULT": "0.75rem", "lg": "1.25rem", "xl": "1.5rem", "2xl": "20px", "full": "9999px" }, "spacing": { "space-sm": "0.5rem", "space-xs": "0.25rem", "space-md": "1rem", "space-2xl": "2.5rem", "gutter-mobile": "1rem", "gutter": "1.5rem", "margin": "2rem", "space-lg": "1.5rem", "margin-mobile": "1rem", "space-xl": "2rem" }, "fontFamily": { "headline-xl": [ "Plus Jakarta Sans", "sans-serif" ], "body-md": [ "Inter", "sans-serif" ], "headline-sm": [ "Plus Jakarta Sans", "sans-serif" ], "body-sm": [ "Inter", "sans-serif" ], "label-code-sm": [ "JetBrains Mono", "monospace" ], "body-lg": [ "Inter", "sans-serif" ], "display-lg": [ "Plus Jakarta Sans", "sans-serif" ], "headline-md": [ "Plus Jakarta Sans", "sans-serif" ], "label-code-lg": [ "JetBrains Mono", "monospace" ], "label-ui": [ "Plus Jakarta Sans", "sans-serif" ], "headline-lg": [ "Plus Jakarta Sans", "sans-serif" ] }, "fontSize": { "headline-xl": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "700" } ], "body-md": [ "14px", { "lineHeight": "22px", "fontWeight": "400" } ], "headline-sm": [ "16px", { "lineHeight": "24px", "fontWeight": "600" } ], "body-sm": [ "12px", { "lineHeight": "18px", "fontWeight": "400" } ], "label-code-sm": [ "11px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" } ], "body-lg": [ "16px", { "lineHeight": "26px", "fontWeight": "400" } ], "display-lg": [ "40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "headline-md": [ "20px", { "lineHeight": "28px", "fontWeight": "600" } ], "label-code-lg": [ "14px", { "lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "500" } ], "label-ui": [ "13px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "600" } ], "headline-lg": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" } ] } } } };</script></head><body class="bg-light-canvas font-body-md text-on-surface antialiased min-h-screen selection:bg-primary-fixed selection:text-primary"><aside class="fixed left-0 top-0 h-full w-72 bg-white z-50 flex flex-col justify-between border-r border-light-border shadow-sm"><div class="flex flex-col"><div class="h-20 px-space-lg flex items-center justify-between border-b border-light-border bg-white"><div class="flex items-center gap-space-sm"><img alt="Northgate Bank Monogram" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrD8SbGzElxVPAjcyQcgvy0gApaNthFyhUIq4GV2c83zJo93uz60Q6OCv35hZVedhxNom7yro7AMYhI9AJ5k3CsLRQ2RH1CH2SNkZLRadAAPWVZzuvo_ah7hIhu5jRvoIJY01zVMj40Xi_K2nCfwqpOvZtfhG6nB08UyNEMjh41wvj3CO9ufo_RVnpGpimSxkuepvXQU-F3oZYVjlhhqA26VNdDvOByZOwO82VtZlzhI"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-text-primary tracking-tight">Northgate Bank</span><span class="font-label-code-sm text-label-code-sm text-text-muted">eKYC Workspace</span></div></div><span class="px-space-xs py-0.5 rounded-full bg-blue-50 text-primary border border-blue-200 font-label-code-sm text-label-code-sm uppercase tracking-wider font-semibold">v3.4</span></div><nav class="flex flex-col gap-1 px-space-md py-space-lg"><a class="flex items-center justify-between px-space-md py-2.5 rounded-DEFAULT text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all group" data-path="case-queue" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors text-[20px]">inbox</span><span class="font-label-ui text-label-ui">Case Queue</span></div><span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 font-label-code-sm text-label-code-sm group-hover:bg-primary group-hover:text-white transition-colors">42</span></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-DEFAULT text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all group" data-path="gap-workspace" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors text-[20px]">description</span><span class="font-label-ui text-label-ui">Gap Workspace</span></div></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-DEFAULT text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all group" data-path="3-day-nudge-tracker" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors text-[20px]">schedule</span><span class="font-label-ui text-label-ui">3-Day Nudges</span></div><span class="px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200 font-label-code-sm text-label-code-sm font-semibold">3 Due</span></a><a aria-current="page" class="flex items-center justify-between px-space-md py-2.5 rounded-DEFAULT transition-all group bg-blue-50 text-primary border border-blue-100 font-headline-sm" data-path="agent-pipeline-trace" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-primary transition-colors text-[20px]">account_tree</span><span class="font-label-ui text-label-ui font-semibold">Agent Trace</span></div></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-DEFAULT text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all group" data-path="prompt-&amp;-toner-studio" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors text-[20px]">tune</span><span class="font-label-ui text-label-ui">Toner Studio</span></div></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-DEFAULT text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all group" data-path="finops-&amp;-impact" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors text-[20px]">bar_chart</span><span class="font-label-ui text-label-ui">FinOps &amp; Impact</span></div></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-DEFAULT text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all group" data-path="kyc-policy-copilot" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors text-[20px]">smart_toy</span><span class="font-label-ui text-label-ui">Policy Copilot</span></div></a></nav></div><div class="p-space-md border-t border-light-border bg-white"><div class="p-space-sm rounded-DEFAULT bg-slate-50 border border-light-border flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm overflow-hidden"><div class="relative flex-shrink-0"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDw48RDCPPDW9VijwDsHaWnQfyH0iVGKBGalI-NTpQbkj-cK1y_e0htXgkwV5f-KUF-8dgqPwaejfMAdusrw9BMi06cYrdzx4F5hPtP680s3TxL9VDSuA4Lax7MrBYsKrzTykLxJglysxTZTzv0FawKEArS2nLFOu6BDh4d3eaDXSfNnnp9qxPOgt0pf7GHgUa-DkQUQHnO986Ps06HcIgNnqRp6N7J3Ne09p7j-QCc"/><div class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-light-teal ring-2 ring-white"></div></div><div class="flex flex-col truncate"><span class="font-label-ui text-label-ui text-text-primary truncate">Marcus Sterling</span><span class="font-body-sm text-body-sm text-text-muted truncate">Lead RM (London)</span></div></div><a class="p-1.5 rounded-DEFAULT text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors flex items-center" data-path="sentinel-sso" href="#" title="Lock &amp; Sign Out"><span class="material-symbols-outlined text-[18px]">power_settings_new</span></a></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-20 bg-white/95 backdrop-blur-xl border-b border-light-border z-40 px-space-xl flex items-center justify-between shadow-sm"><div class="flex items-center gap-space-md"><div class="flex items-center bg-slate-50 px-space-sm py-1 rounded-full border border-light-border text-slate-600"><span class="material-symbols-outlined text-[16px] mr-1.5 text-primary">public</span><span class="font-label-code-sm text-label-code-sm font-semibold tracking-wide text-slate-900">LDN · LON SE1</span><span class="mx-2 text-slate-300">|</span><span class="font-label-code-sm text-label-code-sm text-slate-500">Singapore · New York</span></div><div class="hidden xl:flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800"><span class="w-2 h-2 rounded-full bg-light-teal animate-pulse"></span><span class="font-label-code-sm text-label-code-sm font-semibold text-emerald-700">Deterministic Pre-Check: Active (0% False Chases)</span></div><div class="hidden lg:flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-blue-50 border border-blue-200 text-primary"><span class="material-symbols-outlined text-[14px]">verified_user</span><span class="font-label-code-sm text-label-code-sm font-semibold">Human Gate Enforced</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center bg-slate-100 rounded-full p-0.5 border border-light-border"><button class="px-2.5 py-1 rounded-full text-slate-500 hover:text-slate-800 font-label-code-sm text-label-code-sm flex items-center gap-1 transition-colors" onclick="document.documentElement.classList.add('dark'); document.documentElement.classList.remove('light');" type="button"><span class="material-symbols-outlined text-[14px]">dark_mode</span>Phantom</button><button class="px-2.5 py-1 rounded-full text-white bg-primary shadow-sm font-label-code-sm text-label-code-sm flex items-center gap-1 font-semibold" onclick="document.documentElement.classList.remove('dark'); document.documentElement.classList.add('light');" type="button"><span class="material-symbols-outlined text-[14px]">light_mode</span>Light</button></div><button class="relative p-2 rounded-full text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-rose-500"></span></button><div class="h-4 w-[1px] bg-slate-200"></div><div class="flex items-center gap-space-sm"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-light-border" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDw48RDCPPDW9VijwDsHaWnQfyH0iVGKBGalI-NTpQbkj-cK1y_e0htXgkwV5f-KUF-8dgqPwaejfMAdusrw9BMi06cYrdzx4F5hPtP680s3TxL9VDSuA4Lax7MrBYsKrzTykLxJglysxTZTzv0FawKEArS2nLFOu6BDh4d3eaDXSfNnnp9qxPOgt0pf7GHgUa-DkQUQHnO986Ps06HcIgNnqRp6N7J3Ne09p7j-QCc"/><div class="flex flex-col text-left"><span class="font-label-ui text-label-ui text-slate-900 leading-tight">M. Sterling</span><span class="font-label-code-sm text-label-code-sm text-light-teal font-semibold leading-tight">Authorized RM</span></div></div></div></header><main class="relative pt-20 bg-light-canvas min-h-screen"><div class="flex flex-col w-full">
+<div class="px-space-xl py-space-xl max-w-[1720px] mx-auto w-full space-y-space-xl">
+<!-- Top Action / Title Header -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-lg">
+<div class="space-y-space-xs max-w-3xl">
+<div class="flex items-center gap-space-sm mb-space-xs">
+<span class="px-space-sm py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-light-teal font-label-code-sm text-label-code-sm font-semibold">LIVE TELEMETRY</span>
+<span class="font-label-code-sm text-label-code-sm text-text-muted">SESSION ID: trc_e92bf114a8</span>
+<span class="w-2 h-2 rounded-full bg-light-teal animate-pulse"></span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-slate-900 tracking-tight">Agent Execution Trace · Case NG-2026-0841</h1>
+<p class="font-body-md text-body-md text-slate-600 leading-relaxed">
+          End-to-end deterministic audit trail with sub-second LLM orchestration and MLRO guardrail enforcement for Helios Maritime Ltd.
+        </p>
+</div>
+<div class="flex items-center gap-space-sm flex-wrap self-start lg:self-end">
+<button class="px-space-lg py-2.5 rounded-full bg-white hover:bg-slate-50 text-slate-800 border border-light-border transition-all flex items-center gap-space-xs text-label-ui font-label-ui shadow-sm" id="open-json-btn">
+<span class="material-symbols-outlined text-[18px] text-primary">data_object</span>
+<span>View Raw JSON Trace</span>
+<span class="px-space-xs py-0.5 rounded bg-slate-100 text-slate-600 text-label-code-sm font-label-code-sm border border-slate-200">⌥J</span>
+</button>
+<button class="px-space-lg py-2.5 rounded-full bg-primary hover:bg-blue-700 text-white shadow-sm transition-all flex items-center gap-space-xs text-label-ui font-label-ui" id="proof-btn">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>Export Cryptographic Audit Proof (SHA-256)</span>
+</button>
+</div>
+</div>
+<!-- Case Operational Microstrip -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-space-md p-space-md rounded-DEFAULT bg-white border border-light-border shadow-sm">
+<div class="flex flex-col gap-1 px-space-sm">
+<span class="font-label-code-sm text-label-code-sm text-slate-500 uppercase font-medium">Target Entity</span>
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-slate-900 font-semibold">Helios Maritime Ltd</span>
+<span class="px-2 py-0.5 rounded-full bg-slate-100 border border-slate-200 text-slate-700 font-label-code-sm text-label-code-sm">LEI: 549300V9N</span>
+</div>
+</div>
+<div class="flex flex-col gap-1 px-space-sm">
+<span class="font-label-code-sm text-label-code-sm text-slate-500 uppercase font-medium">Total Latency</span>
+<div class="flex items-center gap-2">
+<span class="font-label-code-lg text-label-code-lg text-light-teal font-semibold">691 ms</span>
+<span class="font-label-code-sm text-label-code-sm text-slate-500">Target &lt; 900ms</span>
+</div>
+</div>
+<div class="flex flex-col gap-1 px-space-sm">
+<span class="font-label-code-sm text-label-code-sm text-slate-500 uppercase font-medium">MLRO Deterministic Suite</span>
+<div class="flex items-center gap-2">
+<span class="font-label-ui text-label-ui text-light-teal flex items-center gap-1 font-semibold">
+<span class="material-symbols-outlined text-[16px]">check_circle</span> 4 / 4 Cleared
+          </span>
+<span class="font-label-code-sm text-label-code-sm text-slate-500">Strict Zero Risk</span>
+</div>
+</div>
+<div class="flex flex-col gap-1 px-space-sm">
+<span class="font-label-code-sm text-label-code-sm text-slate-500 uppercase font-medium">Primary Model Engine</span>
+<div class="flex items-center gap-2">
+<span class="font-label-code-sm text-label-code-sm text-primary font-medium">Vertex AI · Gemini 3 Flash</span>
+<span class="font-label-code-sm text-label-code-sm text-slate-500 truncate">Temp 0.0</span>
+</div>
+</div>
+</div>
+<!-- SECTION 1: Minimalist Horizontal 5-Node Pipeline Visualization -->
+<div class="rounded-DEFAULT bg-white border border-light-border p-space-xl relative overflow-hidden shadow-sm">
+<div class="flex items-center justify-between mb-space-xl">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[22px]">account_tree</span>
+<span class="font-headline-md text-headline-md text-slate-900">Pipeline Step Sequence</span>
+<span class="text-slate-500 font-body-sm text-body-sm pl-space-xs">Synchronous Deterministic Mesh</span>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-light-teal"></span>
+<span class="font-label-code-sm text-label-code-sm text-slate-600 font-medium">Passed</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-code-sm text-label-code-sm text-slate-600 font-medium">Synthesized</span>
+</div>
+</div>
+</div>
+<!-- Connecting line indicator (subtle clean slate-300) -->
+<div class="hidden xl:block absolute top-[138px] left-space-xl right-space-xl h-[2px] bg-slate-200 z-0 pointer-events-none"></div>
+<!-- Pipeline Node Visualizer -->
+<div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-space-md relative z-10">
+<!-- Node 1 -->
+<div class="group p-space-lg rounded-DEFAULT bg-white border border-light-border shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-space-md relative">
+<div class="space-y-space-sm">
+<div class="flex items-center justify-between">
+<span class="px-space-xs py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-light-teal font-label-code-sm text-label-code-sm flex items-center gap-1 font-semibold">
+<span class="material-symbols-outlined text-[14px]">done</span> Passed
+              </span>
+<span class="font-label-code-sm text-label-code-sm text-light-teal font-semibold">12 ms</span>
+</div>
+<div class="space-y-1">
+<h3 class="font-headline-sm text-headline-sm text-slate-900">1. Intake Rules</h3>
+<p class="font-body-sm text-body-sm text-slate-500">
+                Ingested 14 onboarding metadata attributes from Core Banking mainframe adapter.
+              </p>
+</div>
+</div>
+<div class="pt-space-sm border-t border-slate-100">
+<div class="flex items-center justify-between font-label-code-sm text-label-code-sm text-slate-500">
+<span>Schema v4.1</span>
+<span class="text-slate-900 font-medium">14/14 Fields</span>
+</div>
+</div>
+</div>
+<!-- Node 2 -->
+<div class="group p-space-lg rounded-DEFAULT bg-white border border-light-border shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-space-md relative">
+<div class="space-y-space-sm">
+<div class="flex items-center justify-between">
+<span class="px-space-xs py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-light-teal font-label-code-sm text-label-code-sm flex items-center gap-1 font-semibold">
+<span class="material-symbols-outlined text-[14px]">done</span> Passed
+              </span>
+<span class="font-label-code-sm text-label-code-sm text-light-teal font-semibold">34 ms</span>
+</div>
+<div class="space-y-1">
+<h3 class="font-headline-sm text-headline-sm text-slate-900">2. On-Prem Vault Diff</h3>
+<p class="font-body-sm text-body-sm text-slate-500">
+                Deterministic diff: 2 docs verified on-prem, 2 gaps flagged via cold hash cache.
+              </p>
+</div>
+</div>
+<div class="pt-space-sm border-t border-slate-100">
+<div class="flex items-center justify-between font-label-code-sm text-label-code-sm text-slate-500">
+<span>Vault Hit</span>
+<span class="text-light-teal font-semibold">2 Present / 2 Absent</span>
+</div>
+</div>
+</div>
+<!-- Node 3 -->
+<div class="group p-space-lg rounded-DEFAULT bg-white border border-light-border shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-space-md relative">
+<div class="space-y-space-sm">
+<div class="flex items-center justify-between">
+<span class="px-space-xs py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-light-teal font-label-code-sm text-label-code-sm flex items-center gap-1 font-semibold">
+<span class="material-symbols-outlined text-[14px]">done</span> Passed
+              </span>
+<span class="font-label-code-sm text-label-code-sm text-light-teal font-semibold">48 ms</span>
+</div>
+<div class="space-y-1">
+<h3 class="font-headline-sm text-headline-sm text-slate-900">3. Orchestrator Router</h3>
+<p class="font-body-sm text-body-sm text-slate-500">
+                Route: MAS Singapore CDD Pipeline; drafted single consolidated outreach message.
+              </p>
+</div>
+</div>
+<div class="pt-space-sm border-t border-slate-100">
+<div class="flex items-center justify-between font-label-code-sm text-label-code-sm text-slate-500">
+<span>Policy Map</span>
+<span class="text-primary font-medium">MAS Notice 626</span>
+</div>
+</div>
+</div>
+<!-- Node 4 -->
+<div class="group p-space-lg rounded-DEFAULT bg-white border-2 border-primary/40 shadow-md hover:shadow-lg transition-all flex flex-col justify-between space-y-space-md relative">
+<div class="space-y-space-sm">
+<div class="flex items-center justify-between">
+<span class="px-space-xs py-0.5 rounded-full bg-blue-50 border border-blue-200 text-primary font-label-code-sm text-label-code-sm flex items-center gap-1 font-semibold">
+<span class="material-symbols-outlined text-[14px]">auto_awesome</span> Complete
+              </span>
+<span class="font-label-code-sm text-label-code-sm text-primary font-semibold">412 ms</span>
+</div>
+<div class="space-y-1">
+<h3 class="font-headline-sm text-headline-sm text-slate-900">4. Drafter Agent</h3>
+<p class="font-body-sm text-body-sm text-slate-500">
+                Vertex AI Gemini 3 Flash Preview (Primary) · 684 tokens emitted.
+              </p>
+</div>
+</div>
+<div class="pt-space-sm border-t border-slate-100">
+<div class="flex items-center justify-between font-label-code-sm text-label-code-sm text-slate-500">
+<span>Token Cost</span>
+<span class="text-slate-900 font-label-code-sm font-semibold">$0.000102 USD</span>
+</div>
+</div>
+</div>
+<!-- Node 5 -->
+<div class="group p-space-lg rounded-DEFAULT bg-white border border-light-border shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-space-md relative">
+<div class="space-y-space-sm">
+<div class="flex items-center justify-between">
+<span class="px-space-xs py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-light-teal font-label-code-sm text-label-code-sm flex items-center gap-1 font-semibold">
+<span class="material-symbols-outlined text-[14px]">verified_user</span> Passed
+              </span>
+<span class="font-label-code-sm text-label-code-sm text-light-teal font-semibold">185 ms</span>
+</div>
+<div class="space-y-1">
+<h3 class="font-headline-sm text-headline-sm text-slate-900">5. Critique QA Gate</h3>
+<p class="font-body-sm text-body-sm text-slate-500">
+                Deterministic 4-Rule Assertion Suite: 100% Passed · 0 False Chases detected.
+              </p>
+</div>
+</div>
+<div class="pt-space-sm border-t border-slate-100">
+<div class="flex items-center justify-between font-label-code-sm text-label-code-sm text-slate-500">
+<span>Assertion Gate</span>
+<span class="text-light-teal font-semibold">4 / 4 Rules Cleared</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Execution Micro-telemetry Bar -->
+<div class="mt-space-lg p-space-md rounded-DEFAULT bg-slate-50 border border-light-border flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md flex-wrap">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-light-teal font-bold">bolt</span>
+<span class="font-label-code-sm text-label-code-sm text-slate-600">Total Run: <strong class="text-slate-900">691ms</strong></span>
+</div>
+<div class="h-3 w-[1px] bg-slate-300 hidden md:block"></div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary">security</span>
+<span class="font-label-code-sm text-label-code-sm text-slate-600">Hash Digest: <code class="text-slate-900 font-label-code-sm font-semibold bg-white px-1.5 py-0.5 rounded border border-slate-200">a793c1..48fe</code></span>
+</div>
+<div class="h-3 w-[1px] bg-slate-300 hidden md:block"></div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-slate-500">schedule</span>
+<span class="font-label-code-sm text-label-code-sm text-slate-600">Finished: 14:22:08.411 UTC</span>
+</div>
+</div>
+<div class="flex items-center gap-2 text-light-teal font-label-code-sm text-label-code-sm font-semibold">
+<span class="w-2 h-2 rounded-full bg-light-teal"></span>
+<span>Zero Hallucination Proof Confirmed</span>
+</div>
+</div>
+</div>
+<!-- SECTION 2: 4 Clean Pass/Fail Guardrail Assertion Cards (2x2 Grid) -->
+<div class="space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="space-y-1">
+<h2 class="font-headline-lg text-headline-lg text-slate-900">MLRO Guardrail Assertions</h2>
+<p class="font-body-md text-body-md text-slate-600">
+            Independent Critique Agent deterministic checks executed in isolated memory sandbox before RM presentation.
+          </p>
+</div>
+<div class="flex items-center gap-space-sm font-label-code-sm text-label-code-sm text-light-teal bg-emerald-50 border border-emerald-200 px-space-md py-1.5 rounded-full font-semibold">
+<span class="material-symbols-outlined text-[16px]">shield_lock</span>
+<span>Zero Violation Guarantee Active</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg">
+<!-- Guardrail Card 1 -->
+<div class="p-space-xl rounded-2xl bg-white border border-light-border shadow-sm flex flex-col justify-between space-y-space-md hover:border-slate-300 transition-all">
+<div class="space-y-space-sm">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-light-teal flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">inventory_2</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-slate-900">Zero Already-Received Documents Asked</h3>
+<span class="font-label-code-sm text-label-code-sm text-slate-500">Rule ID: MLRO-DET-001</span>
+</div>
+</div>
+<span class="px-space-sm py-1 rounded-full bg-emerald-50 border border-emerald-200 text-light-teal font-label-code-sm text-label-code-sm flex items-center gap-1 font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-light-teal"></span> PASSED
+              </span>
+</div>
+<p class="font-body-md text-body-md text-slate-600 leading-relaxed">
+              Cross-checked against SHA-256 vault index. Excluded ‘Certificate of Incorporation’ and ‘Director Passport’. False chase risk: <span class="font-label-code-sm text-light-teal font-bold">0.00%</span>.
+            </p>
+</div>
+<div class="p-space-sm rounded-DEFAULT bg-slate-50 border border-slate-100 font-label-code-sm text-label-code-sm text-slate-600 space-y-1">
+<div class="flex justify-between">
+<span>Vault Proof:</span>
+<span class="text-slate-900 font-semibold">2 Existing / 2 Requested</span>
+</div>
+<div class="flex justify-between text-light-teal font-semibold">
+<span>False Chase Suppression:</span>
+<span>100% Certified</span>
+</div>
+</div>
+</div>
+<!-- Guardrail Card 2 -->
+<div class="p-space-xl rounded-2xl bg-white border border-light-border shadow-sm flex flex-col justify-between space-y-space-md hover:border-slate-300 transition-all">
+<div class="space-y-space-sm">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-light-teal flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">call_merge</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-slate-900">Single Consolidated Layer Outreach</h3>
+<span class="font-label-code-sm text-label-code-sm text-slate-500">Rule ID: MLRO-EXP-004</span>
+</div>
+</div>
+<span class="px-space-sm py-1 rounded-full bg-emerald-50 border border-emerald-200 text-light-teal font-label-code-sm text-label-code-sm flex items-center gap-1 font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-light-teal"></span> PASSED
+              </span>
+</div>
+<p class="font-body-md text-body-md text-slate-600 leading-relaxed">
+              Both missing gaps (Trust Deed + UBO Declaration) unified in a single message. Round sprawl prevented across client communication channels.
+            </p>
+</div>
+<div class="p-space-sm rounded-DEFAULT bg-slate-50 border border-slate-100 font-label-code-sm text-label-code-sm text-slate-600 space-y-1">
+<div class="flex justify-between">
+<span>Message Bundles:</span>
+<span class="text-slate-900 font-semibold">1 Consolidated Email / 1 WhatsApp</span>
+</div>
+<div class="flex justify-between text-light-teal font-semibold">
+<span>Sprawl Mitigation:</span>
+<span>Single Action Link</span>
+</div>
+</div>
+</div>
+<!-- Guardrail Card 3 -->
+<div class="p-space-xl rounded-2xl bg-white border border-light-border shadow-sm flex flex-col justify-between space-y-space-md hover:border-slate-300 transition-all">
+<div class="space-y-space-sm">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-light-teal flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">policy</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-slate-900">MLRO Zero-Risk Clause Active</h3>
+<span class="font-label-code-sm text-label-code-sm text-slate-500">Rule ID: MLRO-GOV-009</span>
+</div>
+</div>
+<span class="px-space-sm py-1 rounded-full bg-emerald-50 border border-emerald-200 text-light-teal font-label-code-sm text-label-code-sm flex items-center gap-1 font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-light-teal"></span> PASSED
+              </span>
+</div>
+<p class="font-body-md text-body-md text-slate-600 leading-relaxed">
+              Zero AI risk ratings or compliance determinations emitted. Strict deterministic categorization only. Non-delegable MLRO sovereignty preserved.
+            </p>
+</div>
+<div class="p-space-sm rounded-DEFAULT bg-slate-50 border border-slate-100 font-label-code-sm text-label-code-sm text-slate-600 space-y-1">
+<div class="flex justify-between">
+<span>Compliance Adjudication:</span>
+<span class="text-slate-900 font-semibold">Human-in-the-Loop Only</span>
+</div>
+<div class="flex justify-between text-light-teal font-semibold">
+<span>Autonomous Decision Output:</span>
+<span>Blocked (0/0)</span>
+</div>
+</div>
+</div>
+<!-- Guardrail Card 4 -->
+<div class="p-space-xl rounded-2xl bg-white border border-light-border shadow-sm flex flex-col justify-between space-y-space-md hover:border-slate-300 transition-all">
+<div class="space-y-space-sm">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-light-teal flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">forum</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-slate-900">Institutional Tone &amp; Respectfulness</h3>
+<span class="font-label-code-sm text-label-code-sm text-slate-500">Rule ID: MLRO-TON-012</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-space-sm py-1 rounded-full bg-emerald-50 border border-emerald-200 text-light-teal font-label-code-sm text-label-code-sm flex items-center gap-1 font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-light-teal"></span> PASSED
+                </span>
+<span class="px-space-sm py-1 rounded-full bg-blue-50 border border-blue-200 text-primary font-label-code-sm text-label-code-sm font-semibold">
+                  Score: 98/100
+                </span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-slate-600 leading-relaxed">
+              Evaluated by Critique Agent against Sovereign Corporate Bank benchmark. Urgency Level: <span class="text-slate-900 font-semibold">1.0 (Gentle)</span>. High net worth institutional etiquette upheld.
+            </p>
+</div>
+<div class="p-space-sm rounded-DEFAULT bg-slate-50 border border-slate-100 font-label-code-sm text-label-code-sm text-slate-600 space-y-1">
+<div class="flex justify-between">
+<span>Tone Classification:</span>
+<span class="text-slate-900 font-semibold">Institutional Concierge</span>
+</div>
+<div class="flex justify-between text-light-teal font-semibold">
+<span>Hostile / Pressure Lexicon:</span>
+<span>0 Detected</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Cryptographic Audit Ledger Detail Strip -->
+<div class="p-space-xl rounded-DEFAULT bg-white border border-light-border shadow-sm space-y-space-md">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="space-y-1">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">fingerprint</span>
+<span class="font-headline-sm text-headline-sm text-slate-900 font-semibold">Cryptographic WORM Anchor (Immutable Trace Ledger)</span>
+</div>
+<p class="font-body-sm text-body-sm text-slate-500">
+            Tamper-evident payload seal validated against sovereign timestamp authority for Basel Committee AML/CFT recordkeeping.
+          </p>
+</div>
+<div class="flex items-center gap-space-sm flex-wrap">
+<div class="px-space-md py-1.5 rounded-full bg-slate-50 border border-slate-200 font-label-code-sm text-label-code-sm text-slate-600">
+            Status: <span class="text-light-teal font-semibold">Sealed &amp; Replicated</span>
+</div>
+<div class="px-space-md py-1.5 rounded-full bg-slate-50 border border-slate-200 font-label-code-sm text-label-code-sm text-slate-600">
+            Retention: <span class="text-slate-900 font-semibold">7 Years WORM</span>
+</div>
+</div>
+</div>
+<div class="p-space-md rounded-DEFAULT bg-slate-50 border border-slate-200 space-y-space-sm font-label-code-sm text-label-code-sm overflow-x-auto">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-slate-600">
+<span class="font-medium">ROOT MERKLE HASH:</span>
+<span class="text-light-teal select-all font-semibold">0x74fbc19c9bfff30236f00382555dea6e4e1e61f1f22ab9ff2</span>
+</div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-slate-600">
+<span class="font-medium">SIGNING KEY:</span>
+<span class="text-slate-900 select-all font-semibold">ed25519:ng-bank-singapore-audit-hsm-03</span>
+</div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-slate-600">
+<span class="font-medium">WORM COMMIT TS:</span>
+<span class="text-slate-500">2026-03-30T14:22:08.598212Z · Block #19,842,019</span>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION 3: Slide-Over Inspection Drawer (Docked bottom right preview & expandable modal) -->
+<div class="fixed bottom-6 right-6 z-40 max-w-md w-full">
+<div class="p-space-md rounded-DEFAULT bg-white/95 backdrop-blur-xl border border-light-border shadow-2xl flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-light-teal"></span>
+<span class="font-label-ui text-label-ui text-slate-900 font-semibold">Audit Drawer Standby</span>
+</div>
+<span class="font-label-code-sm text-label-code-sm text-primary font-semibold">eIDAS v2.4</span>
+</div>
+<p class="font-body-sm text-body-sm text-slate-500">
+        Slide-over Drawer: Cryptographic 7-Year WORM Audit Trail &amp; Raw LLM Input/Output JSON available on demand.
+      </p>
+<div class="flex items-center gap-space-sm pt-space-xs">
+<button class="flex-1 py-2 px-space-md rounded-full bg-primary hover:bg-blue-700 text-white font-label-ui text-label-ui flex items-center justify-center gap-1.5 transition-transform active:scale-95 shadow-sm" id="quick-inspect-btn">
+<span class="material-symbols-outlined text-[16px]">terminal</span> Inspect Raw Payload
+        </button>
+<button class="p-2 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors" id="dismiss-toast-btn" title="Minimize Drawer Dock">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Full Slide-Over Drawer Modal (Initially hidden) -->
+<div class="fixed inset-0 z-50 pointer-events-none opacity-0 transition-opacity duration-300" id="trace-drawer">
+<div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm pointer-events-auto" id="drawer-backdrop"></div>
+<div class="absolute top-0 right-0 h-full w-full max-w-2xl bg-white shadow-2xl p-space-xl flex flex-col justify-between transform translate-x-full transition-transform duration-300 pointer-events-auto overflow-hidden border-l border-light-border" id="drawer-panel">
+<!-- Drawer Header -->
+<div class="space-y-space-md pb-space-lg border-b border-light-border">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[24px]">terminal</span>
+<div>
+<h3 class="font-headline-md text-headline-md text-slate-900">Raw LLM Input &amp; Output Telemetry</h3>
+<p class="font-label-code-sm text-label-code-sm text-slate-500">Case NG-2026-0841 · Step 4 Drafter &amp; Step 5 Critique</p>
+</div>
+</div>
+<button class="p-2 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-700 transition-colors" id="close-drawer-btn">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="flex items-center gap-space-xs bg-slate-100 p-1 rounded-full">
+<button class="flex-1 py-1 px-space-md rounded-full bg-white shadow-sm text-primary font-semibold font-label-code-sm text-label-code-sm" id="tab-output">Formatted JSON</button>
+<button class="flex-1 py-1 px-space-md rounded-full text-slate-600 hover:text-slate-900 font-label-code-sm text-label-code-sm" id="tab-input">Prompt Context</button>
+<button class="flex-1 py-1 px-space-md rounded-full text-slate-600 hover:text-slate-900 font-label-code-sm text-label-code-sm" id="tab-assertions">Critique Vector</button>
+</div>
+</div>
+<!-- Drawer Content (JSON viewer) -->
+<div class="flex-1 overflow-y-auto space-y-space-md pr-space-xs py-space-md">
+<div class="rounded-DEFAULT bg-slate-900 text-slate-100 p-space-md font-label-code-sm text-label-code-sm space-y-space-xs shadow-inner">
+<div class="flex items-center justify-between text-slate-400 pb-space-xs border-b border-slate-800">
+<span>JSON_TELEMETRY_LOG.json</span>
+<span class="text-light-teal font-semibold">200 OK · eIDAS SIGNED</span>
+</div>
+<pre class="text-slate-200 leading-relaxed text-label-code-sm overflow-x-auto whitespace-pre font-label-code-sm pt-space-xs" id="json-pre-content">{
+  "case_id": "NG-2026-0841",
+  "entity": "Helios Maritime Ltd",
+  "jurisdiction": "MAS Singapore",
+  "orchestration_ts": "2026-03-30T14:22:08.411Z",
+  "pipeline_version": "3.4.12",
+  "vault_diff": {
+    "hash_cache_hit": true,
+    "received_docs": [
+      {
+        "type": "CERT_OF_INCORPORATION",
+        "sha256": "4b92afc8301...",
+        "verified_at": "2026-03-28T09:15:00Z"
+      },
+      {
+        "type": "DIRECTOR_PASSPORT",
+        "sha256": "19e0b3cfa88...",
+        "verified_at": "2026-03-28T09:17:12Z"
+      }
+    ],
+    "flagged_gaps": [
+      "TRUST_DEED_AMENDMENT_2025",
+      "ULTIMATE_BENEFICIAL_OWNER_DECLARATION"
+    ]
+  },
+  "critique_gate": {
+    "zero_already_received_asked": true,
+    "single_consolidated_round": true,
+    "mlro_zero_risk_policy": true,
+    "tone_score": 98,
+    "urgency_level": 1.0,
+    "mlro_adjudication_delegated": false
+  },
+  "runtime_telemetry": {
+    "engine": "Vertex AI · Gemini 3 Flash Preview",
+    "prompt_tokens": 1240,
+    "completion_tokens": 684,
+    "latency_breakdown": {
+      "intake_rules_ms": 12,
+      "vault_diff_ms": 34,
+      "orchestrator_router_ms": 48,
+      "drafter_ms": 412,
+      "critique_qa_gate_ms": 185
+    },
+    "total_elapsed_ms": 691
+  }
+}</pre>
+</div>
+<div class="p-space-md rounded-DEFAULT bg-slate-50 border border-light-border space-y-space-xs">
+<span class="font-headline-sm text-headline-sm text-slate-900">Audit Integrity Guarantee</span>
+<p class="font-body-sm text-body-sm text-slate-500">
+            This trace payload has been committed to the bank's append-only HSM WORM repository. Any programmatic variation or prompt deviation is automatically flagged to the Group MLRO Compliance Officer.
+          </p>
+</div>
+</div>
+<!-- Drawer Footer Actions -->
+<div class="pt-space-md flex items-center justify-between gap-space-md border-t border-light-border">
+<button class="px-space-md py-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-label-ui text-label-ui flex items-center gap-1.5 transition-colors border border-slate-200" id="copy-json-btn">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+<span>Copy JSON Payload</span>
+</button>
+<button class="px-space-md py-2 rounded-full bg-primary hover:bg-blue-700 text-white font-label-ui text-label-ui transition-colors shadow-sm" id="close-drawer-bottom-btn">
+          Close Inspector
+        </button>
+</div>
+</div>
+</div>
+<script>
+    (function initTraceInteractions() {
+      const openBtn = document.getElementById('open-json-btn');
+      const quickBtn = document.getElementById('quick-inspect-btn');
+      const closeBtn = document.getElementById('close-drawer-btn');
+      const closeBottomBtn = document.getElementById('close-drawer-bottom-btn');
+      const drawer = document.getElementById('trace-drawer');
+      const backdrop = document.getElementById('drawer-backdrop');
+      const panel = document.getElementById('drawer-panel');
+      const proofBtn = document.getElementById('proof-btn');
+      const copyBtn = document.getElementById('copy-json-btn');
+      const dismissToastBtn = document.getElementById('dismiss-toast-btn');
+      const toastDock = dismissToastBtn?.closest('.fixed');
+
+      function openDrawer() {
+        if (!drawer || !panel) return;
+        drawer.classList.remove('pointer-events-none', 'opacity-0');
+        drawer.classList.add('opacity-100');
+        panel.classList.remove('translate-x-full');
+      }
+
+      function closeDrawer() {
+        if (!drawer || !panel) return;
+        panel.classList.add('translate-x-full');
+        drawer.classList.remove('opacity-100');
+        drawer.classList.add('opacity-0', 'pointer-events-none');
+      }
+
+      if (openBtn) openBtn.addEventListener('click', openDrawer);
+      if (quickBtn) quickBtn.addEventListener('click', openDrawer);
+      if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+      if (closeBottomBtn) closeBottomBtn.addEventListener('click', closeDrawer);
+      if (backdrop) backdrop.addEventListener('click', closeDrawer);
+
+      // Keyboard shortcut ⌥J or Escape
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDrawer();
+        if (e.altKey && (e.key === 'j' || e.key === 'J')) {
+          e.preventDefault();
+          if (drawer && drawer.classList.contains('opacity-0')) {
+            openDrawer();
+          } else {
+            closeDrawer();
+          }
+        }
+      });
+
+      if (proofBtn) {
+        proofBtn.addEventListener('click', () => {
+          const original = proofBtn.innerHTML;
+          proofBtn.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">sync</span><span>Verifying Cryptographic Ledger...</span>';
+          setTimeout(() => {
+            proofBtn.innerHTML = '<span class="material-symbols-outlined text-[18px]">check_circle</span><span>Proof Verified &amp; Exported</span>';
+            setTimeout(() => {
+              proofBtn.innerHTML = original;
+            }, 2500);
+          }, 800);
+        });
+      }
+
+      if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+          const content = document.getElementById('json-pre-content')?.innerText || '';
+          navigator.clipboard?.writeText(content);
+          const original = copyBtn.innerHTML;
+          copyBtn.innerHTML = '<span class="material-symbols-outlined text-[16px] text-light-teal">done</span><span>Copied to Clipboard</span>';
+          setTimeout(() => {
+            copyBtn.innerHTML = original;
+          }, 2000);
+        });
+      }
+
+      if (dismissToastBtn && toastDock) {
+        dismissToastBtn.addEventListener('click', () => {
+          toastDock.style.display = 'none';
+        });
+      }
+    })();
+  </script>
+</div></main></div></body></html>

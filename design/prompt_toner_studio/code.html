@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "outline": "#938f9c", "surface-tint": "#c9bfff", "secondary": "#cdbff2", "on-background": "#e4e1e6", "background": "#131316", "primary-fixed": "#e5deff", "surface-container": "#1f1f22", "on-secondary-fixed": "#1f143d", "text-muted": "#9E9EA8", "on-primary": "#30236f", "on-tertiary-container": "#004830", "tertiary": "#55dea6", "tertiary-fixed": "#74fbc1", "light-border": "#E2E8F0", "primary-container": "#ab9ff2", "primary": "#c9bfff", "on-primary-fixed": "#1a075a", "light-canvas": "#F8FAFC", "surface-variant": "#353438", "on-primary-container": "#3e327e", "on-error": "#690005", "on-primary-fixed-variant": "#473b87", "status-nudge": "#F59E0B", "light-surface": "#FFFFFF", "on-error-container": "#ffdad6", "on-surface-variant": "#c9c4d2", "surface-bright": "#39393c", "secondary-fixed": "#e8ddff", "surface-elevated": "#1C1C21", "on-tertiary": "#003825", "tertiary-fixed-dim": "#55dea6", "surface-border": "rgba(255, 255, 255, 0.07)", "error": "#ffb4ab", "surface-container-lowest": "#0e0e11", "light-teal": "#0D9488", "error-container": "#93000a", "inverse-on-surface": "#303033", "surface-container-highest": "#353438", "on-secondary-fixed-variant": "#4b406b", "inverse-primary": "#5f54a0", "surface-dim": "#131316", "on-tertiary-fixed-variant": "#005137", "secondary-fixed-dim": "#cdbff2", "on-surface": "#e4e1e6", "primary-fixed-dim": "#c9bfff", "tertiary-container": "#2cbf8a", "secondary-container": "#504570", "surface-container-high": "#2a2a2d", "surface": "#131316", "light-cobalt": "#2563EB", "on-tertiary-fixed": "#002114", "surface-container-low": "#1b1b1e", "on-secondary-container": "#c3b4e7", "on-secondary": "#342a53", "inverse-surface": "#e4e1e6", "outline-variant": "#484550", "text-primary": "#FFFFFF", "status-alert": "#FB7185" }, "borderRadius": { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, "spacing": { "space-sm": "0.5rem", "space-xs": "0.25rem", "space-md": "1rem", "space-2xl": "2.5rem", "gutter-mobile": "1rem", "gutter": "1.5rem", "margin": "2rem", "space-lg": "1.5rem", "margin-mobile": "1rem", "space-xl": "2rem" }, "fontFamily": { "headline-xl": [ "Plus Jakarta Sans" ], "body-md": [ "Inter" ], "headline-sm": [ "Plus Jakarta Sans" ], "body-sm": [ "Inter" ], "label-code-sm": [ "JetBrains Mono" ], "body-lg": [ "Inter" ], "display-lg": [ "Plus Jakarta Sans" ], "headline-md": [ "Plus Jakarta Sans" ], "label-code-lg": [ "JetBrains Mono" ], "label-ui": [ "Plus Jakarta Sans" ], "headline-lg": [ "Plus Jakarta Sans" ] }, "fontSize": { "headline-xl": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "700" } ], "body-md": [ "14px", { "lineHeight": "22px", "fontWeight": "400" } ], "headline-sm": [ "16px", { "lineHeight": "24px", "fontWeight": "600" } ], "body-sm": [ "12px", { "lineHeight": "18px", "fontWeight": "400" } ], "label-code-sm": [ "11px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" } ], "body-lg": [ "16px", { "lineHeight": "26px", "fontWeight": "400" } ], "display-lg": [ "40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "headline-md": [ "20px", { "lineHeight": "28px", "fontWeight": "600" } ], "label-code-lg": [ "14px", { "lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "500" } ], "label-ui": [ "13px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "600" } ], "headline-lg": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" } ] } } } };</script></head><body class="bg-background font-body-md text-on-surface antialiased min-h-screen selection:bg-primary-container selection:text-on-primary-container"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-elevated z-50 flex flex-col justify-between border-r border-surface-border"><div class="flex flex-col"><div class="h-20 px-space-lg flex items-center justify-between border-b border-surface-border"><div class="flex items-center gap-space-sm"><img alt="Northgate Bank Monogram" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrD8SbGzElxVPAjcyQcgvy0gApaNthFyhUIq4GV2c83zJo93uz60Q6OCv35hZVedhxNom7yro7AMYhI9AJ5k3CsLRQ2RH1CH2SNkZLRadAAPWVZzuvo_ah7hIhu5jRvoIJY01zVMj40Xi_K2nCfwqpOvZtfhG6nB08UyNEMjh41wvj3CO9ufo_RVnpGpimSxkuepvXQU-F3oZYVjlhhqA26VNdDvOByZOwO82VtZlzhI"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-text-primary tracking-tight">Northgate Bank</span><span class="font-label-code-sm text-label-code-sm text-text-muted">eKYC Workspace</span></div></div><span class="px-space-xs py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-code-sm text-label-code-sm uppercase tracking-wider">v3.4</span></div><nav class="flex flex-col gap-space-xs px-space-md py-space-lg" data-active-classes="bg-surface-variant text-primary font-headline-sm"><a class="flex items-center justify-between px-space-md py-space-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="case-queue" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[20px]">inbox</span><span class="font-label-ui text-label-ui">Case Queue</span></div><span class="px-space-xs py-0.5 rounded-full bg-surface-container-high text-on-surface font-label-code-sm text-label-code-sm group-hover:bg-primary group-hover:text-on-primary transition-colors">42</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="gap-workspace" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[20px]">description</span><span class="font-label-ui text-label-ui">Gap Workspace</span></div></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="3-day-nudge-tracker" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[20px]">schedule</span><span class="font-label-ui text-label-ui">3-Day Nudges</span></div><span class="px-space-xs py-0.5 rounded-full bg-status-nudge/15 text-status-nudge font-label-code-sm text-label-code-sm">3 Due</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="agent-pipeline-trace" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[20px]">account_tree</span><span class="font-label-ui text-label-ui">Agent Trace</span></div></a><a aria-current="page" class="flex items-center justify-between px-space-md py-space-sm rounded-DEFAULT transition-all group bg-surface-variant text-primary font-headline-sm" data-path="prompt-&amp;-toner-studio" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[20px]">tune</span><span class="font-label-ui text-label-ui">Toner Studio</span></div></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="finops-&amp;-impact" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[20px]">bar_chart</span><span class="font-label-ui text-label-ui">FinOps &amp; Impact</span></div></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="kyc-policy-copilot" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[20px]">smart_toy</span><span class="font-label-ui text-label-ui">Policy Copilot</span></div></a></nav></div><div class="p-space-md border-t border-surface-border"><div class="p-space-sm rounded-DEFAULT bg-surface-container flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm overflow-hidden"><div class="relative flex-shrink-0"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDw48RDCPPDW9VijwDsHaWnQfyH0iVGKBGalI-NTpQbkj-cK1y_e0htXgkwV5f-KUF-8dgqPwaejfMAdusrw9BMi06cYrdzx4F5hPtP680s3TxL9VDSuA4Lax7MrBYsKrzTykLxJglysxTZTzv0FawKEArS2nLFOu6BDh4d3eaDXSfNnnp9qxPOgt0pf7GHgUa-DkQUQHnO986Ps06HcIgNnqRp6N7J3Ne09p7j-QCc"/><div class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-tertiary ring-2 ring-surface-container"></div></div><div class="flex flex-col truncate"><span class="font-label-ui text-label-ui text-text-primary truncate">Marcus Sterling</span><span class="font-body-sm text-body-sm text-text-muted truncate">Lead RM (London)</span></div></div><a class="p-1.5 rounded-DEFAULT text-outline hover:text-status-alert hover:bg-surface-variant transition-colors flex items-center" data-path="sentinel-sso" href="#" title="Lock &amp; Sign Out"><span class="material-symbols-outlined text-[18px]">power_settings_new</span></a></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-20 bg-surface-elevated/85 backdrop-blur-xl border-b border-surface-border z-40 px-space-xl flex items-center justify-between"><div class="flex items-center gap-space-md"><div class="flex items-center bg-surface-container px-space-sm py-1 rounded-full border border-surface-border text-on-surface-variant"><span class="material-symbols-outlined text-[16px] mr-1.5 text-primary">public</span><span class="font-label-code-sm text-label-code-sm font-medium tracking-wide text-on-surface">LDN · LON SE1</span><span class="mx-2 text-outline">|</span><span class="font-label-code-sm text-label-code-sm text-text-muted">Singapore · New York</span></div><div class="hidden xl:flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-tertiary-container/10 border border-tertiary-container/30 text-tertiary"><span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span><span class="font-label-code-sm text-label-code-sm font-semibold">Deterministic Pre-Check: Active (0% False Chases)</span></div><div class="hidden lg:flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-primary-container/10 border border-primary-container/30 text-primary"><span class="material-symbols-outlined text-[14px]">verified_user</span><span class="font-label-code-sm text-label-code-sm font-semibold">Human Gate Enforced</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center bg-surface-container rounded-full p-0.5 border border-surface-border"><button class="px-2.5 py-1 rounded-full text-primary bg-surface-variant font-label-code-sm text-label-code-sm flex items-center gap-1" onclick="document.documentElement.classList.add('dark')" type="button"><span class="material-symbols-outlined text-[14px]">dark_mode</span>Phantom</button><button class="px-2.5 py-1 rounded-full text-text-muted hover:text-on-surface font-label-code-sm text-label-code-sm flex items-center gap-1" onclick="document.documentElement.classList.remove('dark')" type="button"><span class="material-symbols-outlined text-[14px]">light_mode</span>Light</button></div><button class="relative p-2 rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-status-alert"></span></button><div class="h-4 w-[1px] bg-outline-variant"></div><div class="flex items-center gap-space-sm"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-surface-border" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDw48RDCPPDW9VijwDsHaWnQfyH0iVGKBGalI-NTpQbkj-cK1y_e0htXgkwV5f-KUF-8dgqPwaejfMAdusrw9BMi06cYrdzx4F5hPtP680s3TxL9VDSuA4Lax7MrBYsKrzTykLxJglysxTZTzv0FawKEArS2nLFOu6BDh4d3eaDXSfNnnp9qxPOgt0pf7GHgUa-DkQUQHnO986Ps06HcIgNnqRp6N7J3Ne09p7j-QCc"/><div class="flex flex-col text-left"><span class="font-label-ui text-label-ui text-text-primary leading-tight">M. Sterling</span><span class="font-label-code-sm text-label-code-sm text-tertiary leading-tight">Authorized RM</span></div></div></div></header><main class="relative pt-20 bg-background min-h-screen"><div class="flex flex-col w-full">
+<div class="px-space-xl py-space-xl flex flex-col gap-space-xl max-w-[1720px] mx-auto w-full">
+<!-- Header Section with Operational Validation Badge -->
+<div class="flex flex-col xl:flex-row xl:items-end justify-between gap-space-lg">
+<div class="flex flex-col gap-space-xs max-w-3xl">
+<div class="flex items-center gap-space-sm mb-1">
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-high text-primary font-label-code-sm text-label-code-sm uppercase tracking-wider flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+            Governance Engine v4.11
+          </span>
+<span class="font-label-code-sm text-label-code-sm text-text-muted">Commit 7a93c9d · Stable</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-text-primary tracking-tight">Toner &amp; System Prompt Studio</h1>
+<p class="font-body-md text-body-md text-text-muted">Calibrate LLM system personas, enforce jurisdiction-specific regulatory clauses, and run 50-case automated regression golden-sets prior to live deployment.</p>
+</div>
+<div class="flex items-center gap-space-md flex-shrink-0">
+<button class="group relative px-6 py-3 rounded-full bg-primary-container text-on-primary-container font-label-ui text-label-ui shadow-lg hover:shadow-primary-container/20 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center gap-space-sm overflow-hidden" id="runValidationBtn" onclick="runGoldenSetTest()" type="button">
+<span class="material-symbols-outlined text-[18px] group-hover:rotate-180 transition-transform duration-500">play_circle</span>
+<span class="font-semibold tracking-wide">Run 50-Case Golden-Set Validation</span>
+<div class="h-3.5 w-[1px] bg-on-primary-container/30 mx-1"></div>
+<span class="font-label-code-sm text-label-code-sm bg-on-primary-container/15 px-2 py-0.5 rounded-full text-on-primary-container font-semibold">50/50 Passed · 0 Regressions</span>
+</button>
+</div>
+</div>
+<!-- Segmented Architecture Switcher -->
+<div class="flex items-center justify-between border-b border-surface-border pb-space-md">
+<div class="p-1 rounded-full bg-surface-container flex items-center gap-1 shadow-inner">
+<button class="px-5 py-2 rounded-full font-label-ui text-label-ui text-text-muted hover:text-text-primary hover:bg-surface-variant transition-all" type="button">Orchestrator Prompt</button>
+<button class="px-5 py-2 rounded-full font-label-ui text-label-ui bg-primary-container text-on-primary-container shadow-sm font-semibold transition-all flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px]">edit_note</span>
+          Drafter Agent
+        </button>
+<button class="px-5 py-2 rounded-full font-label-ui text-label-ui text-text-muted hover:text-text-primary hover:bg-surface-variant transition-all flex items-center gap-1.5" type="button">
+          Critique Rubric
+          <span class="w-2 h-2 rounded-full bg-tertiary"></span>
+</button>
+<button class="px-5 py-2 rounded-full font-label-ui text-label-ui text-text-muted hover:text-text-primary hover:bg-surface-variant transition-all" type="button">Toner Adapter</button>
+</div>
+<div class="hidden lg:flex items-center gap-space-md text-text-muted font-label-code-sm text-label-code-sm">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary">lock</span>
+<span>Dual Senior Officer Auth Required for Push</span>
+</div>
+<span>•</span>
+<span>Target: Production Cluster (LDN-AZ-2)</span>
+</div>
+</div>
+<!-- 2-Column Responsive Cockpit Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+<!-- LEFT COLUMN: Parameters & Sliders (approx 380px -> col-span-4 on xl) -->
+<div class="lg:col-span-4 flex flex-col gap-space-lg">
+<!-- Calibration Card 1: Tone Engine -->
+<div class="p-space-lg rounded-DEFAULT bg-surface-elevated shadow-xl flex flex-col gap-space-lg">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[22px]">tune</span>
+<h2 class="font-headline-sm text-headline-sm text-text-primary">Dynamic Tone Calibration</h2>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-primary font-label-code-sm text-label-code-sm">v2.8</span>
+</div>
+<!-- Slider 1: Formality -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-ui text-label-ui text-on-surface">Formality Index</span>
+<span class="font-label-code-sm text-label-code-sm text-primary font-bold" id="formalityVal">94% — Sovereign Institutional</span>
+</div>
+<div class="relative py-2 flex items-center">
+<input class="w-full h-1.5 bg-surface-variant rounded-full appearance-none cursor-pointer accent-[#AB9FF2]" id="formalitySlider" max="100" min="50" oninput="updateFormality(this.value)" type="range" value="94"/>
+</div>
+<div class="flex justify-between font-label-code-sm text-label-code-sm text-text-muted opacity-75">
+<span>Retail Friendly</span>
+<span>Corporate Standard</span>
+<span class="text-primary font-medium">Sovereign Tier</span>
+</div>
+</div>
+<!-- Slider 2: Urgency Gradient -->
+<div class="flex flex-col gap-2 pt-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-ui text-label-ui text-on-surface">Urgency Gradient</span>
+<span class="font-label-code-sm text-label-code-sm text-tertiary font-bold" id="urgencyVal">Level 1 of 3 — Collaborative</span>
+</div>
+<div class="relative py-2 flex items-center">
+<input class="w-full h-1.5 bg-surface-variant rounded-full appearance-none cursor-pointer accent-[#55dea6]" id="urgencySlider" max="3" min="1" oninput="updateUrgency(this.value)" step="1" type="range" value="1"/>
+</div>
+<div class="p-space-sm rounded-DEFAULT bg-surface-container text-body-sm font-body-sm text-text-muted flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-status-nudge mt-0.5 flex-shrink-0">info</span>
+<span>Level 1 used for Initial Chase; Level 2 for Day 3 Nudge; Level 3 requires RM Senior Sign-off.</span>
+</div>
+</div>
+<!-- Slider 3: Jurisdiction Clause Weight -->
+<div class="flex flex-col gap-2 pt-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-ui text-label-ui text-on-surface">Jurisdiction Clause Weight</span>
+<span class="font-label-code-sm text-label-code-sm text-secondary font-bold">MAS v626 Active</span>
+</div>
+<div class="grid grid-cols-3 gap-2 p-1 rounded-DEFAULT bg-surface-container">
+<button class="py-1.5 px-2 rounded-DEFAULT bg-surface-variant font-label-code-sm text-label-code-sm text-text-primary text-center font-medium shadow-sm" type="button">MAS (SG)</button>
+<button class="py-1.5 px-2 rounded-DEFAULT text-text-muted font-label-code-sm text-label-code-sm hover:text-text-primary text-center" type="button">FCA (UK)</button>
+<button class="py-1.5 px-2 rounded-DEFAULT text-text-muted font-label-code-sm text-label-code-sm hover:text-text-primary text-center" type="button">FinCEN (US)</button>
+</div>
+<div class="flex items-center justify-between font-label-code-sm text-label-code-sm text-text-muted pt-1">
+<span>Strict UBO Threshold: ≤10%</span>
+<span class="text-tertiary">Notice 626 §7.4</span>
+</div>
+</div>
+</div>
+<!-- Calibration Card 2: Model Configuration & Failover Routing -->
+<div class="p-space-lg rounded-DEFAULT bg-surface-elevated shadow-xl flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[22px]">memory</span>
+<h2 class="font-headline-sm text-headline-sm text-text-primary">Model Routing &amp; Hardware</h2>
+</div>
+<span class="flex h-2 w-2 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span>
+</span>
+</div>
+<!-- Primary Provider Box -->
+<div class="p-space-md rounded-DEFAULT bg-surface-container flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-code-sm text-label-code-sm uppercase tracking-wider text-text-muted">Primary Inference Engine</span>
+<span class="px-2 py-0.5 rounded-full bg-primary/10 text-primary font-label-code-sm text-label-code-sm font-semibold">Active Tier-1</span>
+</div>
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">bolt</span>
+<span class="font-label-ui text-label-ui text-text-primary font-semibold">Google Vertex AI</span>
+</div>
+<span class="font-label-code-sm text-label-code-sm text-on-surface">Gemini 3 Flash</span>
+</div>
+<div class="flex items-center gap-space-md text-text-muted font-label-code-sm text-label-code-sm pt-2">
+<span>Temp: <strong class="text-text-primary">0.20</strong></span>
+<span>Top-P: <strong class="text-text-primary">0.95</strong></span>
+<span>Freq Pen: <strong class="text-text-primary">0.05</strong></span>
+</div>
+</div>
+<!-- Fallback Provider Box -->
+<div class="p-space-md rounded-DEFAULT bg-surface-container flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-code-sm text-label-code-sm uppercase tracking-wider text-text-muted">Deterministic Fallback</span>
+<span class="font-label-code-sm text-label-code-sm text-status-nudge">Auto-Failover @ &gt;1,500ms</span>
+</div>
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">swap_calls</span>
+<span class="font-label-ui text-label-ui text-text-primary font-semibold">Groq Sovereign Cloud</span>
+</div>
+<span class="font-label-code-sm text-label-code-sm text-on-surface">Llama 3 70B Direct</span>
+</div>
+<div class="flex items-center justify-between font-label-code-sm text-label-code-sm text-text-muted pt-1">
+<span>Token Budget Envelope</span>
+<span class="text-text-primary font-bold">1,024 Max Completion</span>
+</div>
+</div>
+<!-- Visual Sparkline Telemetry -->
+<div class="p-space-md rounded-DEFAULT bg-surface-container flex flex-col gap-space-xs">
+<div class="flex items-center justify-between text-text-muted font-label-code-sm text-label-code-sm">
+<span>P99 Inference Latency (Last 60m)</span>
+<span class="text-tertiary font-bold">342ms avg</span>
+</div>
+<div class="h-10 w-full flex items-end gap-1 pt-2">
+<div class="flex-1 bg-surface-variant rounded-t hover:bg-primary transition-all h-[45%]" title="310ms"></div>
+<div class="flex-1 bg-surface-variant rounded-t hover:bg-primary transition-all h-[52%]" title="330ms"></div>
+<div class="flex-1 bg-surface-variant rounded-t hover:bg-primary transition-all h-[40%]" title="290ms"></div>
+<div class="flex-1 bg-surface-variant rounded-t hover:bg-primary transition-all h-[60%]" title="360ms"></div>
+<div class="flex-1 bg-surface-variant rounded-t hover:bg-primary transition-all h-[48%]" title="320ms"></div>
+<div class="flex-1 bg-surface-variant rounded-t hover:bg-primary transition-all h-[75%]" title="410ms"></div>
+<div class="flex-1 bg-primary-container/40 rounded-t hover:bg-primary transition-all h-[55%]" title="345ms"></div>
+<div class="flex-1 bg-primary-container/50 rounded-t hover:bg-primary transition-all h-[50%]" title="335ms"></div>
+<div class="flex-1 bg-primary-container/70 rounded-t hover:bg-primary transition-all h-[42%]" title="300ms"></div>
+<div class="flex-1 bg-primary-container rounded-t h-[46%]" title="312ms"></div>
+<div class="flex-1 bg-tertiary rounded-t h-[38%]" title="280ms current"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN: Prompt Editor & Live Token Preview (approx 8-columns) -->
+<div class="lg:col-span-8 flex flex-col gap-space-md">
+<!-- Editor Container Card -->
+<div class="rounded-DEFAULT bg-surface-elevated shadow-xl flex flex-col overflow-hidden">
+<!-- Tab Bar & Actions -->
+<div class="px-space-lg pt-space-md pb-space-sm bg-surface-container flex flex-wrap items-center justify-between gap-space-md border-b border-surface-border">
+<div class="flex items-center gap-space-xs">
+<button class="px-4 py-2 rounded-DEFAULT bg-surface-elevated text-primary font-label-ui text-label-ui font-semibold shadow-sm flex items-center gap-2" id="tabBtnPrompt" onclick="switchRightTab('prompt')" type="button">
+<span class="material-symbols-outlined text-[16px]">code</span>
+                system_prompt.jinja
+                <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+</button>
+<button class="px-4 py-2 rounded-DEFAULT text-text-muted hover:text-text-primary hover:bg-surface-variant font-label-ui text-label-ui transition-all flex items-center gap-2" id="tabBtnContext" onclick="switchRightTab('context')" type="button">
+<span class="material-symbols-outlined text-[16px]">data_object</span>
+                Test Case Context (NG-2026-0841)
+              </button>
+<button class="px-4 py-2 rounded-DEFAULT text-text-muted hover:text-text-primary hover:bg-surface-variant font-label-ui text-label-ui transition-all flex items-center gap-2" id="tabBtnPreview" onclick="switchRightTab('preview')" type="button">
+<span class="material-symbols-outlined text-[16px]">preview</span>
+                Live Model Output Preview
+              </button>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-DEFAULT bg-surface-variant text-text-muted hover:text-text-primary transition-all flex items-center gap-1 font-label-code-sm text-label-code-sm" onclick="formatPromptTokens()" title="Lint Jinja Tokens" type="button">
+<span class="material-symbols-outlined text-[16px]">spellcheck</span>
+                Lint
+              </button>
+<button class="p-2 rounded-DEFAULT bg-surface-variant text-text-muted hover:text-text-primary transition-all flex items-center gap-1 font-label-code-sm text-label-code-sm" onclick="copyPromptCode()" title="Copy to Clipboard" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+                Copy
+              </button>
+</div>
+</div>
+<!-- TAB 1: Monospace Editor Area -->
+<div class="p-space-lg flex flex-col gap-space-md bg-surface-container-lowest" id="panelPrompt">
+<!-- Code Canvas with Line Numbers -->
+<div class="flex font-label-code-lg text-label-code-lg leading-relaxed overflow-x-auto min-h-[460px]">
+<!-- Gutter Line Numbers -->
+<div class="select-none pr-space-md text-outline-variant font-label-code-sm text-label-code-sm flex flex-col text-right font-mono opacity-50 py-1">
+<span>01</span><span>02</span><span>03</span><span>04</span>
+<span>05</span><span>06</span><span>07</span><span>08</span>
+<span>09</span><span>10</span><span>11</span><span>12</span>
+<span>13</span><span>14</span><span>15</span><span>16</span>
+<span>17</span><span>18</span><span>19</span><span>20</span>
+<span>21</span>
+</div>
+<!-- Code Content with Jinja Syntax Highlighting -->
+<div class="flex-1 text-on-surface font-label-code-sm text-label-code-sm py-1 font-mono tracking-wide selection:bg-primary-container selection:text-on-primary-container">
+<p class="text-text-muted">// System Identity Protocol — Production Tier</p>
+<p class="text-primary font-bold">You are Northgate Corporate Bank's Institutional eKYC Drafter.</p>
+<p class="text-on-surface">Target Recipient: <span class="bg-primary-container/20 text-primary-fixed px-1.5 py-0.5 rounded font-bold">{{client_name}}</span> (LEI: <span class="bg-secondary-container/40 text-secondary-fixed px-1.5 py-0.5 rounded">{{lei_code}}</span>)</p>
+<p class="text-on-surface">Jurisdiction: <span class="bg-primary-container/20 text-primary-fixed px-1.5 py-0.5 rounded">{{jurisdiction_name}}</span> (Regulatory Standard: <span class="bg-primary-container/20 text-primary-fixed px-1.5 py-0.5 rounded">{{cdd_policy_ref}}</span>)</p>
+<p class="text-text-muted"><br/></p>
+<p class="text-status-nudge font-bold tracking-wider">// MANDATORY AUDIT GUARDRAILS (ZERO FALSE CHASE POLICY)</p>
+<p class="text-on-surface"><span class="text-secondary font-bold">1. DO NOT</span> request any document currently listed in verified vault: <span class="bg-surface-variant text-tertiary px-1.5 py-0.5 rounded font-mono">{{already_received_vault_items}}</span></p>
+<p class="text-on-surface"><span class="text-secondary font-bold">2. Consolidate</span> all missing items into a single bulleted executive checklist: <span class="bg-surface-variant text-tertiary px-1.5 py-0.5 rounded font-mono">{{missing_document_requirements}}</span></p>
+<p class="text-on-surface"><span class="text-secondary font-bold">3. Include</span> sovereign custody secure upload URL with ephemeral session token: <span class="bg-surface-variant text-tertiary px-1.5 py-0.5 rounded font-mono">{{portal_deep_link}}</span></p>
+<p class="text-on-surface"><span class="text-secondary font-bold">4. Tone Directive:</span> Maintain <span class="text-primary font-semibold">Sovereign Institutional</span> tone; NEVER assign, expose, or imply internal compliance risk grades or friction flags.</p>
+<p class="text-on-surface"><span class="text-secondary font-bold">5. Grace Window:</span> Specify strict SLA window of <span class="bg-surface-variant text-tertiary px-1.5 py-0.5 rounded font-mono">{{sla_deadline_utc}}</span> before desk escalation protocol triggers.</p>
+<p class="text-text-muted"><br/></p>
+<p class="text-text-muted">// End of Protocol Execution Directive</p>
+</div>
+</div>
+<!-- Editor Micro Toolbar -->
+<div class="flex flex-wrap items-center justify-between gap-space-md pt-space-md border-t border-surface-border">
+<div class="flex items-center gap-space-sm">
+<span class="px-2.5 py-1 rounded-full bg-surface-container text-tertiary font-label-code-sm text-label-code-sm flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                  Prompt Compiled: Zero Jinja Syntax Errors
+                </span>
+<span class="font-label-code-sm text-label-code-sm text-text-muted">Tokens: 312 / 1,024</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-4 py-1.5 rounded-full bg-surface-container text-text-primary hover:bg-surface-variant font-label-ui text-label-ui transition-all" type="button">Revert to Staged</button>
+<button class="px-4 py-1.5 rounded-full bg-primary text-on-primary font-label-ui text-label-ui font-semibold shadow hover:opacity-90 transition-all" type="button">Stage for Golden-Set</button>
+</div>
+</div>
+</div>
+<!-- TAB 2: Test Case Context (Hidden by default, switched via JS) -->
+<div class="hidden p-space-lg flex flex-col gap-space-md bg-surface-container-lowest min-h-[460px]" id="panelContext">
+<div class="flex items-center justify-between pb-space-sm border-b border-surface-border">
+<div class="flex items-center gap-2">
+<span class="font-label-code-sm text-label-code-sm text-primary font-bold">CASE-NG-2026-0841</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-text-muted font-label-code-sm text-label-code-sm">Apex Global Logistics Pte Ltd</span>
+</div>
+<span class="font-label-code-sm text-label-code-sm text-tertiary">Singapore ACRA Reg</span>
+</div>
+<pre class="font-label-code-sm text-label-code-sm text-on-surface-variant bg-surface-container p-space-md rounded-DEFAULT overflow-x-auto leading-relaxed">{
+  "client_name": "Apex Global Logistics Pte Ltd",
+  "lei_code": "5493006MHB84US28SK89",
+  "jurisdiction_name": "Singapore (MAS Notice 626)",
+  "cdd_policy_ref": "SG-CDD-TIER-1-CORP-2026",
+  "already_received_vault_items": [
+    "ACRA BizFile Profile (dated 12 Jan 2026)",
+    "Certificate of Incorporation"
+  ],
+  "missing_document_requirements": [
+    "Register of Controllers &amp; Beneficial Ownership (&gt;10% stake)",
+    "Certified ID &amp; Proof of Address for Managing Director: Sarah Tan",
+    "Audited Consolidated Financial Statement (FY2025)"
+  ],
+  "portal_deep_link": "https://vault.northgate.bank/verify/sess_9f02c4819d",
+  "sla_deadline_utc": "18 Mar 2026 17:00 SGT"
+}</pre>
+</div>
+<!-- TAB 3: Live Model Output Preview (Hidden by default) -->
+<div class="hidden p-space-lg flex flex-col gap-space-md bg-surface-container-lowest min-h-[460px]" id="panelPreview">
+<div class="p-space-lg rounded-DEFAULT bg-surface-elevated flex flex-col gap-space-md">
+<div class="flex items-center justify-between border-b border-surface-border pb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">outgoing_mail</span>
+<span class="font-headline-sm text-headline-sm text-text-primary">Generated Institutional Outreach Draft</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-tertiary/15 text-tertiary font-label-code-sm text-label-code-sm font-semibold">Deterministic Score: 98/100</span>
+</div>
+<div class="font-body-md text-body-md text-on-surface space-y-3 leading-relaxed">
+<p><strong>Subject:</strong> Northgate Bank Onboarding // Required Verification Documentation [Apex Global Logistics Pte Ltd · 5493006MHB84US28SK89]</p>
+<p>Dear Sarah Tan &amp; Executive Board,</p>
+<p>In accordance with Monetary Authority of Singapore (MAS Notice 626) statutory onboarding protocols for institutional multi-currency custody accounts, Northgate Bank has authenticated your ACRA BizFile registration and foundational Certificate of Incorporation.</p>
+<p>To conclude customer due diligence for <strong>Apex Global Logistics Pte Ltd</strong> without account activation interruption, please furnish the remaining items via sovereign custody dispatch:</p>
+<ul class="list-disc pl-5 space-y-1 text-on-surface-variant font-body-sm text-body-sm">
+<li>Certified Register of Registrable Controllers &amp; Beneficial Owners (≥10% equity/voting rights).</li>
+<li>Certified Government Identity Verification and Residential Proof for Managing Director.</li>
+<li>FY2025 Audited Consolidated Financial Statement signed by an accredited independent auditor.</li>
+</ul>
+<p>Please transmit these credentials using your single-use institutional vault portal token: <span class="text-primary font-mono text-label-code-sm">https://vault.northgate.bank/verify/sess_9f02c4819d</span> before <strong>18 Mar 2026 17:00 SGT</strong>.</p>
+<p class="text-text-muted font-body-sm text-body-sm pt-2">Marcus Sterling<br/>Lead Relationship Manager · Northgate Corporate Banking (LDN / SG)</p>
+</div>
+</div>
+</div>
+<!-- Bottom Telemetry Test Bar -->
+<div class="p-space-md bg-surface-container flex flex-wrap items-center justify-between gap-space-md border-t border-surface-border">
+<div class="flex flex-wrap items-center gap-space-md text-on-surface font-label-code-sm text-label-code-sm">
+<span class="flex items-center gap-1.5 text-primary">
+<span class="material-symbols-outlined text-[16px]">biotech</span>
+                Golden-Set: Case NG-2026-0841
+              </span>
+<span class="text-outline-variant">•</span>
+<span class="text-text-muted">Latency: <strong class="text-text-primary">380ms</strong></span>
+<span class="text-outline-variant">•</span>
+<span class="text-text-muted">Inference Cost: <strong class="text-text-primary">£0.0018</strong></span>
+<span class="text-outline-variant">•</span>
+<span class="text-tertiary flex items-center gap-1 font-semibold">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+                Critique Score: 98/100
+              </span>
+<span class="text-outline-variant">•</span>
+<span class="text-tertiary font-bold">0 Violations</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-label-code-sm text-label-code-sm text-text-muted">Safety Guard: Passed</span>
+<div class="w-2 h-2 rounded-full bg-tertiary"></div>
+</div>
+</div>
+</div>
+<!-- Regression Matrix Drawer -->
+<div class="p-space-lg rounded-DEFAULT bg-surface-elevated shadow-xl flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">fact_check</span>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Automated Regression Suite (Last 5 Golden Runs)</h3>
+</div>
+<span class="font-label-code-sm text-label-code-sm text-text-muted">100% Deterministic Reproducibility</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-5 gap-space-sm">
+<div class="p-space-sm rounded-DEFAULT bg-surface-container flex flex-col gap-1">
+<span class="font-label-code-sm text-label-code-sm text-text-muted">Run #894 · SG</span>
+<span class="font-label-ui text-label-ui text-tertiary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> 50/50 Pass
+              </span>
+<span class="font-label-code-sm text-label-code-sm text-outline">0.0% False Chase</span>
+</div>
+<div class="p-space-sm rounded-DEFAULT bg-surface-container flex flex-col gap-1">
+<span class="font-label-code-sm text-label-code-sm text-text-muted">Run #893 · UK</span>
+<span class="font-label-ui text-label-ui text-tertiary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> 50/50 Pass
+              </span>
+<span class="font-label-code-sm text-label-code-sm text-outline">0.0% False Chase</span>
+</div>
+<div class="p-space-sm rounded-DEFAULT bg-surface-container flex flex-col gap-1">
+<span class="font-label-code-sm text-label-code-sm text-text-muted">Run #892 · US</span>
+<span class="font-label-ui text-label-ui text-tertiary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> 50/50 Pass
+              </span>
+<span class="font-label-code-sm text-label-code-sm text-outline">0.0% False Chase</span>
+</div>
+<div class="p-space-sm rounded-DEFAULT bg-surface-container flex flex-col gap-1">
+<span class="font-label-code-sm text-label-code-sm text-text-muted">Run #891 · HK</span>
+<span class="font-label-ui text-label-ui text-tertiary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> 50/50 Pass
+              </span>
+<span class="font-label-code-sm text-label-code-sm text-outline">0.0% False Chase</span>
+</div>
+<div class="p-space-sm rounded-DEFAULT bg-surface-container flex flex-col gap-1">
+<span class="font-label-code-sm text-label-code-sm text-text-muted">Run #890 · EU</span>
+<span class="font-label-ui text-label-ui text-tertiary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> 50/50 Pass
+              </span>
+<span class="font-label-code-sm text-label-code-sm text-outline">0.0% False Chase</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  function switchRightTab(tabKey) {
+    const promptPanel = document.getElementById('panelPrompt');
+    const contextPanel = document.getElementById('panelContext');
+    const previewPanel = document.getElementById('panelPreview');
+    const btnPrompt = document.getElementById('tabBtnPrompt');
+    const btnContext = document.getElementById('tabBtnContext');
+    const btnPreview = document.getElementById('tabBtnPreview');
+
+    // Hide all
+    promptPanel.classList.add('hidden');
+    contextPanel.classList.add('hidden');
+    previewPanel.classList.add('hidden');
+
+    btnPrompt.className = 'px-4 py-2 rounded-DEFAULT text-text-muted hover:text-text-primary hover:bg-surface-variant font-label-ui text-label-ui transition-all flex items-center gap-2';
+    btnContext.className = 'px-4 py-2 rounded-DEFAULT text-text-muted hover:text-text-primary hover:bg-surface-variant font-label-ui text-label-ui transition-all flex items-center gap-2';
+    btnPreview.className = 'px-4 py-2 rounded-DEFAULT text-text-muted hover:text-text-primary hover:bg-surface-variant font-label-ui text-label-ui transition-all flex items-center gap-2';
+
+    if (tabKey === 'prompt') {
+      promptPanel.classList.remove('hidden');
+      btnPrompt.className = 'px-4 py-2 rounded-DEFAULT bg-surface-elevated text-primary font-label-ui text-label-ui font-semibold shadow-sm flex items-center gap-2';
+    } else if (tabKey === 'context') {
+      contextPanel.classList.remove('hidden');
+      btnContext.className = 'px-4 py-2 rounded-DEFAULT bg-surface-elevated text-primary font-label-ui text-label-ui font-semibold shadow-sm flex items-center gap-2';
+    } else if (tabKey === 'preview') {
+      previewPanel.classList.remove('hidden');
+      btnPreview.className = 'px-4 py-2 rounded-DEFAULT bg-surface-elevated text-primary font-label-ui text-label-ui font-semibold shadow-sm flex items-center gap-2';
+    }
+  }
+
+  function updateFormality(val) {
+    const label = document.getElementById('formalityVal');
+    if (val >= 90) {
+      label.innerText = val + '% — Sovereign Institutional';
+    } else if (val >= 75) {
+      label.innerText = val + '% — Institutional Tier';
+    } else {
+      label.innerText = val + '% — Collaborative Corporate';
+    }
+  }
+
+  function updateUrgency(val) {
+    const label = document.getElementById('urgencyVal');
+    if (val == 1) {
+      label.innerText = 'Level 1 of 3 — Collaborative';
+      label.className = 'font-label-code-sm text-label-code-sm text-tertiary font-bold';
+    } else if (val == 2) {
+      label.innerText = 'Level 2 of 3 — Day 3 Nudge';
+      label.className = 'font-label-code-sm text-label-code-sm text-status-nudge font-bold';
+    } else {
+      label.innerText = 'Level 3 of 3 — Senior RM Escalation';
+      label.className = 'font-label-code-sm text-label-code-sm text-status-alert font-bold';
+    }
+  }
+
+  function runGoldenSetTest() {
+    const btn = document.getElementById('runValidationBtn');
+    const originalContent = btn.innerHTML;
+    btn.innerHTML = `
+      <span class="material-symbols-outlined text-[18px] animate-spin">refresh</span>
+      <span class="font-semibold tracking-wide">Executing 50 Test Cases...</span>
+      <div class="h-3.5 w-[1px] bg-on-primary-container/30 mx-1"></div>
+      <span class="font-label-code-sm text-label-code-sm bg-on-primary-container/15 px-2 py-0.5 rounded-full font-semibold">Running 380ms/case</span>
+    `;
+    setTimeout(() => {
+      btn.innerHTML = originalContent;
+      switchRightTab('preview');
+    }, 1200);
+  }
+
+  function copyPromptCode() {
+    const dummy = `You are Northgate Corporate Bank's Institutional eKYC Drafter.\nTarget Recipient: {{client_name}} (LEI: {{lei_code}})\nJurisdiction: {{jurisdiction_name}} (Regulatory Standard: {{cdd_policy_ref}})\n\nMANDATORY GUARDRAILS:\n1. DO NOT request any document listed in: {{already_received_vault_items}}\n2. Consolidate all missing items into a single bulleted checklist: {{missing_document_requirements}}\n3. Include direct secure upload URL with session token {{portal_deep_link}}\n4. Maintain Sovereign Institutional tone; NEVER assign or imply a compliance risk grade.`;
+    navigator.clipboard.writeText(dummy);
+  }
+
+  function formatPromptTokens() {
+    switchRightTab('prompt');
+  }
+</script></main></div></body></html>
