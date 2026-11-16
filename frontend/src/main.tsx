@@ -8,16 +8,18 @@ import {
   useLocation,
 } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext";
+import { AudioProvider } from "./context/AudioContext";
+import { DraftingProvider } from "./context/DraftingContext";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import Layout from "./components/Layout";
 import LoginPage from "./pages/LoginPage";
 import CaseQueuePage from "./pages/CaseQueuePage";
 import ChaserWorkspacePage from "./pages/ChaserWorkspacePage";
 import NudgeTrackerPage from "./pages/NudgeTrackerPage";
-import AgentTracePage from "./pages/AgentTracePage";
+import AgentTracePage from "./pages/TracePage";
 import TonerStudioPage from "./pages/TonerStudioPage";
 import FinOpsDashboardPage from "./pages/FinOpsDashboardPage";
-import PolicyCopilotPage from "./pages/PolicyCopilotPage";
+import PortalGuidePage from "./pages/PortalGuidePage";
 import { Loading } from "./components/UI";
 import "./styles.css";
 function App() {
@@ -35,7 +37,7 @@ function App() {
         <Route path="trace" element={<AgentTracePage />} />
         <Route path="studio" element={<TonerStudioPage />} />
         <Route path="finops" element={<FinOpsDashboardPage />} />
-        <Route path="policy" element={<PolicyCopilotPage />} />
+        <Route path="policy" element={<PortalGuidePage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Route>
     </Routes>
@@ -44,11 +46,15 @@ function App() {
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ThemeProvider>
-      <AuthProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </AuthProvider>
+      <AudioProvider>
+        <DraftingProvider>
+          <AuthProvider>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </AuthProvider>
+        </DraftingProvider>
+      </AudioProvider>
     </ThemeProvider>
   </React.StrictMode>,
 );

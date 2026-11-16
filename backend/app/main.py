@@ -13,7 +13,8 @@ from .db import initialize
 from .worker import worker
 from .mcp.server import mcp
 from .llm.router import ProviderUnavailable
-from .routes import auth_routes, cases_routes, prompts_routes, finops_routes, copilot_routes
+from .routes import auth_routes, cases_routes, prompts_routes, finops_routes, copilot_routes, live_routes
+from . import live
 
 logging.basicConfig(level=logging.INFO, format='%(message)s')
 mcp_app = mcp.streamable_http_app()
@@ -22,11 +23,13 @@ mcp_app = mcp.streamable_http_app()
 @asynccontextmanager
 async def lifespan(app):
     initialize()
+    live.recover_interrupted()
     task = asyncio.create_task(worker())
     try:
         async with mcp.session_manager.run():
             yield
     finally:
+        await live.shutdown()
         task.cancel()
         with contextlib.suppress(asyncio.CancelledError):
             await task
@@ -60,7 +63,7 @@ async def provider_error(request, exc):
     return JSONResponse({"detail": str(exc)}, status_code=503)
 
 
-for router in (auth_routes.router, cases_routes.router, prompts_routes.router, finops_routes.router, copilot_routes.router):
+for router in (auth_routes.router, cases_routes.router, prompts_routes.router, finops_routes.router, copilot_routes.router, live_routes.router):
     app.include_router(router)
 
 

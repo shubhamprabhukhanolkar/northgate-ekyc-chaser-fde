@@ -1,18 +1,10 @@
 import { useState, FormEvent } from "react";
-import {
-  ArrowRight,
-  ShieldCheck,
-  LockKeyhole,
-  Check,
-  Sun,
-  Moon,
-} from "lucide-react";
+import { ArrowRight, ShieldCheck, LockKeyhole, Check } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
-import { useTheme } from "../context/ThemeContext";
+import ExperienceControls from "../components/ExperienceControls";
 import { ErrorBox } from "../components/UI";
 export default function LoginPage() {
   const { login } = useAuth();
-  const { dark, toggle } = useTheme();
   const [email, setEmail] = useState("rm@northgate.demo");
   const [password, setPassword] = useState("NorthgateDemo!2026");
   const [error, setError] = useState("");
@@ -85,10 +77,7 @@ export default function LoginPage() {
         </small>
       </div>
       <div className="login-panel">
-        <button className="theme-switch login-theme" onClick={toggle}>
-          {dark ? <Sun size={16} /> : <Moon size={16} />}{" "}
-          {dark ? "Light mode" : "Dark mode"}
-        </button>
+        <ExperienceControls login />
         <form onSubmit={submit}>
           <div className="login-lock">
             <LockKeyhole size={25} />

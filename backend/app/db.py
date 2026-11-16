@@ -81,6 +81,14 @@ def initialize():
           PRIMARY KEY(actor,case_id));
         CREATE TABLE IF NOT EXISTS outbox(id TEXT PRIMARY KEY, draft_id TEXT UNIQUE, case_id TEXT, payload TEXT, created_at TEXT);
         CREATE TABLE IF NOT EXISTS regression(id TEXT PRIMARY KEY, digest TEXT, result TEXT, created_at TEXT);
+        CREATE TABLE IF NOT EXISTS workflow_runs(id TEXT PRIMARY KEY, case_id TEXT REFERENCES cases(id), actor TEXT,
+          status TEXT, started_at TEXT, finished_at TEXT);
+        CREATE UNIQUE INDEX IF NOT EXISTS one_live_case_run ON workflow_runs(case_id) WHERE status='RUNNING';
+        CREATE TABLE IF NOT EXISTS workflow_events(id INTEGER PRIMARY KEY, run_id TEXT REFERENCES workflow_runs(id),
+          kind TEXT, data TEXT, created_at TEXT);
+        CREATE INDEX IF NOT EXISTS workflow_event_cursor ON workflow_events(run_id,id);
+        CREATE TABLE IF NOT EXISTS workflow_requests(run_id TEXT PRIMARY KEY REFERENCES workflow_runs(id),
+          mode TEXT, instructions TEXT);
         ''')
         for role, name in [("rm", "Marcus Sterling"), ("analyst", "Priya Chen"), ("coo", "Alex Morgan"), ("admin", "Sam Taylor")]:
             if not db.execute("SELECT 1 FROM users WHERE email=?", (f"{role}@northgate.demo",)).fetchone():
@@ -95,6 +103,8 @@ def initialize():
                  ("Crescent Trade Group", "UK", "London"), ("Orion Pacific Pte", "SG", "Singapore"),
                  ("Brookfield Robotics Inc", "US", "New York"), ("Harbour & Finch Ltd", "UK", "London"),
                  ("Solstice Ventures Pte", "SG", "Singapore"), ("Pioneer Materials Inc", "US", "New York")]
+        from .synthetic import ADDITIONAL_CASES
+        names += ADDITIONAL_CASES
         for i, (company, jurisdiction, city) in enumerate(names):
             cid = f"NG-2026-{841+i:04}"
             if db.execute("SELECT 1 FROM cases WHERE id=?", (cid,)).fetchone():

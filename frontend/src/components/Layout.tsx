@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import {
   Inbox,
   FileCheck2,
@@ -8,16 +8,16 @@ import {
   ChartNoAxesCombined,
   Bot,
   LogOut,
-  Sun,
-  Moon,
   ShieldCheck,
   Globe,
   Command,
   PanelLeftClose,
+  Compass,
+  ArrowUpRight,
 } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { useTheme } from "../context/ThemeContext";
+import ExperienceControls from "./ExperienceControls";
 import { api } from "../api";
 import { Pill, usePoll } from "./UI";
 const links = [
@@ -27,11 +27,11 @@ const links = [
   ["/trace", "Agent Trace", Workflow],
   ["/studio", "Toner Studio", SlidersHorizontal],
   ["/finops", "FinOps & Impact", ChartNoAxesCombined],
-  ["/policy", "Policy Copilot", Bot],
+  ["/policy", "Portal Guide", Bot],
 ] as const;
 export default function Layout() {
   const { user, logout } = useAuth();
-  const { dark, toggle } = useTheme();
+  const location = useLocation();
   const [menu, setMenu] = useState(false);
   const { data: runtime } = usePoll(() => api("/runtime"));
   return (
@@ -64,11 +64,25 @@ export default function Layout() {
             </NavLink>
           ))}
         </nav>
-        <div className="sidebar-note">
-          <ShieldCheck size={19} />
-          <strong>Human judgment. Always.</strong>
-          <p>Every client outreach stays behind your review gate.</p>
-        </div>
+        <NavLink
+          to="/policy"
+          className="sidebar-note sidebar-guide"
+          onClick={() => setMenu(false)}
+        >
+          <Compass size={19} />
+          <strong>
+            A little guidance.
+            <br />A clearer next step.
+          </strong>
+          <p>
+            Ask Portal Guide for help finding cases, drafting messages and using
+            your workspace.
+          </p>
+          <span>
+            Open Portal Guide
+            <ArrowUpRight size={12} />
+          </span>
+        </NavLink>
         <div className="profile">
           <div className="avatar">
             {user?.name
@@ -110,14 +124,7 @@ export default function Layout() {
             </Pill>
           </div>
           <div className="header-right">
-            <button
-              className="theme-switch"
-              onClick={toggle}
-              aria-label="Toggle color theme"
-            >
-              {dark ? <Moon size={14} /> : <Sun size={14} />}{" "}
-              {dark ? "Dark" : "Light"}
-            </button>
+            <ExperienceControls />
             <span className="header-divider" />
             <div className="avatar small">
               {user?.role.slice(0, 2).toUpperCase()}
@@ -138,7 +145,9 @@ export default function Layout() {
               · Synthetic outbox
             </span>
           </div>
-          <Outlet />
+          <div className="page-transition" key={location.pathname}>
+            <Outlet />
+          </div>
         </main>
         <footer>
           <span>

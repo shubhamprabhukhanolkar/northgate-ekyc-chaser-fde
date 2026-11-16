@@ -1,3 +1,5 @@
+import { actionFeedback } from "./audio/sound";
+
 export type Case = {
   id: string;
   company: string;
@@ -50,18 +52,39 @@ export async function api<T = any>(
   path: string,
   options: RequestInit = {},
 ): Promise<T> {
-  const response = await fetch("/api" + path, {
-    ...options,
-    credentials: "same-origin",
-    headers: { "Content-Type": "application/json", ...options.headers },
-  });
+  const mutation =
+    !!options.method && !["GET", "HEAD"].includes(options.method.toUpperCase());
+  let response: Response;
+  try {
+    response = await fetch("/api" + path, {
+      ...options,
+      credentials: "same-origin",
+      headers: { "Content-Type": "application/json", ...options.headers },
+    });
+  } catch (error) {
+    if (
+      mutation &&
+      !(error instanceof DOMException && error.name === "AbortError")
+    )
+      actionFeedback("notice");
+    throw error;
+  }
   const data = await response.json();
-  if (!response.ok)
+  if (!response.ok) {
+    if (mutation) actionFeedback("notice");
     throw new Error(
       typeof data.detail === "string"
         ? data.detail
         : "Request failed. Check your inputs.",
     );
+  }
+  if (mutation && path !== "/auth/logout" && !path.endsWith("/runs")) {
+    actionFeedback(
+      data.scorecard?.passed === false || data.passed === false
+        ? "notice"
+        : "success",
+    );
+  }
   return data;
 }
 export const post = <T = any>(path: string, body: unknown = {}) =>

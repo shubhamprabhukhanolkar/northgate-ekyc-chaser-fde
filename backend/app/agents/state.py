@@ -13,3 +13,4 @@ class ChaseState(TypedDict, total=False):
     attempts: int
     provider: str
     overrides: dict[str, Any]
+    drafting_instructions: str

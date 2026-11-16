@@ -2,9 +2,21 @@
 
 A synthetic corporate onboarding prototype: React/Vite/Tailwind, Python 3.12/FastAPI, a cyclical LangGraph workflow, SQLite, and the official Python FastMCP adapter. Direct Gemini APIs only; no Vertex AI.
 
-**Live app:** https://northgate-ekyc-chaser-ruxttjrlxq-el.a.run.app · **MCP:** https://northgate-ekyc-chaser-ruxttjrlxq-el.a.run.app/mcp/ · [Public repository](https://github.com/shubhamprabhukhanolkar/northgate-ekyc-chaser-fde) · [Successful CI/container deployment](https://github.com/shubhamprabhukhanolkar/northgate-ekyc-chaser-fde/actions/runs/43900998032).
+**Live app:** https://northgate-ekyc-chaser-ruxttjrlxq-el.a.run.app · **MCP:** https://northgate-ekyc-chaser-ruxttjrlxq-el.a.run.app/mcp/ · [Public repository](https://github.com/shubhamprabhukhanolkar/northgate-ekyc-chaser-fde) · [Successful CI/container deployment](https://github.com/shubhamprabhukhanolkar/northgate-ekyc-chaser-fde/actions/workflows/deploy.yml).
 
-Verified on 16 November 2026: 23 backend tests, production frontend build, official stdio and authenticated HTTP MCP, real Gemini generation and Groq outage failover, and desktop/mobile browser checks across the complete UI. Docker was built and deployed by GitHub Actions; Docker is unavailable on the local Windows host, so a local Docker run was not performed. The local FastAPI process serves the same built frontend on port 8080.
+Validation covers 35 backend tests, the production frontend build, official stdio and authenticated HTTP MCP, real Gemini generation and Groq outage failover, and desktop/mobile browser checks. Docker is built and deployed by GitHub Actions; Docker is unavailable on the local Windows host, so a local Docker run is not performed. The local FastAPI process serves the same built frontend on port 8080.
+
+## Operator experience
+
+The queue contains 42 synthetic companies, 14 per jurisdiction, displayed six per page with Previous, numbered pages and Next. Search and jurisdiction filters reset pagination to the first page.
+
+The top bar contains **Guided draft** (yellow), **Auto-draft** (green), Audio and Dark/Light in that order. The drafting preference is shared across pages, remembered by the browser and synchronized across tabs. Guided draft initially shows the AI workflow and waits for at least five characters of instructions before generating; Auto-draft automatically prepares a needed draft and accepts optional guidance for redrafts. Both modes keep the mandatory RM approval gate. Guidance is positioned beneath the workflow visualization and is sent to the agents as operator input, with safety contracts enforced separately.
+
+Gap Workspace flips between the draft editor and **AI workflow**, with live stage events, revision paths and a shared activity feed. Drafter and Toner stream actual provider output into an explicitly unreviewed preview. Runs persist events in SQLite and continue after the browser navigates away; SSE reconnects using event IDs. Interrupted runs are marked accordingly on restart. Agent Trace is read-only and filters recorded activity for all five workflow stages plus Portal Guide; it has no drafting controls.
+
+Portal Guide primarily explains how to use the actual portal, with citations to 12 product-help references and the five synthetic KYC clauses. It includes recent conversation context, starting questions, Clear chat and Back-to-welcome controls. Clear and Back cancel pending browser requests and prevent late answers from restoring cleared conversations.
+
+Interface sounds are synthesized locally with Web Audio, disabled by default and enabled only after a user gesture. Optional cues distinguish navigation, theme changes, stage handoffs, rewrites and review readiness. The muted speaker icon uses a theme-appropriate red. Theme switches, workflow flips, chat replies and the Portal Guide illustration animate while respecting reduced-motion preferences. Browser preferences and audio do not expose provider keys.
 
 ## Run locally
 
@@ -37,7 +49,7 @@ Analysts can run drafts and record synthetic receipts. RMs/admins can approve, d
 
 ## Prompts, policy and FinOps
 
-The studio persists all four prompts and version history in SQLite. An exact-candidate five-case regression must pass within the last hour before web prompt saves. MCP toner updates also run the five-case regression. The policy copilot retrieves the three most relevant clauses by lexical overlap from the five synthetic `NG-KYC` clauses and returns clause citations. It is a small grounded retriever, not a legal research system.
+The studio persists all four prompts and version history in SQLite. An exact-candidate five-case regression must pass within the last hour before web prompt saves. MCP toner updates also run the five-case regression. Portal Guide retrieves four relevant references from the product-help and synthetic KYC collection, with weighted title/keyword/text matching and bounded recent-chat context. It returns only known source citations and records its own agent trace. It is a small grounded help system, not a legal research system.
 
 Every LLM provider attempt records agent, model, provider, input/output tokens, latency, USD/GBP estimates and case. Successful billable responses are recorded even if JSON parsing fails; failed calls have unknown usage represented as zero. Gemini 429/5xx/timeouts/connection/quota-unavailable failures trigger Groq. Other errors remain visible. The admin outage toggle forces that failover path.
 

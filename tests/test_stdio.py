@@ -19,7 +19,7 @@ async def test_official_stdio_client_round_trip():
             assert len(tools.tools) == 7
             result = await session.call_tool("list_onboarding_cases", {})
             assert not result.isError
-            assert len(result.structuredContent["cases"]) == 12
+            assert len(result.structuredContent["cases"]) == 42
             checklist = await session.call_tool("get_case_gap_checklist", {"case_id": "NG-2026-0841"})
             assert not checklist.isError
             assert checklist.structuredContent["received"]

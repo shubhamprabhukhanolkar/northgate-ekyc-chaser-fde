@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import {
   LockKeyhole,
@@ -10,10 +10,16 @@ import {
   FileText,
   ArrowRight,
   Copy,
+  MessageSquareText,
 } from "lucide-react";
 import { api, post, put, Case, Checklist, Draft, label } from "../api";
 import { useAuth } from "../context/AuthContext";
 import { PageHead, Pill, ErrorBox, Loading, Empty } from "../components/UI";
+import WorkflowMonitor, {
+  StreamingDraftPreview,
+} from "../components/WorkflowMonitor";
+import { useWorkflow } from "../hooks/useWorkflow";
+import { useDrafting } from "../context/DraftingContext";
 export default function ChaserWorkspacePage() {
   const [params, setParams] = useSearchParams();
   const [cases, setCases] = useState<Case[]>([]);
@@ -23,7 +29,13 @@ export default function ChaserWorkspacePage() {
     draft: Draft | null;
   } | null>(null);
   const [error, setError] = useState("");
-  const [busy, setBusy] = useState("");
+  const [actionBusy, setBusy] = useState("");
+  const { mode: draftMode } = useDrafting();
+  const [instructions, setInstructions] = useState("");
+  const [guidedRunId, setGuidedRunId] = useState("");
+  const autoAttempted = useRef(new Set<string>());
+  const workflow = useWorkflow(cid);
+  const busy = workflow.active ? "generate" : actionBusy;
   const [subject, setSubject] = useState("");
   const [body, setBody] = useState("");
   const [reason, setReason] = useState("");
@@ -50,6 +62,8 @@ export default function ChaserWorkspacePage() {
     setData(null);
     setMessage("");
     setApproval("");
+    setGuidedRunId("");
+    setInstructions("");
     load().catch((e) => setError(e.message));
     setParams({ case: cid }, { replace: true });
   }, [cid]);
@@ -66,7 +80,65 @@ export default function ChaserWorkspacePage() {
       setBusy("");
     }
   }
-  const draft = data?.draft;
+  const terminalEvent = [...workflow.events]
+    .reverse()
+    .find(
+      (event) => event.kind === "run_completed" || event.kind === "run_failed",
+    );
+  useEffect(() => {
+    if (!terminalEvent) return;
+    void load().catch((e) => setError(e.message));
+    if (
+      terminalEvent.kind === "run_failed" &&
+      (draftMode === "auto" || terminalEvent.run_id === guidedRunId)
+    )
+      setError(
+        terminalEvent.data.summary || "Generation stopped. Please retry.",
+      );
+  }, [terminalEvent?.id]);
+  async function generateLive() {
+    setError("");
+    setMessage("");
+    setApproval("");
+    try {
+      const started = await workflow.start(cid, {
+        mode: draftMode,
+        instructions,
+      });
+      if (draftMode === "guided" && started) setGuidedRunId(started.id);
+    } catch (e) {
+      setError((e as Error).message);
+    }
+  }
+  useEffect(() => {
+    if (
+      draftMode !== "auto" ||
+      !data ||
+      data.checklist.case.id !== cid ||
+      !workflow.loaded ||
+      workflow.active ||
+      !canGenerate ||
+      !data.checklist.missing.length ||
+      autoAttempted.current.has(cid)
+    )
+      return;
+    autoAttempted.current.add(cid);
+    if (data.draft?.status === "REVIEW" && data.draft.scorecard.passed) return;
+    void generateLive();
+  }, [draftMode, data, workflow.loaded, workflow.active, cid, canGenerate]);
+  const showRun =
+    draftMode === "auto" || (!!guidedRunId && guidedRunId === workflow.run?.id);
+  const guidedReady =
+    !!guidedRunId &&
+    terminalEvent?.kind === "run_completed" &&
+    terminalEvent.run_id === guidedRunId &&
+    terminalEvent.data.draft?.id === data?.draft?.id;
+  const draft = draftMode === "auto" || guidedReady ? data?.draft : null;
+  useEffect(() => {
+    setGuidedRunId("");
+    setError("");
+    setApproval("");
+  }, [draftMode]);
   const dirty = subject !== draft?.subject || body !== draft?.body;
   return (
     <>
@@ -88,7 +160,7 @@ export default function ChaserWorkspacePage() {
           </select>
         }
       />
-      <ErrorBox message={error} />
+      <ErrorBox message={error || workflow.error} />
       {message && (
         <div className="success" role="status">
           {message}
@@ -112,6 +184,7 @@ export default function ChaserWorkspacePage() {
             </div>
             <Pill tone="green">Metadata presence only</Pill>
           </div>
+
           <div className="workspace-grid">
             <section className="panel checklist">
               <div className="panel-heading">
@@ -176,262 +249,313 @@ export default function ChaserWorkspacePage() {
                 </p>
               </div>
             </section>
-            <section className="panel draft-panel">
-              <div className="panel-heading">
-                <div>
-                  <div className="eyebrow">02 / CONSOLIDATED OUTREACH</div>
-                  <h2>One email. Every missing item.</h2>
-                </div>
-                <Pill tone={draft?.scorecard.passed ? "green" : "purple"}>
-                  {draft ? label(draft.status) : "Ready to draft"}
-                </Pill>
-              </div>
-              {!draft ? (
-                <Empty title="Your next chase starts here">
+            <WorkflowMonitor
+              key={cid + ":" + draftMode}
+              initialView={draftMode === "guided" ? "activity" : "drafter"}
+              run={showRun ? workflow.run : null}
+              events={showRun ? workflow.events : []}
+              reconnecting={workflow.reconnecting}
+              onGenerate={generateLive}
+              hasDraft={!!draft}
+              generationDisabled={
+                !!busy ||
+                !canGenerate ||
+                (draftMode === "guided" && instructions.trim().length < 5)
+              }
+              guidance={
+                <div className="draft-instructions">
+                  <label htmlFor="draft-instructions">
+                    <MessageSquareText size={15} />
+                    {draftMode === "guided"
+                      ? "Drafting & redrafting instructions"
+                      : "Redraft guidance (optional)"}
+                  </label>
                   <p>
-                    Five agent stages consolidate the gaps and check the message
-                    before your review.
+                    {draftMode === "guided"
+                      ? "Watch the workflow above, then tell the AI how you want the email written. Choose Draft to begin, or update these instructions for a redraft."
+                      : "Want a different version? Add guidance for your next draft, or leave this empty to use the default style."}
                   </p>
-                  <button
-                    disabled={!!busy || !canGenerate}
-                    className="primary"
-                    onClick={() =>
-                      perform("generate", () =>
-                        post("/cases/" + cid + "/generate"),
-                      )
-                    }
-                  >
-                    <Sparkles size={16} />
-                    {busy === "generate"
-                      ? "Agents are working…"
-                      : "Generate consolidated draft"}
-                  </button>
-                </Empty>
-              ) : (
-                <>
-                  <div className="draft-meta">
+                  <textarea
+                    id="draft-instructions"
+                    aria-label="Drafting instructions"
+                    value={instructions}
+                    maxLength={3000}
+                    disabled={workflow.active}
+                    onChange={(e) => setInstructions(e.target.value)}
+                    placeholder="For example: Keep it brief and warm, list missing items as bullet points, and offer help if more time is needed."
+                  />
+                  <div>
+                    <small>{instructions.length}/3000</small>
                     <span>
-                      TO <strong>{data.checklist.case.contact}</strong>
+                      {draftMode === "guided" && instructions.trim().length < 5
+                        ? "Add instructions to enable Draft."
+                        : !instructions.trim()
+                          ? "Optional. The default drafting style will be used."
+                          : "These instructions will guide your next draft."}
                     </span>
-                    <Pill>
-                      {draft.provider === "offline_demo"
-                        ? "Offline fixture"
-                        : draft.provider}
+                  </div>
+                </div>
+              }
+              drafter={
+                <section className="panel draft-panel">
+                  <p className="drafting-mode-note">
+                    {draftMode === "auto"
+                      ? "Auto-draft is on. AI prepares and checks the email; you approve every send."
+                      : "Guided draft is on. Add instructions beneath the AI workflow before choosing Draft."}
+                  </p>
+                  <div className="panel-heading">
+                    <div>
+                      <div className="eyebrow">02 / CONSOLIDATED OUTREACH</div>
+                      <h2>One email. Every missing item.</h2>
+                    </div>
+                    <Pill
+                      tone={
+                        workflow.active && showRun
+                          ? "purple"
+                          : draft?.scorecard.passed
+                            ? "green"
+                            : "purple"
+                      }
+                    >
+                      {workflow.active && showRun
+                        ? "Generating · QA pending"
+                        : draft
+                          ? label(draft.status)
+                          : "Ready to draft"}
                     </Pill>
                   </div>
-                  <label className="subject-label">
-                    SUBJECT
-                    <input
-                      aria-label="Email subject"
-                      value={subject}
-                      onChange={(e) => setSubject(e.target.value)}
-                      readOnly={!canReview || draft.status !== "REVIEW"}
-                    />
-                  </label>
-                  <textarea
-                    aria-label="Draft email body"
-                    className="email-body"
-                    value={body}
-                    onChange={(e) => setBody(e.target.value)}
-                    readOnly={!canReview || draft.status !== "REVIEW"}
-                  />
-                  <div className="scorecard">
-                    <div>
-                      <ShieldCheck size={17} />
-                      <strong>Critique QA scorecard</strong>
-                      <Pill tone={draft.scorecard.passed ? "green" : "rose"}>
-                        {draft.scorecard.tone_score}% tone
-                      </Pill>
-                    </div>
-                    <ul>
-                      {[
-                        [
-                          draft.scorecard.zero_false_chases,
-                          "Zero received documents requested",
-                        ],
-                        [
-                          draft.scorecard.all_missing_consolidated,
-                          "All missing items in one email",
-                        ],
-                        [
-                          draft.scorecard.no_prohibited_claims,
-                          "No risk or authenticity claims",
-                        ],
-                        [
-                          draft.scorecard.tone_score >= 95 &&
-                            draft.scorecard.policy_compliant,
-                          "Tone & policy compliance ≥95%",
-                        ],
-                      ].map(([ok, text]) => (
-                        <li
-                          key={String(text)}
-                          className={ok ? "green-text" : "rose-text"}
-                        >
-                          {ok ? <Check size={13} /> : <span>×</span>}
-                          {text}
-                        </li>
-                      ))}
-                    </ul>
-                    {draft.scorecard.feedback.length > 0 && (
-                      <p className="rose-text">
-                        {draft.scorecard.feedback.join("; ")}
+                  {workflow.active && showRun ? (
+                    <StreamingDraftPreview events={workflow.events} active />
+                  ) : !draft ? (
+                    <Empty
+                      title={
+                        draftMode === "guided"
+                          ? "Your instructions. Your starting point."
+                          : "Your next chase starts here"
+                      }
+                    >
+                      <p>
+                        {draftMode === "guided"
+                          ? "Open AI workflow, add your instructions below the animation, then select Draft."
+                          : "AI will consolidate the gaps and check the message before your review."}
                       </p>
-                    )}
-                    <small className="muted">
-                      {draft.scorecard.iterations} iteration(s) · Max 3 rewrites
-                    </small>
-                  </div>
-                  <div className="review-gate">
-                    <div>
-                      <LockKeyhole size={18} />
-                      <strong>RM review gate</strong>
-                    </div>
-                    <p>
-                      Review this exact message before approving. Sends are
-                      recorded in the synthetic outbox.
-                    </p>
-                    <div className="actions">
-                      {canReview && draft.status === "REVIEW" && (
-                        <>
-                          <button
-                            className="secondary"
-                            disabled={!!busy || !dirty}
-                            onClick={() =>
-                              perform("edit", () =>
-                                put("/cases/" + cid + "/draft", {
-                                  subject,
-                                  body,
-                                }),
-                              )
-                            }
+                    </Empty>
+                  ) : (
+                    <>
+                      <div className="draft-meta">
+                        <span>
+                          TO <strong>{data.checklist.case.contact}</strong>
+                        </span>
+                        <Pill>
+                          {draft.provider === "offline_demo"
+                            ? "Offline fixture"
+                            : draft.provider}
+                        </Pill>
+                      </div>
+                      <label className="subject-label">
+                        SUBJECT
+                        <input
+                          aria-label="Email subject"
+                          value={subject}
+                          onChange={(e) => setSubject(e.target.value)}
+                          readOnly={!canReview || draft.status !== "REVIEW"}
+                        />
+                      </label>
+                      <textarea
+                        aria-label="Draft email body"
+                        className="email-body"
+                        value={body}
+                        onChange={(e) => setBody(e.target.value)}
+                        readOnly={!canReview || draft.status !== "REVIEW"}
+                      />
+                      <div className="scorecard">
+                        <div>
+                          <ShieldCheck size={17} />
+                          <strong>Critique QA scorecard</strong>
+                          <Pill
+                            tone={draft.scorecard.passed ? "green" : "rose"}
                           >
-                            Save edits & recheck QA
-                          </button>
-                          <button
-                            className="primary"
-                            disabled={
-                              !!busy || dirty || !draft.scorecard.passed
-                            }
-                            onClick={() =>
-                              perform("approve", async () => {
-                                const r = await post(
-                                  "/cases/" + cid + "/decision",
-                                  {
-                                    action: "approve_send",
+                            {draft.scorecard.tone_score}% tone
+                          </Pill>
+                        </div>
+                        <ul>
+                          {[
+                            [
+                              draft.scorecard.zero_false_chases,
+                              "Zero received documents requested",
+                            ],
+                            [
+                              draft.scorecard.all_missing_consolidated,
+                              "All missing items in one email",
+                            ],
+                            [
+                              draft.scorecard.no_prohibited_claims,
+                              "No risk or authenticity claims",
+                            ],
+                            [
+                              draft.scorecard.tone_score >= 95 &&
+                                draft.scorecard.policy_compliant,
+                              "Tone & policy compliance ≥95%",
+                            ],
+                          ].map(([ok, text]) => (
+                            <li
+                              key={String(text)}
+                              className={ok ? "green-text" : "rose-text"}
+                            >
+                              {ok ? <Check size={13} /> : <span>×</span>}
+                              {text}
+                            </li>
+                          ))}
+                        </ul>
+                        {draft.scorecard.feedback.length > 0 && (
+                          <p className="rose-text">
+                            {draft.scorecard.feedback.join("; ")}
+                          </p>
+                        )}
+                        <small className="muted">
+                          {draft.scorecard.iterations} iteration(s) · Max 3
+                          rewrites
+                        </small>
+                      </div>
+                      <div className="review-gate">
+                        <div>
+                          <LockKeyhole size={18} />
+                          <strong>RM review gate</strong>
+                        </div>
+                        <p>
+                          Review this exact message before approving. Sends are
+                          recorded in the synthetic outbox.
+                        </p>
+                        <div className="actions">
+                          {canReview && draft.status === "REVIEW" && (
+                            <>
+                              <button
+                                className="secondary"
+                                disabled={!!busy || !dirty}
+                                onClick={() =>
+                                  perform("edit", () =>
+                                    put("/cases/" + cid + "/draft", {
+                                      subject,
+                                      body,
+                                    }),
+                                  )
+                                }
+                              >
+                                Save edits & recheck QA
+                              </button>
+                              <button
+                                className="primary"
+                                disabled={
+                                  !!busy || dirty || !draft.scorecard.passed
+                                }
+                                onClick={() =>
+                                  perform("approve", async () => {
+                                    const r = await post(
+                                      "/cases/" + cid + "/decision",
+                                      {
+                                        action: "approve_send",
+                                        draft_id: draft.id,
+                                      },
+                                    );
+                                    setMessage(r.message);
+                                  })
+                                }
+                              >
+                                <Send size={15} />
+                                Approve & Send
+                              </button>
+                            </>
+                          )}
+                          {canReview &&
+                            ["REVIEW", "BLOCKED"].includes(draft.status) && (
+                              <button
+                                className="danger ghost"
+                                disabled={!!busy}
+                                onClick={() => setShowDiscard(!showDiscard)}
+                                title="Discard draft"
+                              >
+                                <Trash2 size={16} />
+                              </button>
+                            )}
+                        </div>
+                        {showDiscard && (
+                          <div className="discard-form">
+                            <input
+                              placeholder="Reason for discarding (required)"
+                              value={reason}
+                              onChange={(e) => setReason(e.target.value)}
+                            />
+                            <button
+                              disabled={!!busy || !reason.trim()}
+                              className="danger"
+                              onClick={() =>
+                                perform("discard", async () => {
+                                  await post("/cases/" + cid + "/decision", {
+                                    action: "discard",
+                                    reason,
                                     draft_id: draft.id,
-                                  },
-                                );
-                                setMessage(r.message);
-                              })
-                            }
-                          >
-                            <Send size={15} />
-                            Approve & Send
-                          </button>
-                        </>
-                      )}
-                      {canReview &&
-                        ["REVIEW", "BLOCKED"].includes(draft.status) && (
+                                  });
+                                  setShowDiscard(false);
+                                })
+                              }
+                            >
+                              Confirm discard
+                            </button>
+                          </div>
+                        )}
+                        {canReview && draft.status === "REVIEW" && !dirty && (
                           <button
-                            className="danger ghost"
+                            className="text-button"
                             disabled={!!busy}
-                            onClick={() => setShowDiscard(!showDiscard)}
-                            title="Discard draft"
+                            onClick={async () => {
+                              try {
+                                const r = await post(
+                                  "/cases/" + cid + "/mcp-approval-token",
+                                );
+                                setApproval(r.approval_token);
+                              } catch (e) {
+                                setError((e as Error).message);
+                              }
+                            }}
                           >
-                            <Trash2 size={16} />
+                            Authorize exact draft for MCP · 2-minute token
                           </button>
                         )}
-                    </div>
-                    {showDiscard && (
-                      <div className="discard-form">
-                        <input
-                          placeholder="Reason for discarding (required)"
-                          value={reason}
-                          onChange={(e) => setReason(e.target.value)}
-                        />
-                        <button
-                          disabled={!!busy || !reason.trim()}
-                          className="danger"
-                          onClick={() =>
-                            perform("discard", async () => {
-                              await post("/cases/" + cid + "/decision", {
-                                action: "discard",
-                                reason,
-                                draft_id: draft.id,
-                              });
-                              setShowDiscard(false);
-                            })
-                          }
-                        >
-                          Confirm discard
-                        </button>
+                        {approval && (
+                          <div className="approval-token">
+                            <input
+                              aria-label="MCP approval token"
+                              readOnly
+                              value={approval}
+                            />
+                            <button
+                              className="icon-button"
+                              title="Copy approval token"
+                              onClick={() =>
+                                navigator.clipboard.writeText(approval)
+                              }
+                            >
+                              <Copy size={15} />
+                            </button>
+                          </div>
+                        )}
+                        {!canReview && (
+                          <p className="muted">
+                            An RM or admin must perform the review decision.
+                          </p>
+                        )}
                       </div>
-                    )}
-                    {canReview && draft.status === "REVIEW" && !dirty && (
-                      <button
-                        className="text-button"
-                        disabled={!!busy}
-                        onClick={async () => {
-                          try {
-                            const r = await post(
-                              "/cases/" + cid + "/mcp-approval-token",
-                            );
-                            setApproval(r.approval_token);
-                          } catch (e) {
-                            setError((e as Error).message);
-                          }
-                        }}
-                      >
-                        Authorize exact draft for MCP · 2-minute token
-                      </button>
-                    )}
-                    {approval && (
-                      <div className="approval-token">
-                        <input
-                          aria-label="MCP approval token"
-                          readOnly
-                          value={approval}
-                        />
-                        <button
-                          className="icon-button"
-                          title="Copy approval token"
-                          onClick={() =>
-                            navigator.clipboard.writeText(approval)
-                          }
-                        >
-                          <Copy size={15} />
-                        </button>
-                      </div>
-                    )}
-                    {!canReview && (
-                      <p className="muted">
-                        An RM or admin must perform the review decision.
-                      </p>
-                    )}
-                  </div>
-                  <button
-                    disabled={!!busy || !canGenerate}
-                    className="text-button regenerate"
-                    onClick={() =>
-                      perform("generate", () =>
-                        post("/cases/" + cid + "/generate"),
-                      )
-                    }
-                  >
-                    <Sparkles size={14} />
-                    {busy === "generate"
-                      ? "Agents are working…"
-                      : "Generate a fresh draft"}
-                  </button>
-                </>
-              )}
-            </section>
+                    </>
+                  )}
+                </section>
+              }
+            />
           </div>
           {busy && (
-            <div className="working">
+            <div className="task-toast">
               <span className="working-dot" />{" "}
               {busy === "generate"
-                ? "Running deterministic → orchestrator → drafter → toner → critique. Please keep this page open."
+                ? "Live run in progress. You can switch views or navigate away; progress will reconnect."
                 : "Recording action and checking safety gates…"}
             </div>
           )}

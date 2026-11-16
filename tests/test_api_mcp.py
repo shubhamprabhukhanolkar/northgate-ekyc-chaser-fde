@@ -25,7 +25,7 @@ def test_api_auth_roles_and_received_race():
         login = client.post("/api/auth/login", json={"email": "rm@northgate.demo", "password": "NorthgateDemo!2026"})
         assert login.status_code == 200
         assert "HttpOnly" in login.headers["set-cookie"]
-        assert len(client.get("/api/cases").json()) == 12
+        assert len(client.get("/api/cases").json()) == 42
         cid = "NG-2026-0841"
         assert client.post(f"/api/cases/{cid}/generate").status_code == 409
         assert client.get(f"/api/cases/{cid}").status_code == 200

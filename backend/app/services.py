@@ -36,7 +36,7 @@ def require_read(case_id, actor):
     return current
 
 
-async def generate(case_id, actor):
+async def generate(case_id, actor, instructions=""):
     async with case_locks.setdefault(case_id, asyncio.Lock()):
         before = require_read(case_id, actor)
         if not before["missing"]:
@@ -46,7 +46,7 @@ async def generate(case_id, actor):
             controls = json.loads(prompt("toner")["settings"])
             controls["urgency"] = "3-Day Nudge"
             overrides = {"toner": {"settings": controls}}
-        result = await run(case_id, overrides)
+        result = await run(case_id, overrides, instructions=instructions)
         draft = result["draft"]
         did = str(uuid.uuid4())
         with connect() as db:
@@ -59,7 +59,7 @@ async def generate(case_id, actor):
             db.execute("INSERT INTO drafts VALUES(?,?,?,?,?,?,?,?,?,?)", (did, case_id, draft.get("subject", ""), draft.get("body", ""),
                 json.dumps(draft.get("requested_document_ids", [])), json.dumps(result["scorecard"]), "REVIEW" if passed else "BLOCKED", before["revision"], now(), result["provider"]))
             db.execute("UPDATE cases SET status=? WHERE id=?", ("RM_REVIEW" if passed else "QA_BLOCKED", case_id))
-            audit(db, actor, "draft_generated", case_id, {"draft_id": did, "scorecard": result["scorecard"], "run_id": result["run_id"]})
+            audit(db, actor, "draft_generated", case_id, {"draft_id": did, "scorecard": result["scorecard"], "run_id": result["run_id"], "drafting_instructions": instructions})
         return get_draft(case_id)
 
 
