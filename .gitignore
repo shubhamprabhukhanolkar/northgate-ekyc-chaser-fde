@@ -12,3 +12,4 @@ frontend/dist/
 pytest-cache-files-*/
 artifacts/
 frontend/*.tsbuildinfo
+gha-creds-*.json

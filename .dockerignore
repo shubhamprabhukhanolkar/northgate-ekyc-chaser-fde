@@ -16,3 +16,4 @@ tests
 .runtime-env.yml
 artifacts
 pytest-cache-files-*
+gha-creds-*.json

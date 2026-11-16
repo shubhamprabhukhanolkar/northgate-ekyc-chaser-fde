@@ -39,13 +39,21 @@ def test_api_auth_roles_and_received_race():
         assert decision["transport"] == "synthetic_outbox"
 
 
-def test_mcp_bearer_required():
+def test_mcp_bearer_required(monkeypatch):
+    security = mcp.settings.transport_security
+    monkeypatch.setattr(security, "allowed_hosts", security.allowed_hosts+["northgate.example.run.app"])
     with TestClient(app) as client:
         assert client.post("/mcp/", json={}).status_code == 401
         response = client.post("/mcp/", headers={"Authorization": "Bearer test-mcp-key", "Accept": "application/json, text/event-stream"},
                                json={"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2025-03-26", "capabilities": {}, "clientInfo": {"name": "pytest", "version": "1"}}})
         assert response.status_code == 200, response.text
         assert response.json()["result"]["serverInfo"]["name"] == "Northgate eKYC"
+        payload = {"jsonrpc": "2.0", "id": 2, "method": "tools/list", "params": {}}
+        headers = {"Authorization": "Bearer test-mcp-key", "Accept": "application/json, text/event-stream", "Host": "northgate.example.run.app"}
+        hosted = client.post("/mcp/", headers=headers, json=payload)
+        assert hosted.status_code == 200, hosted.text
+        headers["Host"] = "untrusted.example.run.app"
+        assert client.post("/mcp/", headers=headers, json=payload).status_code == 421
 
 
 async def test_mcp_tools_validate_schemas_and_results():

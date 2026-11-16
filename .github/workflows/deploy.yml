@@ -75,9 +75,16 @@ jobs:
           GROQ_MODEL: ${{ vars.GROQ_MODEL }}
         run: |
           python - <<'PY'
-          import os, json
+          import os, json, subprocess
+          from urllib.parse import urlsplit
+          existing = subprocess.run(['gcloud','run','services','describe',os.environ['SERVICE_NAME'],
+              '--region=asia-south1','--project='+os.environ['PROJECT_ID'],'--format=value(status.url)'], capture_output=True, text=True)
+          number = subprocess.check_output(['gcloud','projects','describe',os.environ['PROJECT_ID'],'--format=value(projectNumber)'], text=True).strip()
+          hosts = [os.environ['SERVICE_NAME']+'-'+number+'.asia-south1.run.app']
+          if existing.returncode == 0 and existing.stdout.strip(): hosts.append(urlsplit(existing.stdout.strip()).netloc)
           values = {"APP_ENV":"local", "DATABASE_PATH":"/app/data/northgate.db",
               "STATIC_DIR":"/app/static", "SECURE_COOKIES":"true", "OFFLINE_DEMO":"false",
+              "MCP_ALLOWED_HOSTS":','.join(hosts),
               "GEMINI_MODEL_NAME":os.environ["GEMINI_MODEL_NAME"], "GROQ_MODEL":os.environ.get("GROQ_MODEL") or "llama-3.3-70b-versatile"}
           with open('.runtime-env.yml','w') as f: json.dump(values,f)
           PY

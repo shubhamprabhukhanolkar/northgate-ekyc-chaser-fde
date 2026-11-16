@@ -23,7 +23,8 @@ async def lifespan(server):
 mcp = FastMCP("Northgate eKYC", instructions="Synthetic banking prototype. Read the case checklist before writes. Drafts never auto-send. Approvals require an RM-issued short-lived token; direct agents cannot authorize sends.",
     lifespan=lifespan, stateless_http=True, json_response=True, streamable_http_path="/",
     transport_security=TransportSecuritySettings(enable_dns_rebinding_protection=True,
-        allowed_hosts=["localhost:*", "127.0.0.1:*", "testserver", "*.run.app"], allowed_origins=["http://localhost:*", "http://127.0.0.1:*", "https://*.run.app"]))
+        allowed_hosts=["localhost", "localhost:*", "127.0.0.1", "127.0.0.1:*", "testserver"] + [h.strip() for h in settings().mcp_allowed_hosts.split(",") if h.strip()],
+        allowed_origins=["http://localhost", "http://localhost:*", "http://127.0.0.1", "http://127.0.0.1:*"] + ["https://"+h.strip() for h in settings().mcp_allowed_hosts.split(",") if h.strip()]))
 MCP_ACTOR = "mcp:integration"
 
 

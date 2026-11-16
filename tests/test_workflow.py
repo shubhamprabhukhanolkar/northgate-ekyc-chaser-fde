@@ -42,6 +42,29 @@ async def test_critique_loops_a_deliberately_flawed_draft(monkeypatch):
     assert len(rows("SELECT * FROM traces WHERE node='critique'")) == 2
 
 
+async def test_toner_receives_actionable_feedback_on_rewrite(monkeypatch):
+    from app.agents import common
+    original = common.router.call
+    critiques = 0
+    toner_feedback = []
+
+    async def injected(agent, system, payload, case_id=None, fixture=None):
+        nonlocal critiques
+        if agent == "critique":
+            critiques += 1
+            if critiques == 1:
+                fixture = {"tone_score": 90, "policy_compliant": True, "feedback": ["Replace the terse request with a courteous offer to help."]}
+        if agent == "toner":
+            toner_feedback.append(payload["critique_feedback"])
+        return await original(agent, system, payload, case_id, fixture)
+
+    monkeypatch.setattr(common.router, "call", injected)
+    result = await run(CID)
+    assert result["attempts"] == 2 and result["scorecard"]["passed"]
+    assert not toner_feedback[0]
+    assert "Replace the terse request with a courteous offer to help." in toner_feedback[1]
+
+
 async def test_persistent_failure_never_unlocks_review(monkeypatch):
     from app.agents import common
     original = common.router.call

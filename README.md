@@ -45,6 +45,8 @@ The verified deployed primary is `GEMINI_MODEL_NAME=gemini-3.5-flash-lite`; `GEM
 
 The remote server uses **Streamable HTTP**, supporting JSON/SSE content negotiation. The canonical URL ends in `/mcp/`; `/mcp` redirects there. This is not the legacy standalone SSE transport. MCP clients must support Streamable HTTP and custom Bearer headers. [Gemini CLI's official MCP guide](https://geminicli.com/docs/tools/mcp-server/) documents these configurations; Gemini Enterprise availability and credential setup depend on the host's connector support, so this is not an assertion that every Gemini surface accepts arbitrary custom-header MCP servers.
 
+`MCP_ALLOWED_HOSTS` is a comma-separated explicit hostname allowlist for DNS-rebinding protection (no scheme or path). The deployment workflow includes the existing Cloud Run URL and the regional project-number URL. Add any custom host before connecting through it; the SDK supports wildcard ports, not wildcard domain names.
+
 Local Gemini CLI `.gemini/settings.json` (replace the absolute checkout path):
 
 ```json
