@@ -3014,6 +3014,12 @@ textarea {
   min-height: 270px;
   overflow: hidden;
 }
+/* Generated editors can outgrow the other face. Do not let their composited
+   contents paint through the back of the card, even outside the active face. */
+.workflow-face[aria-hidden="true"] {
+  visibility: hidden;
+  pointer-events: none;
+}
 .graph-face {
   transform: rotateY(180deg);
   padding: 10px 10px 15px;
