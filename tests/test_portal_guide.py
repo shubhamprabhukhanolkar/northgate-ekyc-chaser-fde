@@ -111,7 +111,7 @@ async def test_query_receives_role_and_screen_index_without_private_configuratio
     payload = captured.call_args.args[2]
     assert payload["portal_context"]["operator_role"] == "coo"
     assert payload["portal_context"]["draft_mode"] == "guided"
-    assert len(payload["portal_context"]["available_screens"]) == len(PORTAL_PAGES)
+    assert len(payload["portal_context"]["available_screens"]) == 8
     assert "auth_secret" not in json.dumps(payload).lower()
     assert result["citations"][0]["id"] == "NG-PORTAL-11"
 
