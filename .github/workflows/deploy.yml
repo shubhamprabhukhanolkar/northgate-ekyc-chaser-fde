@@ -73,6 +73,7 @@ jobs:
         env:
           GEMINI_MODEL_NAME: ${{ vars.GEMINI_MODEL_NAME }}
           GROQ_MODEL: ${{ vars.GROQ_MODEL }}
+          PUBLIC_BASE_URL: ${{ vars.PUBLIC_BASE_URL }}
         run: |
           python - <<'PY'
           import os, json, subprocess
@@ -82,10 +83,15 @@ jobs:
           number = subprocess.check_output(['gcloud','projects','describe',os.environ['PROJECT_ID'],'--format=value(projectNumber)'], text=True).strip()
           hosts = [os.environ['SERVICE_NAME']+'-'+number+'.asia-south1.run.app']
           if existing.returncode == 0 and existing.stdout.strip(): hosts.append(urlsplit(existing.stdout.strip()).netloc)
+          canonical = os.environ.get('PUBLIC_BASE_URL', '').strip().rstrip('/') or (existing.stdout.strip().rstrip('/') if existing.returncode == 0 and existing.stdout.strip() else 'https://'+hosts[0])
+          parsed = urlsplit(canonical)
+          if parsed.scheme != 'https' or not parsed.hostname or parsed.path or parsed.query or parsed.fragment or parsed.username or parsed.password:
+              raise ValueError('PUBLIC_BASE_URL must be the public HTTPS portal origin')
+          if parsed.netloc not in hosts: hosts.append(parsed.netloc)
           values = {"APP_ENV":"local", "DATABASE_PATH":"/app/data/northgate.db",
               "STATIC_DIR":"/app/static", "SECURE_COOKIES":"true", "OFFLINE_DEMO":"false",
               "MCP_ALLOWED_HOSTS":','.join(hosts),
-              "PUBLIC_BASE_URL":existing.stdout.strip().rstrip('/') if existing.returncode == 0 and existing.stdout.strip() else 'https://'+hosts[0],
+              "PUBLIC_BASE_URL":canonical,
               "GEMINI_MODEL_NAME":os.environ["GEMINI_MODEL_NAME"], "GROQ_MODEL":os.environ.get("GROQ_MODEL") or "llama-3.3-70b-versatile"}
           with open('.runtime-env.yml','w') as f: json.dump(values,f)
           PY
