@@ -8,6 +8,7 @@ import {
   ChartNoAxesCombined,
   Bot,
   Link2,
+  Landmark,
   LogOut,
   ShieldCheck,
   Globe,
@@ -26,6 +27,7 @@ const links = [
   ["/trace", "Agent Trace", Workflow],
   ["/studio", "Toner Studio", SlidersHorizontal],
   ["/finops", "FinOps & Impact", ChartNoAxesCombined],
+  ["/executive", "Executive Dashboard", Landmark],
   ["/policy", "Portal Guide", Bot],
   ["/connections", "Connected Apps", Link2],
 ] as const;

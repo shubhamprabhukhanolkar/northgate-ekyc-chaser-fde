@@ -21,6 +21,7 @@ import TonerStudioPage from "./pages/TonerStudioPage";
 import FinOpsDashboardPage from "./pages/FinOpsDashboardPage";
 import PortalGuidePage from "./pages/PortalGuidePage";
 import ConnectionsPage from "./pages/ConnectionsPage";
+import ExecutiveDashboardPage from "./pages/ExecutiveDashboardPage";
 import { Loading } from "./components/UI";
 import "./styles.css";
 function App() {
@@ -40,6 +41,7 @@ function App() {
         <Route path="finops" element={<FinOpsDashboardPage />} />
         <Route path="policy" element={<PortalGuidePage />} />
         <Route path="connections" element={<ConnectionsPage />} />
+        <Route path="executive" element={<ExecutiveDashboardPage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Route>
     </Routes>
