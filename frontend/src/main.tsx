@@ -20,6 +20,7 @@ import AgentTracePage from "./pages/TracePage";
 import TonerStudioPage from "./pages/TonerStudioPage";
 import FinOpsDashboardPage from "./pages/FinOpsDashboardPage";
 import PortalGuidePage from "./pages/PortalGuidePage";
+import ConnectionsPage from "./pages/ConnectionsPage";
 import { Loading } from "./components/UI";
 import "./styles.css";
 function App() {
@@ -38,6 +39,7 @@ function App() {
         <Route path="studio" element={<TonerStudioPage />} />
         <Route path="finops" element={<FinOpsDashboardPage />} />
         <Route path="policy" element={<PortalGuidePage />} />
+        <Route path="connections" element={<ConnectionsPage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Route>
     </Routes>

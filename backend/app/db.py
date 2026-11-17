@@ -89,6 +89,18 @@ def initialize():
         CREATE INDEX IF NOT EXISTS workflow_event_cursor ON workflow_events(run_id,id);
         CREATE TABLE IF NOT EXISTS workflow_requests(run_id TEXT PRIMARY KEY REFERENCES workflow_runs(id),
           mode TEXT, instructions TEXT);
+        CREATE TABLE IF NOT EXISTS mcp_clients(id TEXT PRIMARY KEY, name TEXT NOT NULL, redirects TEXT NOT NULL,
+          created_at TEXT NOT NULL);
+        CREATE TABLE IF NOT EXISTS mcp_authorizations(id TEXT PRIMARY KEY, client_id TEXT NOT NULL REFERENCES mcp_clients(id),
+          redirect_uri TEXT NOT NULL, challenge TEXT NOT NULL, state TEXT NOT NULL, resource TEXT NOT NULL,
+          csrf_hash TEXT NOT NULL, expires_at REAL NOT NULL);
+        CREATE TABLE IF NOT EXISTS mcp_codes(hash TEXT PRIMARY KEY, client_id TEXT NOT NULL, email TEXT NOT NULL REFERENCES users(email),
+          redirect_uri TEXT NOT NULL, challenge TEXT NOT NULL, resource TEXT NOT NULL, expires_at REAL NOT NULL);
+        CREATE TABLE IF NOT EXISTS mcp_grants(id TEXT PRIMARY KEY, client_id TEXT NOT NULL REFERENCES mcp_clients(id),
+          email TEXT NOT NULL REFERENCES users(email), resource TEXT NOT NULL, created_at TEXT NOT NULL,
+          expires_at REAL NOT NULL, revoked INTEGER NOT NULL DEFAULT 0);
+        CREATE TABLE IF NOT EXISTS mcp_tokens(hash TEXT PRIMARY KEY, grant_id TEXT NOT NULL REFERENCES mcp_grants(id),
+          kind TEXT NOT NULL, expires_at REAL NOT NULL);
         ''')
         for role, name in [("rm", "Marcus Sterling"), ("analyst", "Priya Chen"), ("coo", "Alex Morgan"), ("admin", "Sam Taylor")]:
             if not db.execute("SELECT 1 FROM users WHERE email=?", (f"{role}@northgate.demo",)).fetchone():

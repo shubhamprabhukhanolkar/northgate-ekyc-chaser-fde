@@ -7,6 +7,7 @@ import {
   SlidersHorizontal,
   ChartNoAxesCombined,
   Bot,
+  Link2,
   LogOut,
   ShieldCheck,
   Globe,
@@ -26,6 +27,7 @@ const links = [
   ["/studio", "Toner Studio", SlidersHorizontal],
   ["/finops", "FinOps & Impact", ChartNoAxesCombined],
   ["/policy", "Portal Guide", Bot],
+  ["/connections", "Connected Apps", Link2],
 ] as const;
 export default function Layout() {
   const { user, logout } = useAuth();

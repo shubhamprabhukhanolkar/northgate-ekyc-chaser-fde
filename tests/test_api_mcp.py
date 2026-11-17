@@ -54,6 +54,8 @@ def test_mcp_bearer_required(monkeypatch):
         assert hosted.status_code == 200, hosted.text
         headers["Host"] = "untrusted.example.run.app"
         assert client.post("/mcp/", headers=headers, json=payload).status_code == 421
+        from test_mcp_readonly import assert_readonly_http
+        assert_readonly_http(client)
 
 
 async def test_mcp_tools_validate_schemas_and_results():

@@ -9,7 +9,7 @@ password_hash = hasher.hash
 
 
 def token_for(user):
-    return jwt.encode({"sub": user["email"], "exp": datetime.now(timezone.utc)+timedelta(hours=8)}, settings().auth_secret, algorithm="HS256")
+    return jwt.encode({"sub": user["email"], "purpose": "session", "exp": datetime.now(timezone.utc)+timedelta(hours=8)}, settings().auth_secret, algorithm="HS256")
 
 
 def current_user(request: Request):
@@ -17,6 +17,8 @@ def current_user(request: Request):
     token = request.cookies.get("northgate_session") or request.headers.get("authorization", "").removeprefix("Bearer ")
     try:
         claim = jwt.decode(token, settings().auth_secret, algorithms=["HS256"])
+        if claim.get("purpose") not in (None, "session"):
+            raise ValueError()
         found = rows("SELECT email,name,role FROM users WHERE email=?", (claim["sub"],))
         if not found:
             raise ValueError()

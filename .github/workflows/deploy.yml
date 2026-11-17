@@ -85,6 +85,7 @@ jobs:
           values = {"APP_ENV":"local", "DATABASE_PATH":"/app/data/northgate.db",
               "STATIC_DIR":"/app/static", "SECURE_COOKIES":"true", "OFFLINE_DEMO":"false",
               "MCP_ALLOWED_HOSTS":','.join(hosts),
+              "PUBLIC_BASE_URL":existing.stdout.strip().rstrip('/') if existing.returncode == 0 and existing.stdout.strip() else 'https://'+hosts[0],
               "GEMINI_MODEL_NAME":os.environ["GEMINI_MODEL_NAME"], "GROQ_MODEL":os.environ.get("GROQ_MODEL") or "llama-3.3-70b-versatile"}
           with open('.runtime-env.yml','w') as f: json.dump(values,f)
           PY
@@ -119,6 +120,14 @@ jobs:
           url=os.environ['SERVICE_URL']
           for path in ['/api/health','/']:
               with urllib.request.urlopen(url+path, timeout=60) as r: assert r.status==200
+          with urllib.request.urlopen(url+'/.well-known/oauth-authorization-server', timeout=60) as r:
+              oauth=json.load(r)
+              assert oauth['code_challenge_methods_supported']==['S256']
+              assert oauth['scopes_supported']==['northgate:read']
+          with urllib.request.urlopen(url+'/.well-known/oauth-protected-resource/mcp-readonly', timeout=60) as r:
+              resource=json.load(r)
+              assert resource['resource'].endswith('/mcp-readonly/')
+              assert resource['authorization_servers']==[oauth['issuer']]
           payload={"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-03-26","capabilities":{},"clientInfo":{"name":"deployment-check","version":"1"}}}
           req=urllib.request.Request(url+'/mcp/', data=json.dumps(payload).encode(), headers={'Authorization':'Bearer '+os.environ['MCP_API_KEY'],'Accept':'application/json, text/event-stream','Content-Type':'application/json'})
           with urllib.request.urlopen(req, timeout=60) as r: assert json.load(r)['result']['serverInfo']['name']=='Northgate eKYC'

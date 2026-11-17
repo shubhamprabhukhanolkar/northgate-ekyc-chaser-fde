@@ -5330,3 +5330,19 @@ textarea {
     transition: none !important;
   }
 }
+/* Account-scoped read-only chat connections. */
+.connections-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 24px; margin-top: 24px; }
+.connections-panel { padding: 28px; min-width: 0; }
+.connections-panel p, .connections-panel li { line-height: 1.7; }
+.connections-panel ol { list-style: decimal; padding-left: 22px; }
+.connections-panel h3 { margin-top: 26px; }
+.connections-title { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.connections-title h2 { font-size: 20px; margin: 0; }
+.connections-endpoint { display: flex; align-items: center; gap: 10px; border: 1px solid var(--border); border-radius: 12px; padding: 12px; }
+.connections-endpoint code { overflow-wrap: anywhere; flex: 1; font-size: 13px; }
+.connections-note { font-size: 13px; color: var(--muted); }
+.connections-notice { padding: 14px; border: 1px solid var(--border); border-radius: 10px; }
+.connections-list { list-style: none; padding: 0; }
+.connections-list li { padding: 18px 0; border-bottom: 1px solid var(--border); display: flex; gap: 16px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.connections-list small { display: block; font-size: 12px; margin-top: 5px; }
+@media (max-width: 1000px) { .connections-grid { grid-template-columns: 1fr; } }

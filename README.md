@@ -59,6 +59,20 @@ The verified deployed primary is `GEMINI_MODEL_NAME=gemini-3.5-flash-lite`; `GEM
 
 ## Gemini / MCP connection guide
 
+### Personal read-only connections
+
+The local implementation now has a separate `/mcp-readonly/` Streamable HTTP endpoint with user-delegated OAuth authorization-code access and mandatory S256 PKCE. It is separate from the shared-key `/mcp/` integration described below. Deploy and test the new endpoint before giving its URL to end users; these changes do not update an already-running Cloud Run revision.
+
+Signed-in users open **Connected Apps** in the portal to copy the endpoint and manage their connections. A compatible client discovers `/.well-known/oauth-protected-resource/mcp-readonly` and `/.well-known/oauth-authorization-server`, registers a public PKCE client at `/oauth/register`, and starts `/oauth/authorize`. The user explicitly allows read-only access, signing in if needed. `/oauth/token` issues one-hour opaque access tokens and rotating refresh tokens, with a maximum connection lifetime of 30 days. Token/code values are stored only as SHA-256 hashes. Disconnecting from the portal or calling `/oauth/revoke` invalidates the grant and its access/refresh tokens. Reads are audited with the operator's email.
+
+Only three tools are registered: `list_onboarding_cases`, `get_case_gap_checklist`, and `get_case_draft`. No generation, edits, approvals, discards, sending, system settings or FinOps tools are exposed. These credentials are rejected by `/mcp/` and the web API. Conversely, portal session tokens and the shared `MCP_API_KEY` do not authorize `/mcp-readonly/`. Reading a checklist through this endpoint does not create a write-enabling read receipt. The prototype has a shared case queue: read-only users see the same cases they can see in the portal, without individual case assignments.
+
+For deployment set `PUBLIC_BASE_URL` to the canonical public HTTPS portal origin (no trailing path), and include its hostname in `MCP_ALLOWED_HOSTS`. Local testing uses `http://localhost:8080/mcp-readonly/`. The public origin can otherwise be derived only from explicit allowed hosts or loopback hosts. Use persistent database storage before relying on long-lived connections: the current Cloud Run lab stores SQLite on ephemeral instance storage, so grants can disappear on replacement and cannot be shared across instances reliably.
+
+For eligible personal Gemini accounts, Google's documented flow is **Settings > Connected Apps > Add a custom app**, paste the public `/mcp-readonly/` URL, follow the Northgate sign-in/consent flow, then select Northgate with `@` in chat. Google's current eligibility is US users aged 18+, English, with Keep Activity enabled; availability is controlled by Google. See [Gemini custom app instructions](https://support.google.com/gemini/answer/17209137?hl=en) and [Google's OAuth account-linking guide](https://developers.google.com/connected-apps/mcp/oauth). We test the server's OAuth and MCP flows locally; a successful personal Gemini connection still requires verification in an eligible real Gemini account after deployment.
+
+### Existing shared-key integration
+
 The remote server uses **Streamable HTTP**, supporting JSON/SSE content negotiation. The canonical URL ends in `/mcp/`; `/mcp` redirects there. This is not the legacy standalone SSE transport. MCP clients must support Streamable HTTP and custom Bearer headers. [Gemini CLI's official MCP guide](https://geminicli.com/docs/tools/mcp-server/) documents these configurations; Gemini Enterprise availability and credential setup depend on the host's connector support, so this is not an assertion that every Gemini surface accepts arbitrary custom-header MCP servers.
 
 `MCP_ALLOWED_HOSTS` is a comma-separated explicit hostname allowlist for DNS-rebinding protection (no scheme or path). The deployment workflow includes the existing Cloud Run URL and the regional project-number URL. Add any custom host before connecting through it; the SDK supports wildcard ports, not wildcard domain names.

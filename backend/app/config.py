@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     auth_secret: str = ""
     mcp_api_key: str = ""
     mcp_allowed_hosts: str = ""
+    public_base_url: str = ""
     gemini_api_key: str = ""
     groq_api_key: str = ""
     gemini_model: str = Field(default="gemini-2.5-flash-lite", validation_alias=AliasChoices("GEMINI_MODEL_NAME", "GEMINI_MODEL"))
