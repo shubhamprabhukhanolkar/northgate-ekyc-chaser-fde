@@ -13,9 +13,13 @@ import {
   ShieldCheck,
   Sparkles,
   X,
+  Clock3,
+  Link2,
+  SlidersHorizontal,
 } from "lucide-react";
 import { api } from "../api";
 import { ErrorBox } from "../components/UI";
+import { useDrafting } from "../context/DraftingContext";
 
 type Message = {
   id: string;
@@ -23,36 +27,16 @@ type Message = {
   answer: string;
   citations?: { id: string; title: string; text: string }[];
 };
-const suggestions = [
-  {
-    question:
-      "How do I use Guided draft and add drafting instructions in this portal?",
-    label: "Create your first draft",
-    detail: "Choose a mode, add guidance and get started.",
-    Icon: MessageCircle,
-  },
-  {
-    question: "How can I find a case, filter the queue and move between pages?",
-    label: "Find your way around cases",
-    detail: "Search, filter and browse the case queue.",
-    Icon: FileText,
-  },
-  {
-    question: "How do I follow the AI workflow and inspect all agent traces?",
-    label: "Follow your AI team",
-    detail: "Understand the workflow and Agent Trace.",
-    Icon: BookOpen,
-  },
-  {
-    question: "How do I edit, review and approve a draft in the portal?",
-    label: "Review with confidence",
-    detail: "Edit a message and complete your review.",
-    Icon: ShieldCheck,
-  },
-];
+const topicIcons = { cases: FileText, draft: MessageCircle, review: ShieldCheck,
+  followup: Clock3, connect: Link2, settings: SlidersHorizontal };
+type Suggestion = { id: string; question: string; label: string; detail: string; icon: keyof typeof topicIcons };
 
 export default function PortalGuidePage() {
   const navigate = useNavigate();
+  const { mode } = useDrafting();
+  const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
+  const [topicsLoading, setTopicsLoading] = useState(true);
+  const [topicsError, setTopicsError] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [question, setQuestion] = useState("");
   const [busy, setBusy] = useState(false);
@@ -62,6 +46,15 @@ export default function PortalGuidePage() {
   const requestVersion = useRef(0);
   const input = useRef<HTMLInputElement>(null);
   const end = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    api<{ suggestions: Suggestion[] }>("/policy/help", { signal: controller.signal })
+      .then((data) => { if (!controller.signal.aborted) setSuggestions(data.suggestions); })
+      .catch(() => { if (!controller.signal.aborted) setTopicsError("Starting questions are unavailable. You can still ask your own question below."); })
+      .finally(() => { if (!controller.signal.aborted) setTopicsLoading(false); });
+    return () => controller.abort();
+  }, []);
 
   useEffect(
     () => () => {
@@ -100,6 +93,7 @@ export default function PortalGuidePage() {
         method: "POST",
         body: JSON.stringify({
           question: text,
+          draft_mode: mode,
           history: messages.slice(-6).map((message) => ({
             role: message.role,
             content: message.answer.slice(0, 3000),
@@ -209,11 +203,16 @@ export default function PortalGuidePage() {
                 <br />
                 Choose a starting point, or ask in your own words.
               </p>
+              {topicsLoading && <p role="status">Loading starting questions…</p>}
+              {topicsError && <p role="status">{topicsError}</p>}
               <div className="portal-suggestions">
-                {suggestions.map(({ question, label, detail, Icon }, index) => (
+                {suggestions.map(({ id, question, label, detail, icon }, index) => {
+                  const Icon = topicIcons[icon] || HelpCircle;
+                  return (
                   <button
                     type="button"
-                    key={label}
+                    key={id}
+                    title={question}
                     onClick={() => void ask(question)}
                     style={{ animationDelay: `${index * 50}ms` }}
                   >
@@ -226,7 +225,7 @@ export default function PortalGuidePage() {
                     </span>
                     <ArrowUpRight size={16} />
                   </button>
-                ))}
+                ); })}
               </div>
               <div className="portal-shortcuts">
                 <span>Or jump straight to</span>

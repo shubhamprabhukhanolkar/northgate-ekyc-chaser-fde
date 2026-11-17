@@ -59,6 +59,8 @@ The verified deployed primary is `GEMINI_MODEL_NAME=gemini-3.5-flash-lite`; `GEM
 
 ## Gemini / MCP connection guide
 
+Portal Guide's operational knowledge and six starting questions are maintained together in `backend/app/agents/portal_help.py`. Update this catalog when changing screens, control labels, defaults, permissions or workflows. The welcome cards load from the authenticated `/api/policy/help` endpoint, so their questions match the backend knowledge. Guide requests include the authenticated operator role and current browser drafting preference; they do not grant the guide action tools or live-case lookup. Coverage tests compare the help index with every navigation screen and exercise operational questions, follow-ups and unsupported requests.
+
 ### Personal read-only connections
 
 The local implementation now has a separate `/mcp-readonly/` Streamable HTTP endpoint with user-delegated OAuth authorization-code access and mandatory S256 PKCE. It is separate from the shared-key `/mcp/` integration described below. Deploy and test the new endpoint before giving its URL to end users; these changes do not update an already-running Cloud Run revision.
