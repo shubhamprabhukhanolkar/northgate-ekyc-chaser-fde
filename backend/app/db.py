@@ -102,7 +102,7 @@ def initialize():
         CREATE TABLE IF NOT EXISTS mcp_tokens(hash TEXT PRIMARY KEY, grant_id TEXT NOT NULL REFERENCES mcp_grants(id),
           kind TEXT NOT NULL, expires_at REAL NOT NULL);
         ''')
-        for role, name in [("rm", "Marcus Sterling"), ("analyst", "Priya Chen"), ("coo", "Alex Morgan"), ("admin", "Sam Taylor"), ("cfo", "Eleanor Brooks")]:
+        for role, name in [("rm", "Marcus Sterling"), ("analyst", "Priya Chen"), ("coo", "Alex Morgan"), ("admin", "Sam Taylor"), ("cfo", "Eleanor Brooks"), ("cro", "David Mercer")]:
             if not db.execute("SELECT 1 FROM users WHERE email=?", (f"{role}@northgate.demo",)).fetchone():
                 db.execute("INSERT INTO users VALUES(?,?,?,?)", (f"{role}@northgate.demo", name, role, password_hash(settings().default_operator_password)))
         for agent, content in PROMPTS.items():

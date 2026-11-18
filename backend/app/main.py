@@ -18,6 +18,7 @@ from .llm.router import ProviderUnavailable
 from .routes import auth_routes, cases_routes, prompts_routes, finops_routes, copilot_routes, live_routes
 from . import live
 from .routes import cfo_routes
+from .routes import cro_routes
 
 logging.basicConfig(level=logging.INFO, format='%(message)s')
 mcp_app = mcp.streamable_http_app()
@@ -82,7 +83,7 @@ async def oauth_error(request, exc):
                         headers={"Cache-Control": "no-store", "Pragma": "no-cache"})
 
 
-for router in (auth_routes.router, cases_routes.router, prompts_routes.router, finops_routes.router, copilot_routes.router, live_routes.router, oauth.router, cfo_routes.router):
+for router in (auth_routes.router, cases_routes.router, prompts_routes.router, finops_routes.router, copilot_routes.router, live_routes.router, oauth.router, cfo_routes.router, cro_routes.router):
     app.include_router(router)
 
 

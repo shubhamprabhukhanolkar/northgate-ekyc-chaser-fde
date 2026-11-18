@@ -22,6 +22,7 @@ import FinOpsDashboardPage from "./pages/FinOpsDashboardPage";
 import PortalGuidePage from "./pages/PortalGuidePage";
 import ConnectionsPage from "./pages/ConnectionsPage";
 import CfoDashboardPage from "./pages/CfoDashboardPage";
+import CroDashboardPage from "./pages/CroDashboardPage";
 import { Loading } from "./components/UI";
 import "./styles.css";
 function App() {
@@ -30,6 +31,7 @@ function App() {
   if (loading) return <Loading />;
   if (!user) return <LoginPage />;
   if (user.role === "cfo" && location.pathname !== "/cfo") return <Navigate to="/cfo" replace />;
+  if (user.role === "cro" && location.pathname !== "/cro") return <Navigate to="/cro" replace />;
   if (location.pathname === "/login") return <Navigate to="/" />;
   return (
     <Routes>
@@ -43,6 +45,7 @@ function App() {
         <Route path="policy" element={<PortalGuidePage />} />
         <Route path="connections" element={<ConnectionsPage />} />
         <Route path="cfo" element={["cfo", "admin"].includes(user.role) ? <CfoDashboardPage /> : <Navigate to="/" replace />} />
+        <Route path="cro" element={["cro", "admin"].includes(user.role) ? <CroDashboardPage /> : <Navigate to="/" replace />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Route>
     </Routes>

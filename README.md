@@ -57,6 +57,10 @@ Default pricing estimates per million tokens are Gemini $0.10/$0.40 and Groq $0.
 
 The verified deployed primary is `GEMINI_MODEL_NAME=gemini-3.5-flash-lite`; `GEMINI_MODEL` remains a compatible fallback variable. The configured backup is `GROQ_MODEL=openai/gpt-oss-120b`, approved because the supplied key cannot access `llama-3.3-70b-versatile`. Both provider connections were verified. Update the pricing overrides to your chosen backup's rates. Provider availability depends on the key's accessible models.
 
+## CRO risk and governance workspace
+
+The separate **CRO** demo login (`cro@northgate.demo`, configured operator password) opens `/cro` for read-only governance oversight. It reports existing QA, sign-off, drift, exception, prompt-control and sanitized audit evidence without invoking agents. Empty evidence is not treated as compliance; the local threshold changes no services. See [CRO governance methodology](design/CRO_GOVERNANCE_REPORT.md). Admins can inspect both executive dashboards; CFO and CRO accounts remain separately scoped.
+
 ## CFO financial workspace
 
 Choose **CFO** on the demo login (`cfo@northgate.demo`, configured operator password) to open `/cfo`. This is a separate read-only finance role; admins can inspect it too. The dashboard reads existing telemetry, provides dated cost and unit-economics reports, and includes a clearly labelled resource/savings planner. It invokes no AI agents. Recorded token-price estimates, current inventory and planning assumptions remain distinct. See [workflow analysis and financial methodology](design/CFO_FINANCIAL_MODEL.md) for sources, formulas, permissions and data limits.

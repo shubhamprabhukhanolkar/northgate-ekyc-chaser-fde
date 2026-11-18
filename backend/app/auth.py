@@ -24,6 +24,8 @@ def current_user(request: Request):
             raise ValueError()
         if found[0]["role"] == "cfo" and request.url.path not in ("/api/auth/me", "/api/auth/logout", "/api/runtime", "/api/cfo/summary"):
             raise HTTPException(403, "The CFO account has read-only financial access")
+        if found[0]["role"] == "cro" and request.url.path not in ("/api/auth/me", "/api/auth/logout", "/api/runtime", "/api/cro/summary"):
+            raise HTTPException(403, "The CRO account has read-only risk oversight access")
         return found[0]
     except (jwt.PyJWTError, ValueError, KeyError):
         raise HTTPException(401, "Please sign in")
