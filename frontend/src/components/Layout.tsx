@@ -8,6 +8,7 @@ import {
   ChartNoAxesCombined,
   Bot,
   Link2,
+  Landmark,
   LogOut,
   ShieldCheck,
   Globe,
@@ -26,6 +27,7 @@ const links = [
   ["/trace", "Agent Trace", Workflow],
   ["/studio", "Toner Studio", SlidersHorizontal],
   ["/finops", "FinOps & Impact", ChartNoAxesCombined],
+  ["/cfo", "CFO Dashboard", Landmark],
   ["/policy", "Portal Guide", Bot],
   ["/connections", "Connected Apps", Link2],
 ] as const;
@@ -33,6 +35,8 @@ export default function Layout() {
   const { user, logout } = useAuth();
   const location = useLocation();
   const [menu, setMenu] = useState(false);
+  const finance = user?.role === "cfo";
+  const visibleLinks = links.filter(([path]) => finance ? path === "/cfo" : path !== "/cfo" || user?.role === "admin");
   const { data: runtime } = usePoll(() => api("/runtime"));
   return (
     <div className={"shell " + (menu ? "menu-open" : "")}>
@@ -49,9 +53,9 @@ export default function Layout() {
           </div>
           <Pill>01</Pill>
         </a>
-        <div className="nav-label">OPERATOR WORKSPACE</div>
+        <div className="nav-label">{finance ? "FINANCE WORKSPACE" : "OPERATOR WORKSPACE"}</div>
         <nav>
-          {links.map(([path, text, Icon]) => (
+          {visibleLinks.map(([path, text, Icon]) => (
             <NavLink
               key={path}
               to={path}
@@ -105,7 +109,7 @@ export default function Layout() {
             </Pill>
           </div>
           <div className="header-right">
-            <ExperienceControls />
+            <ExperienceControls finance={finance} />
             <span className="header-divider" />
             <div className="avatar small">
               {user?.role.slice(0, 2).toUpperCase()}
@@ -119,7 +123,7 @@ export default function Layout() {
                 <Command size={12} /> FIRST SOLUTION SLICE
               </span>
               <span>
-                {runtime?.offline_demo
+                {finance ? "Read-only financial oversight" : runtime?.offline_demo
                   ? "Offline demo · deterministic fixtures"
                   : runtime?.gemini_configured
                     ? "Gemini primary · Groq standby"

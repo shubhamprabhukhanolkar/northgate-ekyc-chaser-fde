@@ -57,6 +57,10 @@ Default pricing estimates per million tokens are Gemini $0.10/$0.40 and Groq $0.
 
 The verified deployed primary is `GEMINI_MODEL_NAME=gemini-3.5-flash-lite`; `GEMINI_MODEL` remains a compatible fallback variable. The configured backup is `GROQ_MODEL=openai/gpt-oss-120b`, approved because the supplied key cannot access `llama-3.3-70b-versatile`. Both provider connections were verified. Update the pricing overrides to your chosen backup's rates. Provider availability depends on the key's accessible models.
 
+## CFO financial workspace
+
+Choose **CFO** on the demo login (`cfo@northgate.demo`, configured operator password) to open `/cfo`. This is a separate read-only finance role; admins can inspect it too. The dashboard reads existing telemetry, provides dated cost and unit-economics reports, and includes a clearly labelled resource/savings planner. It invokes no AI agents. Recorded token-price estimates, current inventory and planning assumptions remain distinct. See [workflow analysis and financial methodology](design/CFO_FINANCIAL_MODEL.md) for sources, formulas, permissions and data limits.
+
 ## Gemini / MCP connection guide
 
 Portal Guide's operational knowledge and six starting questions are maintained together in `backend/app/agents/portal_help.py`. Update this catalog when changing screens, control labels, defaults, permissions or workflows. The welcome cards load from the authenticated `/api/policy/help` endpoint, so their questions match the backend knowledge. Guide requests include the authenticated operator role and current browser drafting preference; they do not grant the guide action tools or live-case lookup. Coverage tests compare the help index with every navigation screen and exercise operational questions, follow-ups and unsupported requests.

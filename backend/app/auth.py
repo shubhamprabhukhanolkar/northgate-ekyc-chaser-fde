@@ -22,6 +22,8 @@ def current_user(request: Request):
         found = rows("SELECT email,name,role FROM users WHERE email=?", (claim["sub"],))
         if not found:
             raise ValueError()
+        if found[0]["role"] == "cfo" and request.url.path not in ("/api/auth/me", "/api/auth/logout", "/api/runtime", "/api/cfo/summary"):
+            raise HTTPException(403, "The CFO account has read-only financial access")
         return found[0]
     except (jwt.PyJWTError, ValueError, KeyError):
         raise HTTPException(401, "Please sign in")

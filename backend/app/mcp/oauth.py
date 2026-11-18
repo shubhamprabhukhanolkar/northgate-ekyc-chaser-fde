@@ -208,6 +208,8 @@ async def consent(request: Request):
         except ValidationError:
             raise OAuthError("invalid_request", "Invalid sign-in fields")
         user = login(credentials, Response(), request)["user"]
+    if allowed and user["role"] == "cfo":
+        raise OAuthError("access_denied", "The CFO account is limited to the financial dashboard")
     code = secrets.token_urlsafe(32)
     with connect() as db:
         db.execute("BEGIN IMMEDIATE")

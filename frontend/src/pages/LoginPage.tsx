@@ -116,7 +116,7 @@ export default function LoginPage() {
           </button>
           <div className="demo-label">EXPLORE A DEMO ROLE</div>
           <div className="role-pills">
-            {["rm", "analyst", "coo", "admin"].map((role) => (
+            {["rm", "analyst", "coo", "cfo", "admin"].map((role) => (
               <button
                 type="button"
                 className={email.startsWith(role + "@") ? "selected" : ""}

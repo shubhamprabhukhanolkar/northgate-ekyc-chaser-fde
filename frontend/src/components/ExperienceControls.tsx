@@ -124,12 +124,14 @@ export function AudioToggle() {
 
 export default function ExperienceControls({
   login = false,
+  finance = false,
 }: {
   login?: boolean;
+  finance?: boolean;
 }) {
   return (
     <div className={"experience-controls " + (login ? "login-controls" : "")}>
-      {!login && <DraftingModeToggle />}
+      {!login && !finance && <DraftingModeToggle />}
       {!login && <AudioToggle />}
       <ThemeToggle />
     </div>

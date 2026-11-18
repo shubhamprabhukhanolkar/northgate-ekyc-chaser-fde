@@ -21,6 +21,7 @@ import TonerStudioPage from "./pages/TonerStudioPage";
 import FinOpsDashboardPage from "./pages/FinOpsDashboardPage";
 import PortalGuidePage from "./pages/PortalGuidePage";
 import ConnectionsPage from "./pages/ConnectionsPage";
+import CfoDashboardPage from "./pages/CfoDashboardPage";
 import { Loading } from "./components/UI";
 import "./styles.css";
 function App() {
@@ -28,6 +29,7 @@ function App() {
   const location = useLocation();
   if (loading) return <Loading />;
   if (!user) return <LoginPage />;
+  if (user.role === "cfo" && location.pathname !== "/cfo") return <Navigate to="/cfo" replace />;
   if (location.pathname === "/login") return <Navigate to="/" />;
   return (
     <Routes>
@@ -40,6 +42,7 @@ function App() {
         <Route path="finops" element={<FinOpsDashboardPage />} />
         <Route path="policy" element={<PortalGuidePage />} />
         <Route path="connections" element={<ConnectionsPage />} />
+        <Route path="cfo" element={["cfo", "admin"].includes(user.role) ? <CfoDashboardPage /> : <Navigate to="/" replace />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Route>
     </Routes>

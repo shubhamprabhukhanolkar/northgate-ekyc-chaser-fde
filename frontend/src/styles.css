@@ -5352,3 +5352,105 @@ textarea {
 .connections-list li { padding: 18px 0; border-bottom: 1px solid var(--border); display: flex; gap: 16px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
 .connections-list small { display: block; font-size: 12px; margin-top: 5px; }
 @media (max-width: 1000px) { .connections-grid { grid-template-columns: 1fr; } }
+/* Dedicated CFO financial reporting workspace. */
+.cfo-toolbar { display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:20px; }
+.cfo-readonly { display:flex; gap:7px; align-items:center; color:var(--green); font-size:10px; }
+.cfo-provenance { display:flex; gap:12px; align-items:center; padding:14px 17px; margin-bottom:22px; border:1px solid var(--border); border-radius:10px; background:color-mix(in srgb,var(--primary) 4%,var(--surface)); color:var(--muted); font-size:11px; }
+.cfo-provenance > svg { flex-shrink:0; color:var(--primary); }
+.cfo-provenance strong { color:var(--text); }
+.cfo-provenance > button { flex-shrink:0; margin-left:auto; }
+.cfo-metrics .metric-value { font-size:28px; white-space:normal; overflow-wrap:anywhere; letter-spacing:-1px; }
+.cfo-metrics .metric-note { line-height:1.7; }
+.cfo-observation-strip { display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px; margin:-7px 0 26px; padding:0 2px 17px; border-bottom:1px solid var(--border); color:var(--muted); font-size:10px; }
+.cfo-observation-strip strong { color:var(--text); font-weight:500; }
+.cfo-dashboard .panel-heading h2 { font-size:15px; line-height:1.6; }
+.cfo-dashboard .panel-heading p { color:var(--muted); line-height:1.7; }
+.cfo-workflow-steps { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; }
+.cfo-workflow-steps > div { padding:16px; background:var(--bg); border:1px solid var(--border); border-radius:9px; display:flex; flex-direction:column; gap:9px; min-width:0; }
+.cfo-workflow-steps small { color:var(--primary); font:10px monospace; }
+.cfo-workflow-steps strong { font-size:12px; }
+.cfo-workflow-steps b { font-size:14px; font-weight:500; color:var(--primary); overflow-wrap:anywhere; }
+.cfo-workflow-steps span { font-size:9px; color:var(--muted); }
+.cfo-workflow-footer { display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; color:var(--muted); font-size:10px; margin-top:17px; }
+.cfo-workflow-footer > span:first-child { display:flex; align-items:center; gap:7px; }
+.cfo-columns { gap:20px; align-items:stretch; }
+.cfo-trend svg { width:100%; display:block; }
+.cfo-mini-values { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; border-top:1px solid var(--border); padding-top:20px; }
+.cfo-mini-values small { display:block; font-size:9px; color:var(--muted); margin-bottom:7px; }
+.cfo-mini-values strong { font-size:17px; font-weight:500; overflow-wrap:anywhere; }
+.cfo-empty { display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:12px; color:var(--muted); min-height:190px; padding:20px; font-size:11px; }
+.cfo-empty svg { color:var(--primary); }
+.cfo-provider { padding:15px 0; border-top:1px solid var(--border); }
+.cfo-provider > div:first-child { display:flex; align-items:center; flex-wrap:wrap; gap:9px; }
+.cfo-provider strong { font-size:12px; }
+.cfo-provider code { color:var(--muted); font-size:9px; overflow-wrap:anywhere; }
+.cfo-provider .pill { font-size:8px; margin-left:auto; }
+.cfo-provider-figures { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin-top:14px; }
+.cfo-provider-figures > span { font-size:16px; overflow-wrap:anywhere; }
+.cfo-provider-figures small { display:block; color:var(--muted); font-size:9px; margin-top:5px; }
+.cfo-planning-grid { display:grid; grid-template-columns:1.1fr 1fr; gap:30px; }
+.cfo-planning-grid h3 { font-size:12px; margin-bottom:16px; }
+.cfo-subheading { margin-top:25px; }
+.cfo-inputs { display:grid; grid-template-columns:1fr 1fr; gap:13px; }
+.cfo-inputs label { display:flex; flex-direction:column; gap:7px; margin:0; min-width:0; font-size:10px; }
+.cfo-inputs label small { display:block; color:var(--muted); font-size:9px; }
+.cfo-inputs input { width:100%; min-width:0; padding:10px 12px; background:var(--bg); border:1px solid var(--border); border-radius:7px; color:var(--text); font-size:12px; }
+.cfo-business-case { background:var(--bg); border:1px solid var(--border); border-radius:12px; padding:22px; }
+.cfo-business-case > .pill { margin-bottom:14px; }
+.cfo-net-value { display:flex; flex-direction:column; gap:7px; border-bottom:1px solid var(--border); padding-bottom:18px; }
+.cfo-net-value > small { color:var(--muted); font-size:10px; }
+.cfo-net-value > strong { font-size:35px; font-weight:500; letter-spacing:-1px; overflow-wrap:anywhere; color:var(--primary); }
+.cfo-net-value > span { color:var(--muted); font-size:9px; }
+.cfo-case-values { display:grid; grid-template-columns:1fr 1fr; gap:18px 15px; margin:20px 0; }
+.cfo-case-values small { display:block; color:var(--muted); font-size:9px; margin-bottom:5px; }
+.cfo-case-values strong { font-size:15px; font-weight:500; overflow-wrap:anywhere; }
+.cfo-resource-ledger { border-top:1px solid var(--border); padding-top:7px; }
+.cfo-resource-ledger > div { display:grid; grid-template-columns:1fr auto; gap:6px 12px; font-size:10px; margin-top:12px; }
+.cfo-resource-ledger strong { font-weight:500; }
+.cfo-cost-track { grid-column:1 / -1; height:4px; background:var(--border); border-radius:5px; overflow:hidden; }
+.cfo-cost-track > span { background:var(--primary); height:100%; display:block; border-radius:inherit; transition:width 250ms ease; }
+.cfo-footnote { color:var(--muted); font-size:10px; line-height:1.8; margin-top:16px; }
+.cfo-unit-economics { display:flex; gap:25px; justify-content:space-between; align-items:center; margin-top:25px; padding-top:20px; border-top:1px solid var(--border); flex-wrap:wrap; }
+.cfo-unit-economics > div { flex:1 1 150px; }
+.cfo-unit-economics small { display:block; font-size:9px; color:var(--muted); margin-bottom:6px; }
+.cfo-unit-economics strong { font-size:18px; font-weight:500; overflow-wrap:anywhere; }
+.cfo-unit-economics span { display:block; color:var(--muted); font-size:9px; margin-top:5px; }
+.cfo-unit-economics > svg { color:var(--green); flex-shrink:0; }
+.cfo-table-scroll { overflow-x:auto; }
+.cfo-table-scroll table { width:100%; min-width:610px; }
+.cfo-table-scroll th { font-size:9px; color:var(--muted); font-weight:500; }
+.cfo-table-scroll td { font-size:11px; }
+.cfo-activity-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px 12px; }
+.cfo-activity-grid small { display:block; color:var(--muted); font-size:9px; margin-bottom:8px; }
+.cfo-activity-grid strong { font-size:24px; font-weight:500; }
+.cfo-pagination { display:flex; justify-content:flex-end; gap:15px; align-items:center; margin-top:16px; font-size:10px; color:var(--muted); }
+.cfo-pagination button { font-size:10px; padding:7px 12px; }
+.cfo-methodology { color:var(--muted); font-size:11px; }
+.cfo-methodology summary { cursor:pointer; color:var(--primary); }
+.cfo-methodology ul { padding-left:18px; list-style:disc; margin-top:15px; }
+.cfo-methodology li { margin-bottom:9px; }
+.cfo-methodology p { margin-top:12px; line-height:1.8; }
+.cfo-report-stamp { display:flex; gap:8px; align-items:center; color:var(--muted); font-size:9px; padding:0 2px 8px; }
+@media(max-width:1180px) {
+  .cfo-metrics { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .cfo-planning-grid { gap:20px; }
+  .cfo-columns { grid-template-columns:1fr; }
+  .cfo-workflow-steps { gap:7px; }
+  .cfo-workflow-steps > div { padding:12px; }
+}
+@media(max-width:760px) {
+  .cfo-dashboard .panel { padding:17px; }
+  .cfo-dashboard .panel-heading { flex-wrap:wrap; }
+  .cfo-provenance { align-items:flex-start; padding:12px; font-size:10px; }
+  .cfo-planning-grid { grid-template-columns:1fr; }
+  .cfo-workflow-steps { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .cfo-metrics { gap:10px; }
+  .cfo-metrics .metric { padding:13px; }
+  .cfo-metrics .metric-value { font-size:23px; }
+  .cfo-mini-values strong { font-size:14px; }
+  .cfo-provider-figures > span { font-size:14px; }
+  .cfo-business-case { padding:17px; }
+  .cfo-net-value > strong { font-size:29px; }
+  .cfo-activity-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .cfo-report-stamp { align-items:flex-start; }
+}
